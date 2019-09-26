@@ -148,6 +148,14 @@ a {
     input:last-child {border-radius:0px 30px 30px 0px}
 }
 
+.plain-link:hover, .plain-link:focus {
+  text-decoration: none;
+  border-bottom: $red 0.1rem solid;
+  color: $red;
+  padding-bottom: 0.5rem;
+  transition: ease-in-out 0.25s;
+}
+
 
 // Nav
 .navbar {

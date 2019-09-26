@@ -46,9 +46,9 @@ $grays: map-merge(
 
 $blue:    #7832e2 !default;
 $indigo:  #502c6c !default;
-$purple:  #ad6edd !default;
+$purple:  #2A1737;
 $pink:    #ff0266 !default;
-$red:     #ff5916 !default;
+$red:     #E0082D;
 $orange:  #fbb500 !default;
 $yellow:  #ffde03 !default;
 $green:   #44c553 !default;
@@ -56,6 +56,7 @@ $teal:    #09ebaf !default;
 $cyan:    #35bdff !default;
 $lila:    #b2a5e4 !default;
 $salmon:  #ff977a !default;
+
 
 
 $colors: () !default;
@@ -79,8 +80,8 @@ $colors: map-merge(
 $colors
 );
 
-$primary:       $indigo !default;
-$secondary:     $blue !default;
+$primary:       $purple !default;
+$secondary:     $red !default;
 $success:       $green !default;
 $info:          $teal !default;
 $warning:       $yellow !default;
@@ -266,7 +267,7 @@ $white:         $white !default;
 // // Font, line-height, and color for body text, headings, and more.
 //
 // // stylelint-disable value-keyword-case
-   $font-family-sans-serif:      Nunito, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+   $font-family-sans-serif:      'abadi', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 // $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 // $font-family-base:            $font-family-sans-serif !default;
 // // stylelint-enable value-keyword-case
@@ -275,7 +276,7 @@ $white:         $white !default;
    $font-size-lg:                ($font-size-base * 1.15) !default;
    $font-size-smaller:           ($font-size-base * 1) !default;
 // $font-size-sm:                ($font-size-base * .875) !default;
-//
+//gu
    $font-weight-light:           300 !default;
    $font-weight-normal:          400 !default;
 // $font-weight-bold:            700 !default;
