@@ -8470,6 +8470,12 @@ html {
 
 /* Custom Mixins -------------------- */
 /* Base Styles -------------------- */
+.bg-landing {
+  background-image: url("./assets/img/landing-img.jpg"); }
+
+.landcar {
+  width: 50%; }
+
 body {
   overflow-x: hidden; }
 

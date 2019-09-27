@@ -71,7 +71,7 @@ NAVBAR
 <!-------------------------------------
 HEADER
 --------------------------------------->
-<div class="jumbotron jumbotron-lg jumbotron-fluid mb-0 pb-3 bg-primary position-relative">
+<div class="jumbotron jumbotron-lg jumbotron-fluid mb-0 pb-5 bg-primary position-relative">
     <div class="container-fluid text-white h-100">
         <div class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5">
             <div class="col pt-4 pb-4">
@@ -83,7 +83,7 @@ HEADER
                 <a href="#" class="btn btn-lg btn-outline-white btn-round">Learn more</a>
             </div>
             <div class="col align-self-bottom align-items-right text-right h-max-380 position-relative z-index-1">
-                <!-- <img src="#" class="rounded img-fluid"> -->
+				<img data-aos="fade-up" src="assets/img/f1car.png" class="rounded img-fluid">
             </div>
         </div>
     </div>
@@ -319,11 +319,6 @@ CTA
 	</form>
 </div> -->
 <!-- End CTA -->
-
-
-<!------------------------------------------
-DEMO MODAL & DONATE BUTTON ONLY - DON'T COPY
-------------------------------------------->
 <div class="modal fade" id="modal_signin" tabindex="-1" role="dialog" aria-labelledby="modal_signin" aria-hidden="true">
 	<div class="modal-dialog shadow-lg" role="document">
 		<div class="modal-content">
@@ -428,6 +423,9 @@ JAVASCRIPTS
 <script src="./assets/js/vendor/popper.min.js" type="text/javascript"></script>
 <script src="./assets/js/vendor/bootstrap.min.js" type="text/javascript"></script>
 <script src="./assets/js/functions.js" type="text/javascript"></script>
+
+<!-- Parallax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 
 <!-- Animation -->
 <script src="./assets/js/vendor/aos.js" type="text/javascript"></script>
