@@ -44,6 +44,8 @@ NAVBAR
 				<a class="dropdown-item" href="./page.html">Sample Page</a>
 			</div>
 			</li>
+			<a class="nav-link" href="./about.php">About</a>
+			</li>
 			<li class="nav-item">
 			<a class="nav-link" href="./docs.html">Docs</a>
 			</li>
