@@ -31,29 +31,17 @@ NAVBAR
 	</button>
 	<div class="navbar-collapse collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto d-flex align-items-center">
-			<li class="nav-item">
-			<a class="nav-link" href="./index.php">Intro</a>
-			</li>
-			<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Examples </a>
-			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="./landing.html">Home Landing</a>
-				<a class="dropdown-item" href="./login.html">User Login</a>
-				<a class="dropdown-item" href="./blog.html">Blog Index</a>
-				<a class="dropdown-item" href="./page.html">Sample Page</a>
-			</div>
-			</li>
+			<li>
 			<a class="nav-link" href="./about.php">About</a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href="./docs.html">Docs</a>
+			<a class="nav-link" href="./docs.html">Races</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto d-flex align-items-center">
 			<li class="nav-item">
 			<span class="nav-link" href="#">
-			<a class="plain-link bg-transparent" href="#" data-toggle="modal" data-target="#modal_signin"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="downloadzip" class="hidden"></a>
+			<a class="plain-link bg-transparent" href="./register.php"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="downloadzip" class="hidden"></a>
 			</a>
 			</span>
 			</li>
