@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
@@ -60,24 +60,28 @@ NAVBAR
 <!-- End Navbar -->
 
 <!----------------------- Begin Content -- Races ---------------------->
-<div class="container pt-5 pb-4">
+<div class="container pb-5 pt-3 text-center"> <br><br><br><br>  
+        <h2>Races</h2>
+</div>
+
+<div class="container pt-5 pb-4"> 
     <div class="row gap-y justify-content-center">
 		<div class="col-md-3">
 			<!-- Simple Card -->
     <div class="card shadow-sm border-0">
-    <img class="card-img-top" src="./assets/img/about-img/Keegan.png" alt="Card image cap">
+    <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Race 1</h5>
             <p class="card-text text-muted">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
             </p>
-        <a href="#" class="btn btn-info btn-round">Read More</a>
+        <a href="./race-details.php" class="btn btn-info btn-round">Read More</a>
         </div>
     </div>
 </div>
 <div class="col-md-3">
 	<div class="card shadow-sm border-0">
-        <img class="card-img-top" src="./assets/img/about-img/Apoorva.png" alt="Card image cap">
+        <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Race 2</h5>
             <p class="card-text text-muted">
@@ -89,7 +93,47 @@ NAVBAR
 </div>
 <div class="col-md-3">
 	<div class="card shadow-sm border-0">
-        <img class="card-img-top" src="./assets/img/about-img/Apoorva.png" alt="Card image cap">
+        <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Race 3</h5>
+            <p class="card-text text-muted">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
+            </p>
+        <a href="#" class="btn btn-info btn-round">Read More</a>
+        </div>
+    </div>
+</div>
+
+<div class="container pt-5 pb-4">
+    <div class="row gap-y justify-content-center">
+		<div class="col-md-3">
+			<!-- Simple Card -->
+    <div class="card shadow-sm border-0">
+    <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Race 1</h5>
+            <p class="card-text text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
+            </p>
+        <a href="#" class="btn btn-info btn-round">Read More</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+	<div class="card shadow-sm border-0">
+        <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Race 2</h5>
+            <p class="card-text text-muted">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
+            </p>
+        <a href="#" class="btn btn-info btn-round">Read More</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+	<div class="card shadow-sm border-0">
+        <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Race 3</h5>
             <p class="card-text text-muted">
