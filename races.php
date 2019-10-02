@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
@@ -16,9 +16,9 @@
 		<!-- Animation CSS -->
 		<link href="./assets/css/vendor/aos.css" rel="stylesheet"/>
 	</head>
-    
+
 <body> 
-    
+
     <!--------------------------------------
 NAVBAR
 --------------------------------------->
@@ -59,51 +59,49 @@ NAVBAR
 </nav>
 <!-- End Navbar -->
 
-<!----------------------- Content - About ---------------------->
+<!----------------------- Begin Content -- Races ---------------------->
 <div class="container pt-5 pb-4">
-    <div class="pb-5 pt-3 text-center"> <br><br>
-		<h2>About</h2><br>
-		<p class="text-muted">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est. Praesent in semper arcu, vitae ornare ex. In vel lorem ex. Morbi ultricies aliquet consectetur. Ut id ex erat. Vestibulum vitae velit augue. Donec id justo lacinia, malesuada augue vel, dapibus eros. Vestibulum eu volutpat arcu. Suspendisse lacinia arcu eget elit porta, ac vulputate nisl dignissim. Duis euismod pellentesque nisi, a convallis massa suscipit nec. Curabitur viverra consectetur tempor. Duis volutpat eros imperdiet arcu viverra, eget efficitur turpis fringilla.
-
-Phasellus vel rutrum elit. Integer pretium sem at odio volutpat, id sodales arcu finibus. Aliquam erat volutpat. Nunc sed efficitur leo, in fringilla justo. Quisque lobortis, ligula mattis dapibus pharetra, dui erat fringilla mauris, in vestibulum eros magna eget nulla. Aliquam suscipit lacus nec ligula dapibus pulvinar. In molestie arcu quis justo cursus pretium.
-		</p>
-    </div>
-
-    <div class="pb-5 pt-3 text-center"> <br><br>
-		<h2>Team</h2>
-	
-    </div>
-
-
-<div class="row gap-y justify-content-center">
-		<div class="col-md-5">
+    <div class="row gap-y justify-content-center">
+		<div class="col-md-3">
 			<!-- Simple Card -->
-<div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0">
     <img class="card-img-top" src="./assets/img/about-img/Keegan.png" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">Keegan George</h5>
-        <p class="card-text text-muted">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
-        </p>
+        <div class="card-body">
+            <h5 class="card-title">Race 1</h5>
+            <p class="card-text text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
+            </p>
+        <a href="#" class="btn btn-info btn-round">Read More</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+	<div class="card shadow-sm border-0">
+        <img class="card-img-top" src="./assets/img/about-img/Apoorva.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Race 2</h5>
+            <p class="card-text text-muted">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
+            </p>
+        <a href="#" class="btn btn-info btn-round">Read More</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+	<div class="card shadow-sm border-0">
+        <img class="card-img-top" src="./assets/img/about-img/Apoorva.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Race 3</h5>
+            <p class="card-text text-muted">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
+            </p>
+        <a href="#" class="btn btn-info btn-round">Read More</a>
+        </div>
     </div>
 </div>
 
-		</div>
-		<div class="col-md-5">
-		<div class="card shadow-sm border-0">
-    <img class="card-img-top" src="./assets/img/about-img/Apoorva.png" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">Apoorva Bitton</h5>
-        <p class="card-text text-muted">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
-        </p>
-    </div>
-    
-    </div>
-    </div>
 
-<!-- End Content - About -->
+<!-- End Content - Races -->
 
 
  <!-- <main> My content goes here </main> -->
