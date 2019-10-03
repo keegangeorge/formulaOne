@@ -59,7 +59,14 @@ NAVBAR
 <!----------------------- Begin Content -- Races ---------------------->
 <div class="container pb-5 pt-5 text-center"> <br><br><br><br>  
         <h2>Races</h2>
+        <div class ="pt-3">
+            <a class="btn btn-outline-primary btn-round" href="#">Recent</a>
+            <a class="btn btn-outline-primary btn-round" href="#">Country A-Z</a>
+            <a class="btn btn-outline-primary btn-round" href="#">Driver Names</a>
+            <a class="btn btn-outline-primary btn-round" href="#">Year</a>
+        </div>
 </div>
+
 
 <div class="container pt-0 pb-4"> 
     <div class="row gap-y justify-content-center">
