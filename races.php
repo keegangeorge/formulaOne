@@ -76,7 +76,7 @@ NAVBAR
     <div class="card shadow-sm border-0">
     <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">Race 1</h5>
+            <h5 class="card-title">Race 1 - This is the only linked card</h5>
             <p class="card-text text-muted">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex lectus, ultricies nec ex sit amet, sodales rhoncus est.
             </p>
