@@ -31,14 +31,11 @@ NAVBAR
 	<div class="navbar-collapse collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto d-flex align-items-center">
             <li class="nav-item">
-			<a class="nav-link" href="./about.php">About</a>
+			    <a class="nav-link" href="./races.php">Races</a>
             </li>
             <li class="nav-item">
-			<a class="nav-link" href="./races.php">Races</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="./docs.html">Docs</a>
-			</li>
+			    <a class="nav-link" href="./about.php">About</a>
+            </li>
 		</ul>
 		<ul class="navbar-nav ml-auto d-flex align-items-center">
 			<li class="nav-item">
@@ -60,13 +57,14 @@ NAVBAR
 <!-- End Navbar -->
 
 <!----------------------- Begin Content -- Races ---------------------->
-<div class="container pb-5 pt-3 text-center"> <br><br><br><br>  
+<div class="container pb-5 pt-5 text-center"> <br><br><br><br>  
         <h2>Races</h2>
 </div>
 
-<div class="container pt-5 pb-4"> 
+<div class="container pt-0 pb-4"> 
     <div class="row gap-y justify-content-center">
 		<div class="col-md-3">
+
 			<!-- Simple Card -->
     <div class="card shadow-sm border-0">
     <img class="card-img-top" src="./assets/img/races-img/placeholder-race-img.png" alt="Card image cap">

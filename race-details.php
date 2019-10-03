@@ -31,14 +31,11 @@ NAVBAR
 	<div class="navbar-collapse collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto d-flex align-items-center">
             <li class="nav-item">
-			<a class="nav-link" href="./about.php">About</a>
-            </li>
+			    <a class="nav-link" href="./races.php">Races</a>
+			</li>
             <li class="nav-item">
-			<a class="nav-link" href="./races.php">Races</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="./docs.html">Docs</a>
-			</li>
+			    <a class="nav-link" href="./about.php">About</a>
+            </li>
 		</ul>
 		<ul class="navbar-nav ml-auto d-flex align-items-center">
 			<li class="nav-item">

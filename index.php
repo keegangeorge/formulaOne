@@ -29,11 +29,11 @@ NAVBAR
 	</button>
 	<div class="navbar-collapse collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto d-flex align-items-center">
-			<li>
-				<a class="nav-link" href="./about.php">About</a>
-			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="./races.php">Races</a>
+			</li>
+			<li>
+				<a class="nav-link" href="./about.php">About</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto d-flex align-items-center">
