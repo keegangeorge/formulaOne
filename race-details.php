@@ -60,7 +60,94 @@ NAVBAR
 <!-- End Navbar -->
 
 <body>
+    
+<div class="container pb-5 pt-3 text-left"> <br><br><br><br>  
+        <h1>Race1</h1>
 
+        <div class= "container pt-5">
+            <img class="card-img-top" src="./assets/img/race-details-img/placeholder-race-details-img.png" alt="Card image cap">
+        </div>
+        <div class= "container">
+
+            <div class="row pt-5">
+                <h5>Race Location</h5>
+            </div>
+            <br> 
+            <div class="row">
+                <div class= "col-md-3">
+                    <p>Country</p>
+                    <h2>Info</h2>
+                </div>
+                <div class= "col-md-3">
+                    <p>Location</p>
+                    <h2>Info</h2>
+                </div>
+                <div class= "col-md-3">
+                    <p>Latitude</p>
+                    <h2>Info</h2>
+                </div>
+                <div class= "col-md-3">
+                    <p>Longitude</p>
+                    <h2>Info</h2>
+                </div>
+            </div>
+
+            <br> 
+            <hr size="10">
+            <br>
+            
+
+            <div class="row">
+                <h5>Race Results</h5>
+            </div>
+            <br> 
+            <div class="row">
+                <div class= "col-md-3">
+                    <p>Winner</p>
+                    <h2>Info</h2>
+                </div>
+                </div>
+
+            <br> 
+            <hr size="10">
+            <br>
+
+            <div class="row">
+            <h5>Drivers Information</h5>
+            </div>
+            <br> 
+            <div class="row">
+                <div class= "col-md-3">
+                    <p>Names</p>
+                    <h2>Info</h2>
+                </div>
+                <div class= "col-md-3">
+                    <p>Standings</p>
+                    <h2>Info</h2>
+                </div>
+                <div class= "col-md-3">
+                    <p>Laps Times</p>
+                    <h2>Info</h2>
+                </div>
+                <div class= "col-md-3">
+                    <p>Longitude</p>
+                    <h2>Info</h2>
+                </div>
+            </div>
+
+
+            <br> 
+            <hr size="10">
+            <br>
+        
+            <div class="row">
+                <h5>Status Information</h5>
+            </div>
+            <br> 
+
+        </div>
+     </div>
+</div>
 
 </body>
 
