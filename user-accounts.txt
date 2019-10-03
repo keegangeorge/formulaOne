@@ -1,3 +1,3 @@
-testuser@sfu.ca,123 
-user@sfu.ca,pass 
-hatephp@sfu.ca,123456 
+USER: kga29@sfu.ca PASS: test
+USER: abitton@sfu.ca PASS: testagain
+USER: anothertest@gmail.com PASS: testerspassword

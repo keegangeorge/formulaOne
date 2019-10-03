@@ -66,26 +66,36 @@ NAVBAR
 			<?php
 				@$email = $_POST['email'];
 				@$password = $_POST['password'];
-				$listedEmail = 'defaultUser@sfu.ca';
-				$listedPassword = 'defaultPassword';
 
-				$file = 'user-accounts.txt';
-				$content = "";
-				if ($handle = fopen($file, 'r')) {
-					while  (!feof($handle)) {
-						$content = fgets($handle);
-						if (!empty($content)) {
-							$credentials = explode(",", $content);
-							$credentials[0] = $listedEmail;
-							$credentials[1] = $listedPassword;				
-						}
-					}
+				$lines = file('user-accounts.txt');
+				$credentials = array();
+
+				foreach ($lines as $line) {
+					if (empty($line)) continue;
+
+					// entire line
+					$line = trim(str_replace(": ", ':', $line));
+					$lineArr = explode(' ', $line);
+					
+					// email only
+					$storedEmail = explode(':', $lineArr[0]);
+					$storedEmail = array_pop($storedEmail);
+
+					// password
+					$storedPass = explode(':', $lineArr[1]);
+					$storedPass = array_pop($storedPass);
+
+					// putting them together
+					$credentials[$storedEmail] = $storedPass;
 				}
-				fclose($handle);
+
+				// print_r($credentials["kgeorge13@gmail.com"]);
+				// print_r($credentials["johnapples@gmail.com"]);
+
 
 
 				if ((!isset($email)) || (!isset($password))) {
-				// Visitor must enter credentials in form below:
+				// Visitor must enter credentials in form below
 			?>
 
 			<form class="border rounded p-5" method="post" action="sign-in.php">
@@ -105,12 +115,7 @@ NAVBAR
 			</form>
 			
 			<?php
-
-
-				} else if(($email=="$listedEmail") && ($password=="$listedPassword")) {
-					
-
-
+				} else if ($credentials[$email] == $password) {
 			?>
 				<div class="border rounded p-5" data-aos="fade">
 					<div class="text-center success-items">

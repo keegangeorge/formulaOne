@@ -72,13 +72,16 @@ NAVBAR
                 <p>An account has been created with the email address:</p>
             </div>
             <?php
-                $email = (!empty($_POST['email']) ? $_POST['email'] : "");
-                $password = (!empty($_POST['password']) ? $_POST['password'] : "");
-
+				$firstname = (!empty($_POST['firstname']) ? $_POST['firstname'] : "");
+				$lastname = (!empty($_POST['lastname']) ? $_POST['lastname'] : "");
+				$email = (!empty($_POST['email']) ? $_POST['email'] : "");
+				$password = (!empty($_POST['password']) ? $_POST['password'] : "");
+				
                 $file = 'user-accounts.txt';
                 // OPEN CONNECTION
                 if($handle = fopen($file, 'a+')) {
-                    fwrite($handle, "$email,$password \n");
+					// fwrite($handle, "$firstname|,$lastname|,$email|,$password\n");
+					fwrite($handle, "USER: $email PASS: $password\n");
 
                     fclose($handle);
                 } else {
