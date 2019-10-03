@@ -39,13 +39,13 @@ NAVBAR
 		<ul class="navbar-nav ml-auto d-flex align-items-center">
 			<li class="nav-item">
 			<span class="nav-link" href="#">
-			<a class="plain-link bg-transparent" href="./register.php"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="downloadzip" class="hidden"></a>
+			<a class="plain-link bg-transparent" href="./register.php"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="hidden"></a>
 			</a>
 			</span>
 			</li>
 			<li class="nav-item">
 			<span class="nav-link" href="#">
-			<a class="btn btn-secondary btn-round" href="#" data-toggle="modal" data-target="#modal_signin"><i class="fas fa-sign-in-alt"></i> Sign In <a href="#signin" class="downloadzip" class="hidden"></a>
+			<a class="btn btn-secondary btn-round" href="./sign-in.php"><i class="fas fa-sign-in-alt"></i> Sign In <a href="#signin" class="hidden"></a>
 			</a>
 			</span>
 			</li>
@@ -320,27 +320,32 @@ CTA
 			<div class="modal-body">
 			<div class="bg-white loginarea">
 			<div class="d-sm-flex align-items-center  justify-content-center">
+			<!-- User Signin Form -->
 			<form class="p-1">
 				<h3 class="mb-4 text-center">Sign In</h3>
 				<div class="form-group">
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required="">
+					<input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required="">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
+					<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">
 					<label class="form-check-label small text-muted" for="exampleCheck1">Remember me</label>
 				</div>
-				<button type="submit" class="btn btn-primary btn-round btn-block">Sign in</button>
+				<button type="submit" name="submit" class="btn btn-primary btn-round btn-block">Sign in</button>
 				<small class="d-block mt-4 text-center"><a class="text-gray" href="#">Forgot your password?</a></small>
 			</form>
+			<!-- User Signin Form End -->
+
 			</div>
 			</div>
 		</div>
 	</div>
 </div>
 </div>
+
+
 
 <!--------------------------------------
 END DEMO MODAL & DONATE BUTTON
