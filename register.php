@@ -54,64 +54,32 @@ NAVBAR
 				<h1 class="mb-0 mt-3 display-4">Formula One</h1>
 				<h5 class="font-weight-light text-gray">Create an account to access more features
 				</h5>				
-				<h5 class="mb-4 font-weight-light text-muted">Already have an account? <a class="text-muted" href="#" data-toggle="modal" data-target="#modal_signin">Sign In <a href="#signin" class="hidden"></a>
+				<h5 class="mb-4 font-weight-light text-muted">Already have an account? <a class="text-muted" href="./sign-in.php">Sign In</a>
 				</a> instead
 				</h5>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-6 p-0 bg-white h-md-100 loginarea">
-		<!-- Sign in Modal -->
-		<div class="modal fade" id="modal_signin" tabindex="-1" role="dialog" aria-labelledby="modal_signin" aria-hidden="true">
-			<div class="modal-dialog shadow-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<div class="d-flex align-items-center justify-content-center">
-						</div>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-					<div class="bg-white loginarea bringFront">
-					<div class="d-sm-flex align-items-center  justify-content-center">
-					<form class="p-1">
-						<h3 class="mb-4 text-center">Sign In</h3>
-						<div class="form-group">
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required="">
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
-						</div>
-						<div class="form-group form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label small text-muted" for="exampleCheck1">Remember me</label>
-						</div>
-						<button type="submit" class="btn btn-primary btn-round btn-block">Sign in</button>
-						<small class="d-block mt-4 text-center"><a class="text-gray" href="#">Forgot your password?</a></small>
-					</form>
-					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-		<!-- End of sign in modal -->
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center" data-aos="fade">
 			<form class="border rounded p-5" method="post" action="registration-process.php">
 				<h3 class="mb-4 text-center">Register an Account</h3>
+				<div class="form-group">
+					<input type="text" name="firstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Name" required>
+				</div>					
+				<div class="form-group">
+					<input type="text" name="lastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Last Name" required>
+				</div>				
 				<div class="form-group">
 					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required>
 				</div>
 				<div class="form-group">
 					<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+					<small id="emailHelp" class="form-text text-muted">Use 8 or more characters with a mix of letters, numbers & symbols</small>
 				</div>
-				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label small text-muted" for="exampleCheck1">Remember me</label>
-				</div>
-				<button type="submit" name="submit" class="btn btn-success btn-round btn-block shadow-sm">Sign in</button>
+				<button type="submit" name="submit" class="btn btn-success btn-round btn-block shadow-sm">Register</button>
 				<small class="d-block mt-4 text-center"><a class="text-gray" href="#">Forgot your password?</a></small>
+
 			</form>
 		</div>
 	</div>
