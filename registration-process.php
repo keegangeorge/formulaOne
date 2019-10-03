@@ -20,29 +20,7 @@
 <body> 
     
     
-<!--------------------------------------
-NAVBAR
---------------------------------------->
-<nav class="topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-<div class="container">
-	<a class="navbar-brand" href="./index.php"><i class="fas fa-flag-checkered mr-2"></i><strong>Formula</strong> One</a>
-	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="navbar-collapse collapse" id="navbarColor02">
-		<ul class="navbar-nav mr-auto d-flex align-items-center">
-			<li>
-				<a class="nav-link" href="./about.php">About</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="./docs.html">Races</a>
-			</li>
-		</ul>
-	</div>
-</div>
-</nav>
-<!-- End Navbar -->
-
+<?php require("includes/navigation.php"); ?>
 
    
 <!-- Main -->
