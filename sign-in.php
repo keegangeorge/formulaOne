@@ -107,7 +107,9 @@
 				<div>
 				<?php
 					} else {
+						// Sign in unsucessful
 						?>
+						
 						<div class="border rounded p-5" data-aos="fade">
 							<div class="text-center success-items">
 								<i class="fas fa-times-circle fa-2x text-danger"></i>
