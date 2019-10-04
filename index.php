@@ -10,7 +10,7 @@
 		<!-- Adobe Fonts -->
 		<link rel="stylesheet" href="https://use.typekit.net/qah3bmy.css">
 		<!-- Font Awesome Icons -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/2df6258c61.js" crossorigin="anonymous"></script>
 		<!-- Main CSS -->
 		<link href="./assets/css/main.css" rel="stylesheet"/>
 		<!-- Animation CSS -->
@@ -49,165 +49,214 @@ HEADER
 <!--------------------------------------
 FEATURES
 --------------------------------------->
-<div class="container pt-5 pb-5 mt-4" data-aos="fade-up">
+<div class="container pt-5 pb-3 mt-4" data-aos="fade">
 	<div class="row gap-y">
 		<div class="col-md-6 col-xl-4">
 			<div class="media">
-				<div class="iconbox iconmedium rounded-circle text-info mr-4">
-					<i class="fab fa-html5"></i>
+				<div class="iconbox iconlarge bg-secondary rounded-circle text-white mr-4">
+					<i class="fas fa-globe-europe "></i>
 				</div>
 				<div class="media-body">
-					<h5>Responsive</h5>
+					<h5>Global</h5>
 					<p class="text-muted">
-						 Your website works on any device: desktop, tablet or mobile.
+						 Races occur in a variety of host countries around the world where each location has a unique circuit.
 					</p>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-6 col-xl-4">
 			<div class="media">
-				<div class="iconbox iconmedium rounded-circle text-purple mr-4">
-					<i class="fab fa-gulp"></i>
+				<div class="iconbox iconlarge bg-primary rounded-circle text-white mr-4">
+					<i class="fas fa-cog"></i>
 				</div>
 				<div class="media-body">
-					<h5>Gulp</h5>
+					<h5>Engineering</h5>
 					<p class="text-muted">
-						 You can easily read, edit, and write your own code, or change everything.
+						 See the marvels of engineering put in actions as teams develop unique vehicles to compete for fastest time.
 					</p>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-6 col-xl-4">
 			<div class="media">
-				<div class="iconbox iconmedium rounded-circle text-info mr-4">
-					<i class="fab fa-amazon"></i>
+				<div class="iconbox iconlarge bg-secondary rounded-circle text-white mr-4">
+					<i class="fas fa-tachometer-alt"></i>
 				</div>
 				<div class="media-body">
-					<h5>UI Kit</h5>
+					<h5>Speed</h5>
 					<p class="text-muted">
-						 There is a bunch of useful and necessary elements for developing your website.
-					</p>
+						The cars are the fastest road-course cars in the world. With high cornering speeds achieved through aerodynamics.
 				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-xl-4">
-			<div class="media">
-				<div class="iconbox iconmedium rounded-circle text-warning mr-4">
-					<i class="fab fa-sass"></i>
-				</div>
-				<div class="media-body">
-					<h5>Bootstrap 4.1.x</h5>
-					<p class="text-muted">
-						 You can find our code well organized, commented and readable.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-xl-4">
-			<div class="media">
-				<div class="iconbox iconmedium rounded-circle text-info mr-4">
-					<i class="fas fa-layer-group"></i>
-				</div>
-				<div class="media-body">
-					<h5>Clean Code</h5>
-					<p class="text-muted">
-						 As you can see in the source code, we provided a clean code.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-xl-4">
-			<div class="media">
-				<div class="iconbox iconmedium rounded-circle text-salmon mr-4">
-					<i class="fas fa-burn"></i>
-				</div>
-				<div class="media-body">
-					<h5>Support</h5>
-					<p class="text-muted">
-						 When you download this template, you'll freely receive future updates.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
-<!-- End Features
-
-
-<!--------------------------------------
-SCREENSHOT
---------------------------------------->
-<!-- <section class="pt-3 pb-4" data-aos="zoom-in">
-<div class="container text-center">
-	<div class="row justify-content-center">
-		<div class="col-md-10">
-			<img class="d-block m-auto shadow" src="assets/img/demo/screenshot1.png" alt="">
-		</div>
-	</div>
-</div>
-</section> -->
-<!-- End Screenshot -->
-
-
-<!--------------------------------------
-PRICING
---------------------------------------->
-<div class="container pt-5 pb-4" data-aos="fade-up">
-	<div class="pb-5 pt-3 text-center">
-		<h2>Predictive and <strong>imperative approach</strong> towards application.</h2>
-		<p class="text-muted">
-			 It’s a social collaboration trello software platform that employees really love to use, with rich personalized interface
-		</p>
-	</div>
-	<div class="card-deck card-pricing text-center">
-		<div class="card border-0 shadow-sm">
-			<div class="card-header bg-indigo border-0 pt-4 pb-4 text-white">
-				<h2 class="my-0 font-weight-normal mb-3">Personal</h2>
-				<h4 class="card-title pricing-card-title">$11 <small class="text-white">/ mo</small></h4>
-			</div>
-			<div class="card-body">
-				<ul class="list-unstyled mt-3 mb-4">
-					<li>10 users included</li>
-					<li>2 GB of storage</li>
-					<li>Email support</li>
-					<li>Help center access</li>
-				</ul>
-				<button type="button" class="btn btn-indigo btn-round">Start Free</button>
-			</div>
-		</div>
-		<div class="card border-0 shadow-sm">
-			<div class="card-header bg-info border-0 pt-4 pb-4">
-				<h2 class="my-0 font-weight-normal mb-3">Premium</h2>
-				<h4 class="card-title pricing-card-title">$15 <small>/ mo</small></h4>
-			</div>
-			<div class="card-body">
-				<ul class="list-unstyled mt-3 mb-4">
-					<li>20 users included</li>
-					<li>10 GB of storage</li>
-					<li>Priority email support</li>
-					<li>Help center access</li>
-				</ul>
-				<button type="button" class="btn btn-info btn-round"><i class="fab fa-telegram mr-2"></i> Start Free</button>
-			</div>
-		</div>
-		<div class="card border-0 shadow-sm">
-			<div class="card-header border-0 pt-4 pb-4 bg-indigo text-white">
-				<h2 class="my-0 font-weight-normal mb-3">Enterprise</h2>
-				<h4 class="card-title pricing-card-title">$29 <small class="textwhite">/ mo</small></h4>
-			</div>
-			<div class="card-body">
-				<ul class="list-unstyled mt-3 mb-4">
-					<li>30 users included</li>
-					<li>15 GB of storage</li>
-					<li>Phone and email support</li>
-					<li>Help center access</li>
-				</ul>
-				<button type="button" class="btn btn-indigo btn-round">Contact us</button>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- End Pricing -->
+<!-- End Features -->
+
+<!-- Start Recent Races -->
+  <div class="container pt-5 pb-5 mt-4" data-aos="fade">
+    <h2><strong>Recent and Upcoming Races</strong></h2>
+    <div class="row gap-y">
+      <div class="col-md-6 col-xl-4">
+
+        <div class="card shadow-sm border-0">
+          <img class="card-img-top" src="./assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
+          <div class="card-body">
+			<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019</h5>
+			<div class="row ml-0">
+			<i class="fas fa-calendar-day mr-2 text-primary"></i>
+				<h6>Aug. 2 - 4 2019</h6>
+			</div>
+			<div class="row ml-0">
+				<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+				<h6>Hungary</h6>
+			</div>					
+			<div class="row ml-0">
+				<i class="fas fa-trophy mr-2 text-primary"></i>
+				<h6>Lewis Hamilton</h6>
+			</div>			
+            <a href='#' class='btn btn-sm btn-primary text-white'>
+				View Details
+			</a>
+          </div>
+        </div>
+	  </div>
+
+      <div class="col-md-6 col-xl-4">
+        <div class="card shadow-sm border-0">
+          <img class="card-img-top" src="./assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
+		  <div class="card-body">
+			<h5 class="card-title text-secondary">GRAN PREMIO DE MÉXICO 2019</h5>
+			<div class="row ml-0">
+			<i class="fas fa-calendar-day mr-2 text-primary"></i>
+				<h6>Oct. 25 - 27 2019</h6>
+			</div>
+			<div class="row ml-0">
+				<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+				<h6>Mexico</h6>
+			</div>					
+			<div class="row ml-0">
+				<i class="fas fa-trophy mr-2 text-primary"></i>
+				<h6>NYD</h6>
+			</div>			
+            <a href='#' class='btn btn-sm btn-primary text-white'>
+				View Details
+			</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <div class="card shadow-sm border-0">
+          <img class="card-img-top" src="./assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
+		  <div class="card-body">
+			<h5 class="card-title text-secondary">SOCAR AZERBAIJAN 2019</h5>
+			<div class="row ml-0">
+			<i class="fas fa-calendar-day mr-2 text-primary"></i>
+				<h6>Apr. 26 - 28 2019</h6>
+			</div>
+			<div class="row ml-0">
+				<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+				<h6>Azerbaijan</h6>
+			</div>					
+			<div class="row ml-0">
+				<i class="fas fa-trophy mr-2 text-primary"></i>
+				<h6>Valtteri Bottas</h6>
+			</div>			
+            <a href='#' class='btn btn-sm btn-primary text-white'>
+				View Details
+			</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Recent Races -->
+
+
+
+  <!-- Start News Items -->
+  <div class="container">
+  <h2><strong>News</strong></h2>
+
+  <div class="row gap-y"  data-aos="fade-up">
+		<div class="col-md-6 col-lg-4">
+			<div class="card">
+				<img class="img-card-top" src="./assets/img/news-item-img/esports-roster.jpg">
+				<div class="card-body">
+					<a href="https://www.formula1.com/en/latest/article.fdas-tonizza-continues-to-lead-the-2019-f1-new-balance-esports-pro-series.3p2aT806MO0cw2XIfuBjUF.html" target="_blank">
+					<h5 class="card-title text-dark">FDA’s Tonizza continues to lead the 2019 F1 New Balance Esports Pro Series</h5>
+					<span class="card-text text-muted">
+					Posted on Oct. 02, 2019</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-4">
+			<div class="card pb-4">
+				<img class="img-card-top" src="./assets/img/news-item-img/russia.jpg">
+				<div class="card-body">
+					<a href="https://www.formula1.com/en/latest/article.ferrari-to-run-vettel-in-extra-pirelli-test-pre-japan.75Tpodf53gSv1ir8e5PmEh.html" target="_blank">
+					<h5 class="card-title text-dark">Ferrari to run Vettel in extra Pirelli test pre-Japan</h5>
+					<span class="card-text text-muted">
+					Posted on Oct 02, 2019</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-4">
+			<div class="card">
+				<img class="img-card-top" src="./assets/img/news-item-img/singapore.jpg">
+				<div class="card-body">
+					<a href="formula1.com/en/latest/article.a-lost-opportunity-why-renault-wanted-a-stronger-partnership-with-mclaren.6ARaPKbGYeRdHXsZNqTydu.html" target="_blank">
+					<h5 class="card-title text-dark">‘A lost opportunity’ – Why Renault wanted a stronger partnership with McLaren</h5>
+					<span class="card-text text-muted">
+					Posted on Oct 02, 2019 </span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-4">
+			<div class="card">
+				<img class="img-card-top" src="./assets/img/news-item-img/power-rankings.jpg">
+				<div class="card-body">
+					<a href="https://www.formula1.com/en/latest/article.power-rankings-which-former-champion-has-fallen-out-of-the-top-10-after.3n0esTPWAWmnjzwY3c2jzm.html" target="_blank">
+					<h5 class="card-title text-dark">POWER RANKINGS: Which former champion has fallen out of the top 10 after Russia?</h5>
+					<span class="card-text text-muted">
+					Posted on Oct 02, 2019 </span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-4">
+			<div class="card">
+				<img class="img-card-top" src="./assets/img/news-item-img/carlos.jpg">
+				<div class="card-body">
+					<a href="https://www.formula1.com/en/latest/article.f1-partners-with-complex-to-launch-new-content-series-the-pit-hosted-by.1oQe5B4sZFxY1wnUe0dlio.html" target="_blank">
+					<h5 class="card-title text-dark">F1 partners with Complex to launch new content series, The Pit, hosted by A$AP Ferg</h5>
+					<span class="card-text text-muted">
+					Posted on Oct 03, 2019 </span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-4">
+			<div class="card pb-4">
+				<img class="img-card-top" src="./assets/img/news-item-img/greg.jpg">
+				<div class="card-body">
+					<a href="https://www.formula1.com/en/latest/article.f1-fantasy-how-williams-tough-weekend-in-russia-hurt-players.46Ek0VO3A3zVQBBoN3nU1q.html" target="_blank">
+					<h5 class="card-title text-dark">F1 FANTASY: How Williams’ tough weekend in Russia hurt players</h5>
+					<span class="card-text text-muted">
+					Posted on May 24, 2019 by Sal </span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+
+  <!-- End News Items -->
+
+
 
 
 <!--------------------------------------
@@ -253,9 +302,11 @@ FAQ
 <!--------------------------------------
 CTA
 --------------------------------------->
-<!-- <div class="container pt-4 pb-5 mb-5" data-aos="fade-up">
+<img src="./assets/img/sponsor-banner.jpg" alt="">
+
+<div class="pt-4 pb-5 mb-5" data-aos="fade-up">
 	<div class="pb-4 text-center">
-		<h2>Ready? <strong><span class="text-secondary">Start</span> your free trial!</strong></h2>
+		<h2>Ready? <strong><span class="text-white">Start</span> your free trial!</strong></h2>
 		<p class="text-muted">
 			 A lot of features to develop your own lore ipsum. No credit card required.
 		</p>
@@ -271,7 +322,7 @@ CTA
 			<button type="submit" class="btn btn-info btn-round btn-lg w-100">Start Free</button>
 		</div>
 	</form>
-</div> -->
+</div>
 <!-- End CTA -->
 <div class="modal fade" id="modal_signin" tabindex="-1" role="dialog" aria-labelledby="modal_signin" aria-hidden="true">
 	<div class="modal-dialog shadow-lg" role="document">
