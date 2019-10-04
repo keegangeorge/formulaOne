@@ -63,6 +63,7 @@
 </div>
 
 <!----------------------- Content - About END ---------------------->
+<?php require("includes/footer.php"); ?>
 
 
 <!-- Javascript -->

@@ -18,8 +18,7 @@
 	</head>
 
 <body>
-
-<?php require("includes/navigation.php"); ?>
+<?php require("includes/navigation-member.php"); ?>
 
 
 <!-------------------------------------
@@ -93,16 +92,16 @@ FEATURES
 </div>
 <!-- End Features -->
 
-<!-- Start Recent Races -->
+<!-- Start Favourites -->
   <div class="container pt-5 pb-5 mt-4" data-aos="fade">
-    <h2><strong>Recent and Upcoming Races</strong></h2>
+    <h2><strong>Favourites</strong></h2>
     <div class="row gap-y">
       <div class="col-md-6 col-xl-4">
 
         <div class="card shadow-sm border-0">
           <img class="card-img-top" src="./assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
           <div class="card-body">
-			<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019</h5>
+			<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019 <i class="fas fa-heart text-secondary"></i></h5>
 			<div class="row ml-0">
 			<i class="fas fa-calendar-day mr-2 text-primary"></i>
 				<h6>Aug. 2 - 4 2019</h6>
@@ -126,7 +125,86 @@ FEATURES
         <div class="card shadow-sm border-0">
           <img class="card-img-top" src="./assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
 		  <div class="card-body">
-			<h5 class="card-title text-secondary">GRAN PREMIO DE MÉXICO 2019</h5>
+			<h5 class="card-title text-secondary">GRAN PREMIO DE MÉXICO 2019            <i class="fas fa-heart text-secondary"></i></h5>
+			<div class="row ml-0">
+			<i class="fas fa-calendar-day mr-2 text-primary"></i>
+				<h6>Oct. 25 - 27 2019</h6>
+			</div>
+			<div class="row ml-0">
+				<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+				<h6>Mexico</h6>
+			</div>					
+			<div class="row ml-0">
+				<i class="fas fa-trophy mr-2 text-primary"></i>
+				<h6>NYD</h6>
+			</div>			
+            <a href='#' class='btn btn-sm btn-primary text-white'>
+				View Details
+            </a>            
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-6 col-xl-4">
+        <div class="card shadow-sm border-0">
+          <img class="card-img-top" src="./assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
+		  <div class="card-body">
+			<h5 class="card-title text-secondary">SOCAR AZERBAIJAN 2019</h5>
+			<div class="row ml-0">
+			<i class="fas fa-calendar-day mr-2 text-primary"></i>
+				<h6>Apr. 26 - 28 2019</h6>
+			</div>
+			<div class="row ml-0">
+				<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+				<h6>Azerbaijan</h6>
+			</div>					
+			<div class="row ml-0">
+				<i class="fas fa-trophy mr-2 text-primary"></i>
+				<h6>Valtteri Bottas</h6>
+			</div>			
+            <a href='#' class='btn btn-sm btn-primary text-white'>
+				View Details
+			</a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- End Favourite Races -->
+  
+  <!-- Start Recent Races -->
+  <div class="container pt-5 pb-5 mt-4" data-aos="fade">
+    <h2><strong>Recent and Upcoming Races</strong></h2>
+    <div class="row gap-y">
+      <div class="col-md-6 col-xl-4">
+
+        <div class="card shadow-sm border-0">
+          <img class="card-img-top" src="./assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
+          <div class="card-body">
+			<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019 <i class="fas fa-heart text-secondary"></i></h5>
+			<div class="row ml-0">
+			<i class="fas fa-calendar-day mr-2 text-primary"></i>
+				<h6>Aug. 2 - 4 2019</h6>
+			</div>
+			<div class="row ml-0">
+				<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+				<h6>Hungary</h6>
+			</div>					
+			<div class="row ml-0">
+				<i class="fas fa-trophy mr-2 text-primary"></i>
+				<h6>Lewis Hamilton</h6>
+			</div>			
+            <a href='#' class='btn btn-sm btn-primary text-white'>
+				View Details
+			</a>
+          </div>
+        </div>
+	  </div>
+
+      <div class="col-md-6 col-xl-4">
+        <div class="card shadow-sm border-0">
+          <img class="card-img-top" src="./assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
+		  <div class="card-body">
+			<h5 class="card-title text-secondary">GRAN PREMIO DE MÉXICO 2019 <i class="fas fa-heart text-secondary"></i></h5>
 			<div class="row ml-0">
 			<i class="fas fa-calendar-day mr-2 text-primary"></i>
 				<h6>Oct. 25 - 27 2019</h6>
@@ -149,7 +227,7 @@ FEATURES
         <div class="card shadow-sm border-0">
           <img class="card-img-top" src="./assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
 		  <div class="card-body">
-			<h5 class="card-title text-secondary">SOCAR AZERBAIJAN 2019</h5>
+			<h5 class="card-title text-secondary">SOCAR AZERBAIJAN 2019 <i class="far fa-heart text-secondary"></i></h5>
 			<div class="row ml-0">
 			<i class="fas fa-calendar-day mr-2 text-primary"></i>
 				<h6>Apr. 26 - 28 2019</h6>
