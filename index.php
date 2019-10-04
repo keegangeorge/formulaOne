@@ -34,7 +34,7 @@ HEADER
 					<br>Race History
 				</h1>
                 <h5 class="font-weight-light mb-4">View all race information since the <strong> 1950&#8217;s</strong></strong></h5>
-                <a href="#" class="btn btn-lg btn-outline-white btn-round">Learn more</a>
+                <a href="./about.php" class="btn btn-lg btn-outline-white btn-round">Learn more</a>
             </div>
             <div class="col align-self-bottom align-items-right text-right h-max-380 position-relative z-index-1">
 				<img data-aos="fade-up" src="assets/img/f1car.png" class="rounded img-fluid">
