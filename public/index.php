@@ -9,7 +9,7 @@ HEADER
 --------------------------------------->
 <div class="jumbotron jumbotron-lg jumbotron-fluid mb-0 pb-5 bg-primary position-relative">
     <div class="container-fluid text-white h-100">
-        <div class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5">
+        <div class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5" data-aos="fade">
             <div class="col pt-4 pb-4">
 				<h1 class="display-3">
 					<strong>Formula 1</strong>
@@ -81,7 +81,7 @@ FEATURES
     <div class="row gap-y">
       <div class="col-md-6 col-xl-4">
 
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-sm border-0" data-aos="fade-right"> 
           <img class="card-img-top" src="../public/assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
           <div class="card-body">
 			<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019</h5>
@@ -104,7 +104,7 @@ FEATURES
         </div>
 	  </div>
 
-      <div class="col-md-6 col-xl-4">
+      <div class="col-md-6 col-xl-4" data-aos="fade-up">
         <div class="card shadow-sm border-0">
           <img class="card-img-top" src="../public/assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
 		  <div class="card-body">
@@ -127,7 +127,7 @@ FEATURES
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-4">
+      <div class="col-md-6 col-xl-4" data-aos="fade-left">
         <div class="card shadow-sm border-0">
           <img class="card-img-top" src="../public/assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
 		  <div class="card-body">

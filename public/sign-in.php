@@ -1,7 +1,25 @@
-<?php require_once('../private/initialize.php'); ?>
+<?php require_once('../private/initialize.php');
 
-<?php $page_title = 'Races'; ?>
+
+$errors = [];
+$username = '';
+$password = '';
+
+if (is_post_request()) {
+	$username = $_POST['username'] ?? '';
+	$password  = $_POST['password'] ?? '';
+
+	$_SESSION['username'] = $username;
+
+	redirect_to(url_for('/index.php'));
+}
+
+
+?>
+
+<?php $page_title = 'Sign in'; ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
+
 
     
 <!-- Main -->
@@ -50,10 +68,6 @@
 					$credentials[$storedEmail] = $storedPass;
 				}
 
-				// print_r($credentials["kgeorge13@gmail.com"]);
-				// print_r($credentials["johnapples@gmail.com"]);
-
-
 
 				if ((!isset($email)) || (!isset($password))) {
 				// Visitor must enter credentials in form below
@@ -61,18 +75,24 @@
 
 			<form class="border rounded p-5" method="post" action="sign-in.php">
 				<h3 class="mb-4 text-center">Sign in</h3>
+
 				<div class="form-group">
-					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required>
+					<input type="text" name="username" value="<?php echo h($username); ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" required>
 				</div>
+
 				<div class="form-group">
 					<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
 				</div>
+
 				<div class="form-group form-check">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">
 					<label class="form-check-label small text-muted" for="exampleCheck1">Remember me</label>
 				</div>
+
 				<button type="submit" name="submit" class="btn btn-success btn-round btn-block shadow-sm">Sign in</button>
+
 				<small class="d-block mt-4 text-center"><a class="text-gray" href="#">Forgot your password?</a></small>
+
 			</form>
 			
 			<?php

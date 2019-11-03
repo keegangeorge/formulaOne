@@ -1,5 +1,6 @@
 <?php
     ob_start(); // Turns on output buffering
+    session_start(); // Turns on sessions
 
     /*
      * Constants for file paths
@@ -26,7 +27,7 @@
     require_once('validation_functions.php');
 
     // Connects to Database
-    // $db = db_connect();
+    $db = db_connect();
     
     // Initializes Array for Housing Errors
     $errors = [];

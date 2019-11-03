@@ -41,18 +41,65 @@
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto d-flex align-items-center">
-			<li class="nav-item">
-			<span class="nav-link" href="#">
-			<a class="plain-link bg-transparent" href="<?php echo url_for('/register.php'); ?>"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="hidden"></a>
-			</a>
-			</span>
+			<!-- Username in Navigation -->
+			<li class="nav-item nav-link">
+				<?php if (isset($_SESSION['username'])) {
+					?>
+					<i class="fas fa-user-circle"></i> 
+				<?php 
+					echo $_SESSION['username'];
+				}  else {
+					echo '';
+				}
+				?>
 			</li>
+
+			<!-- Register Button -->
 			<li class="nav-item">
-			<span class="nav-link" href="#">
-			<a class="btn btn-secondary btn-round" href="<?php echo url_for('/sign-in.php'); ?>"><i class="fas fa-sign-in-alt"></i> Sign In <a href="#signin" class="hidden"></a>
-			</a>
-			</span>
+				<?php if (!isset($_SESSION['username'])) { ?>
+					<span class="nav-link">
+					<a class="plain-link bg-transparent" href="<?php echo url_for('/register.php'); ?>"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="hidden"></a>
+					</a>
+					</span>
+				<?php } else { 
+					echo '';
+				} ?>
 			</li>
+
+			<!-- Sign In / Sign Out Button -->
+			<li class="nav-item">
+				<span class="nav-link">
+				<?php if (isset($_SESSION['username'])) { ?>
+					<a class="btn btn-secondary btn-round" href="<?php echo url_for('/sign-out.php'); ?>">
+					<i class="fas fa-sign-out-alt"></i>
+					Sign Out
+					</a>
+				<?php } else { ?>
+					<a class="btn btn-secondary btn-round" href="<?php echo url_for('/sign-in.php'); ?>">
+					<i class="fas fa-sign-in-alt"></i>
+					Sign In
+					</a>
+				<?php } ?>
+				</span>
+			</li>
+
+			<!-- <li class="nav-item">
+				<form action="<?php echo url_for('/index.php'); ?>" method="post">
+					<select name="season" class="form-control pr-2 pl-2 bg-transparent text-secondary font-weight-light border-secondary rounded-pill">
+						<?php 
+						$season = "";
+							$season_choices = ['2019', '2018', '2017', '2016'];
+							foreach($season_choices as $season_choice) {
+								echo "<option value=\"{$season_choice}\"";
+								if ($season == $season_choice) {
+									echo " selected";
+								}
+								echo ">{$season_choice}</option>";
+							}
+						?>
+					</select>
+				</form>
+			</li> -->
 		</ul>
 	</div>
 </div>
