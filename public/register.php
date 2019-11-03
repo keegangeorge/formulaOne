@@ -1,14 +1,42 @@
 <?php require_once('../private/initialize.php'); ?>
 
-<?php $page_title = 'Races'; ?>
+<?php 
+	if (is_post_request()) {
+		$admin['first_name'] = $_POST['first_name'] ?? '';
+		$admin['last_name'] = $_POST['last_name'] ?? '';
+		$admin['email'] = $_POST['email'] ?? '';
+		$admin['username'] = $_POST['username'] ?? '';
+		$admin['password'] = $_POST['password'] ?? '';
+		$admin['confirm_password'] = $_POST['confirm_password'] ?? '';
+
+		$result = insert_admin($admin);
+		if ($result === true) {
+			// $new_id = mysqli_insert_id($db);
+			$_SESSION['message'] = 'Admin created.';
+			redirect_to(url_for('/sign-in.php'));
+		} else {
+			$errors = $result;
+		}
+	} else {
+		$admin = [];
+		$admin['first_name'] = '';
+		$admin['last_name'] = '';
+		$admin['email'] = '';
+		$admin['username'] = '';
+		$admin['password'] = '';
+		$admin['confirm_password'] = '';
+	}
+?>
+
+<?php $page_title = 'Registration'; ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
     
 <!-- Main -->
 <div class="d-md-flex h-md-100 align-items-center">
 	<div class="col-md-6 p-0 bg-primary h-md-100">
-		<div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
-			<div class="logoarea pt-5 pb-5" data-aos="fade">
+		<div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center" data-aos="fade">
+			<div class="logoarea pt-5 pb-5" data-aos="fade-right">
 				<p>
 					<i class="fas fa-flag-checkered fa-3x"></i>
 				</p>
@@ -23,20 +51,33 @@
 	</div>
 	<div class="col-md-6 p-0 bg-white h-md-100 loginarea">
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center" data-aos="fade">
-			<form class="border rounded p-5" method="post" action="registration-process.php">
+
+			<form class="m-5 border rounded p-5" method="post" action="registration-process.php" data-aos="fade-left">
 				<h3 class="mb-4 text-center">Register an Account</h3>
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group">
+							<input type="text" name="firstname" class="form-control" value="<?php echo h($admin['first_name']);?>" placeholder="First Name" required>
+						</div>			
+					</div>		
+					<div class="col-6">
+						<div class="form-group">
+							<input type="text" name="lastname" class="form-control" value="<?php echo h($admin['last_name']);?>" placeholder="Last Name" required>
+						</div>		
+					</div>
+				</div>		
 				<div class="form-group">
-					<input type="text" name="firstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Name" required>
-				</div>					
-				<div class="form-group">
-					<input type="text" name="lastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Last Name" required>
-				</div>				
-				<div class="form-group">
-					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required>
+					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo h($admin['email']);?>" placeholder="E-mail" required>
 				</div>
 				<div class="form-group">
-					<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-					<small id="emailHelp" class="form-text text-muted">Use 8 or more characters with a mix of letters, numbers & symbols</small>
+					<input type="text" name="username" class="form-control" value="<?php echo h($admin['username']);?>" placeholder="Username" required>
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" class="form-control" placeholder="Password" value="" required>
+				</div>
+				<div class="form-group">
+					<input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" value="" required>
+					<small class="form-text text-center text-muted mt-3">Password must be 12+ characters including at least one uppercase letter, lowercase letter, number, and symbol.</small>
 				</div>
 				<button type="submit" name="submit" class="btn btn-success btn-round btn-block shadow-sm">Register</button>
 				<small class="d-block mt-4 text-center"><a class="text-gray" href="#">Forgot your password?</a></small>
