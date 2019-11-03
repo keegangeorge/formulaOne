@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-		<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/favicon.png">
-		<link rel="icon" type="image/png" href="./assets/img/favicon.png">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-		<title>F1 | Home</title>
-		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
-		<!-- Adobe Fonts -->
-		<link rel="stylesheet" href="https://use.typekit.net/qah3bmy.css">
-		<!-- Font Awesome Icons -->
-		<script src="https://kit.fontawesome.com/2df6258c61.js" crossorigin="anonymous"></script>
-		<!-- Main CSS -->
-		<link href="./assets/css/main.css" rel="stylesheet"/>
-		<!-- Animation CSS -->
-		<link href="./assets/css/vendor/aos.css" rel="stylesheet"/>
-	</head>
+<?php require_once('../private/initialize.php'); ?>
 
-<body>
-
-<?php require("includes/navigation.php"); ?>
+<?php $page_title = 'Home'; ?>
+<?php include(SHARED_PATH . '/public_header.php'); ?>
 
 
 <!-------------------------------------
@@ -34,10 +16,10 @@ HEADER
 					<br>Race History
 				</h1>
                 <h5 class="font-weight-light mb-4">View all race information since the <strong> 1950&#8217;s</strong></strong></h5>
-                <a href="./about.php" class="btn btn-lg btn-outline-white btn-round">Learn more</a>
+                <a href="<?php echo url_for('/about.php') ?>" class="btn btn-lg btn-outline-white btn-round">Learn more</a>
             </div>
             <div class="col align-self-bottom align-items-right text-right h-max-380 position-relative z-index-1">
-				<img data-aos="fade-up" src="assets/img/f1car.png" class="rounded img-fluid">
+				<img data-aos="fade-up" src="<?php echo url_for('../public/assets/img/f1car.png'); ?>" class="rounded img-fluid">
             </div>
         </div>
     </div>
@@ -100,7 +82,7 @@ FEATURES
       <div class="col-md-6 col-xl-4">
 
         <div class="card shadow-sm border-0">
-          <img class="card-img-top" src="./assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
+          <img class="card-img-top" src="../public/assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
           <div class="card-body">
 			<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019</h5>
 			<div class="row ml-0">
@@ -124,7 +106,7 @@ FEATURES
 
       <div class="col-md-6 col-xl-4">
         <div class="card shadow-sm border-0">
-          <img class="card-img-top" src="./assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
+          <img class="card-img-top" src="../public/assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
 		  <div class="card-body">
 			<h5 class="card-title text-secondary">GRAN PREMIO DE MÉXICO 2019</h5>
 			<div class="row ml-0">
@@ -147,7 +129,7 @@ FEATURES
       </div>
       <div class="col-md-6 col-xl-4">
         <div class="card shadow-sm border-0">
-          <img class="card-img-top" src="./assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
+          <img class="card-img-top" src="../public/assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
 		  <div class="card-body">
 			<h5 class="card-title text-secondary">SOCAR AZERBAIJAN 2019</h5>
 			<div class="row ml-0">
@@ -178,7 +160,7 @@ CTA
 
 <div class="pt-4 pb-5 mb-5" data-aos="fade-up">
 	<div class="pb-4 text-center">
-		<img src="./assets/img/sponsors.jpg" alt="f1 sponsors">
+		<img src="../public/assets/img/sponsors.jpg" alt="f1 sponsors">
 	</div>
 </div>
 <!-- End CTA -->
@@ -192,7 +174,7 @@ CTA
   <div class="row gap-y"  data-aos="fade-up">
 		<div class="col-md-6 col-lg-4">
 			<div class="card">
-				<img class="img-card-top" src="./assets/img/news-item-img/esports-roster.jpg">
+				<img class="img-card-top" src="../public/assets/img/news-item-img/esports-roster.jpg">
 				<div class="card-body">
 					<a href="https://www.formula1.com/en/latest/article.fdas-tonizza-continues-to-lead-the-2019-f1-new-balance-esports-pro-series.3p2aT806MO0cw2XIfuBjUF.html" target="_blank">
 					<h5 class="card-title text-dark">FDA’s Tonizza continues to lead the 2019 F1 New Balance Esports Pro Series</h5>
@@ -204,7 +186,7 @@ CTA
 		</div>
 		<div class="col-md-6 col-lg-4">
 			<div class="card pb-4">
-				<img class="img-card-top" src="./assets/img/news-item-img/russia.jpg">
+				<img class="img-card-top" src="../public/assets/img/news-item-img/russia.jpg">
 				<div class="card-body">
 					<a href="https://www.formula1.com/en/latest/article.ferrari-to-run-vettel-in-extra-pirelli-test-pre-japan.75Tpodf53gSv1ir8e5PmEh.html" target="_blank">
 					<h5 class="card-title text-dark">Ferrari to run Vettel in extra Pirelli test pre-Japan</h5>
@@ -216,7 +198,7 @@ CTA
 		</div>
 		<div class="col-md-6 col-lg-4">
 			<div class="card">
-				<img class="img-card-top" src="./assets/img/news-item-img/singapore.jpg">
+				<img class="img-card-top" src="../public/assets/img/news-item-img/singapore.jpg">
 				<div class="card-body">
 					<a href="formula1.com/en/latest/article.a-lost-opportunity-why-renault-wanted-a-stronger-partnership-with-mclaren.6ARaPKbGYeRdHXsZNqTydu.html" target="_blank">
 					<h5 class="card-title text-dark">‘A lost opportunity’ – Why Renault wanted a stronger partnership with McLaren</h5>
@@ -228,7 +210,7 @@ CTA
 		</div>
 		<div class="col-md-6 col-lg-4">
 			<div class="card">
-				<img class="img-card-top" src="./assets/img/news-item-img/power-rankings.jpg">
+				<img class="img-card-top" src="../public/assets/img/news-item-img/power-rankings.jpg">
 				<div class="card-body">
 					<a href="https://www.formula1.com/en/latest/article.power-rankings-which-former-champion-has-fallen-out-of-the-top-10-after.3n0esTPWAWmnjzwY3c2jzm.html" target="_blank">
 					<h5 class="card-title text-dark">POWER RANKINGS: Which former champion has fallen out of the top 10 after Russia?</h5>
@@ -240,7 +222,7 @@ CTA
 		</div>
 		<div class="col-md-6 col-lg-4">
 			<div class="card">
-				<img class="img-card-top" src="./assets/img/news-item-img/carlos.jpg">
+				<img class="img-card-top" src="../public/assets/img/news-item-img/carlos.jpg">
 				<div class="card-body">
 					<a href="https://www.formula1.com/en/latest/article.f1-partners-with-complex-to-launch-new-content-series-the-pit-hosted-by.1oQe5B4sZFxY1wnUe0dlio.html" target="_blank">
 					<h5 class="card-title text-dark">F1 partners with Complex to launch new content series, The Pit, hosted by A$AP Ferg</h5>
@@ -252,7 +234,7 @@ CTA
 		</div>
 		<div class="col-md-6 col-lg-4">
 			<div class="card pb-4">
-				<img class="img-card-top" src="./assets/img/news-item-img/greg.jpg">
+				<img class="img-card-top" src="../public/assets/img/news-item-img/greg.jpg">
 				<div class="card-body">
 					<a href="https://www.formula1.com/en/latest/article.f1-fantasy-how-williams-tough-weekend-in-russia-hurt-players.46Ek0VO3A3zVQBBoN3nU1q.html" target="_blank">
 					<h5 class="card-title text-dark">F1 FANTASY: How Williams’ tough weekend in Russia hurt players</h5>
@@ -310,8 +292,8 @@ FAQ
 <!-- End FAQ -->
 
 
-<?php require("includes/footer.php"); ?>
 
+<?php include(SHARED_PATH . '/public_footer.php'); ?>
 
 
 

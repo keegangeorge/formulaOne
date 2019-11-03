@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-		<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/favicon.png">
-		<link rel="icon" type="image/png" href="./assets/img/favicon.png">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-		<title>F1 | About</title>
-		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
-		<!-- Adobe Fonts -->
-		<link rel="stylesheet" href="https://use.typekit.net/qah3bmy.css">
-		<!-- Font Awesome Icons -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-		<!-- Main CSS -->
-		<link href="./assets/css/main.css" rel="stylesheet"/>
-		<!-- Animation CSS -->
-		<link href="./assets/css/vendor/aos.css" rel="stylesheet"/>
-	</head>
-    
-<body> 
+<?php require_once('../private/initialize.php'); ?>
 
-<?php require("includes/navigation.php"); ?>
+<?php $page_title = 'About'; ?>
+<?php include(SHARED_PATH . '/public_header.php'); ?>
 
 
 <!----------------------- Content - About START ---------------------->
@@ -63,7 +45,7 @@
 </div>
 
 <!----------------------- Content - About END ---------------------->
-<?php require("includes/footer.php"); ?>
+<?php include(SHARED_PATH . '/public_footer.php'); ?>
 
 
 <!-- Javascript -->

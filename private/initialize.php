@@ -20,13 +20,13 @@
     define("WWW_ROOT", $doc_root);
 
     // Requires
-    // require_once('functions.php');
-    // require_once('database.php');
-    // require_once('query_functions.php');
-    // require_once('validation_functions.php');
+    require_once('general_functions.php');
+    require_once('database.php');
+    require_once('query_functions.php');
+    require_once('validation_functions.php');
 
     // Connects to Database
-    $db = db_connect();
+    // $db = db_connect();
     
     // Initializes Array for Housing Errors
     $errors = [];
