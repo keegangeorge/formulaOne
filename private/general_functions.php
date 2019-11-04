@@ -57,9 +57,10 @@
     function display_errors($errors=array()) {
         $output = '';
         if(!empty($errors)) {
-            $output .= "<div class=\"errors\">";
-            $output .= "Please fix the following errors:";
-            $output .= "<ul>";
+            $output .= "<div class=\"alert alert-danger errors mt-3\">";
+            $output .= "<i class=\"fas fa-bullhorn mr-3\"></i>";
+            $output .= "<strong>Please fix the following errors:</strong>";
+            $output .= "<ul class=\"mt-2\">";
             foreach($errors as $error) {
             $output .= "<li>" . h($error) . "</li>";
             }

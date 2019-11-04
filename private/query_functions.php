@@ -57,12 +57,13 @@ function validate_admin($admin) {
 
 function insert_admin($admin) {
     global $db;
+
     $errors = validate_admin($admin);
     if (!empty($errors)) {
         return $errors; 
     }
 
-    $hashed_password = $admin['password'];
+    $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO admins ";
     $sql .= "(first_name, last_name, email, username, hashed_password) ";
@@ -84,6 +85,29 @@ function insert_admin($admin) {
         db_disconnect($db);
         exit;
     }
+}
+
+function update_admin($admin) {
+    global $db;
+
+    $errors = validate_admin($admin);
+    if (!empty($errors)) {
+        return $errors;
+    }
+
+    $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
+
+    $sql = "UPDATE admins SET ";
+    $sql .= "first_name='" . db_escape($db, $admin['first_name']) . "', ";
+    $sql .= "last_name='" . db_escape($db, $admin['last_name']) . "', ";
+    $sql .= "last_name='" . db_escape($db, $admin['last_name']) . "', ";
+    $sql .= "email='" . db_escape($db, $admin['email']) . "', ";
+    $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
+    $sql .= "username='" . db_escape($db, $admin['username']) . "', ";
+    $sql .= "WHERE id='" . db_escape($db, $admin['id']) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    
 }
 
 
