@@ -107,7 +107,19 @@ function update_admin($admin) {
     $sql .= "WHERE id='" . db_escape($db, $admin['id']) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
-    
+}
+
+function find_admin_by_username($username) {
+    global $db;
+
+    $sql = "SELECT * FROM admins ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $admin = mysqli_fetch_assoc($result); // find first
+    mysqli_free_result($result);
+    return $admin; // returns the associative array
 }
 
 

@@ -6,12 +6,43 @@ $username = '';
 $password = '';
 
 if (is_post_request()) {
+
 	$username = $_POST['username'] ?? '';
 	$password  = $_POST['password'] ?? '';
 
-	$_SESSION['username'] = $username;
+	// Validations
+	if (is_blank($username)) {
+		$errors[] = "Username cannot be blank.";
+	}
+	if (is_blank($password)) {
+		$errors[] = "Password cannot be blank.";
+	}
 
-	redirect_to(url_for('/index.php'));
+	// If there were no errors, attempt to login
+	if (empty($errors)) {
+		
+		// Using one variable ensures that msg is the same.
+		$login_failure_msg = "Log in was unsuccessful.";
+		
+		$admin = find_admin_by_username($username);
+		if ($admin) {
+
+			// if record is found
+			if (password_verify($password, $admin['hashed_password'])) {
+				// password matches
+				log_in_admin($admin);
+				redirect_to(url_for('/index.php'));
+			} else {
+				// username found, but password does not match
+				$errors[] = $login_failure_msg;
+			}
+
+		} else {
+			// no username found
+			$errors[] = $login_failure_msg;
+		}
+	}
+
 }
 
 
@@ -41,51 +72,24 @@ if (is_post_request()) {
 	</div>
 	<div class="col-md-6 p-0 bg-white h-md-100 loginarea">
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center" data-aos="fade">
-			<!-- SIGN IN FORM -->
-			<?php
-				@$email = $_POST['email'];
-				@$password = $_POST['password'];
 
-				$lines = file('user-accounts.txt');
-				$credentials = array();
-
-				foreach ($lines as $line) {
-					if (empty($line)) continue;
-
-					// entire line
-					$line = trim(str_replace(": ", ':', $line));
-					$lineArr = explode(' ', $line);
-					
-					// email only
-					$storedEmail = explode(':', $lineArr[0]);
-					$storedEmail = array_pop($storedEmail);
-
-					// password
-					$storedPass = explode(':', $lineArr[1]);
-					$storedPass = array_pop($storedPass);
-
-					// putting them together
-					$credentials[$storedEmail] = $storedPass;
-				}
-
-
-				if ((!isset($email)) || (!isset($password))) {
-				// Visitor must enter credentials in form below
-			?>
 
 			<form class="border rounded p-5" method="post" action="sign-in.php">
 				<h3 class="mb-4 text-center">Sign in</h3>
 
-				<div class="form-group">
-					<input type="text" name="username" value="<?php echo h($username); ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" required>
-				</div>
+				<?php echo display_errors($errors); ?>
 
+				<!-- Username Field -->
 				<div class="form-group">
-					<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+					<input type="text" name="username" value="<?php echo h($username); ?>" class="form-control" placeholder="Username" required>
+				</div>
+				<!-- Password Field -->
+				<div class="form-group">
+					<input type="password" name="password" class="form-control" placeholder="Password" required>
 				</div>
 
 				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<input type="checkbox" class="form-check-input">
 					<label class="form-check-label small text-muted" for="exampleCheck1">Remember me</label>
 				</div>
 
@@ -94,39 +98,6 @@ if (is_post_request()) {
 				<small class="d-block mt-4 text-center"><a class="text-gray" href="#">Forgot your password?</a></small>
 
 			</form>
-			
-			<?php
-				} else if ($credentials[$email] == $password) {
-			?>
-				<div class="border rounded p-5" data-aos="fade">
-					<div class="text-center success-items">
-						<i class="fas fa-check-circle fa-2x text-success"></i>
-						<h3 class="text-success">Success</h3>
-						<p>You have logged in successfully</p>
-						<a href="./index-member.php" class="btn btn-primary btn-round">Return to Homepage</a>
-					</div>
-				<div>
-				<?php
-					} else {
-						// Sign in unsucessful
-						?>
-						
-						<div class="border rounded p-5" data-aos="fade">
-							<div class="text-center success-items">
-								<i class="fas fa-times-circle fa-2x text-danger"></i>
-								<h3 class="text-danger">Error</h3>
-								<p>The email or password that was entered is incorrect.</p>
-								<a href="./sign-in.php" class="btn btn-primary btn-round">Try Again</a>
-							</div>
-						<div>
-			<?php
-
-			}
-			?>
-
-
-			
-
 			<!-- END SIGN IN FORM -->
 		</div>
 	</div>
