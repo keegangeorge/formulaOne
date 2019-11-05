@@ -6,7 +6,7 @@
 <?php
 $season_set = find_all_seasons();
 $seasons = [];
-$year = $_GET['year'] ?? '2019';
+$year = $_GET['year'] ?? date('Y');
 
 $race_set = find_race_by_year($year);
 
@@ -20,10 +20,10 @@ $race_set = find_race_by_year($year);
 <div class="jumbotron jumbotron-lg jumbotron-fluid mb-3 bg-primary position-relative">
     <div class="container text-white tofront">
         <div class="row align-items-center justify-content-center text-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <h1 class="display-3">Races</h1>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group" aria-label="Race Filters Buttons">
                 <button type="button" class="btn btn-outline-white">Recent</button>
                 <button type="button" class="btn btn-outline-white">Country (A-Z)</button>
                 <button type="button" class="btn btn-outline-white">Driver Names</button>
@@ -48,33 +48,49 @@ $race_set = find_race_by_year($year);
 <div class="container pt-0 pb-4">
     <div class="row gap-y justify-content-center">
     <?php while ($race = mysqli_fetch_assoc($race_set)) { ?>
+        <?php 
+             $circuitId = $race['circuitId'];
+            $circuit_set = find_race_by_circuitId($circuitId);
+
+            while ($circuit = mysqli_fetch_assoc($circuit_set)) {
+            
+            ?>
         <div class="col-md-3">
             <!-- Simple Card -->
             <div class="card shadow-sm border-0">
-                <img class="card-img-top" src="../public/assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
+                <img class="card-img-top" src="../public/assets/img/recent-race-img/<?php echo $circuit['country'] ?>.jpg" alt="">
                 <div class="card-body">
+
                     <h5 class="card-title text-secondary">
                         <?php echo h($race['name']); ?>
                     </h5>
+
                     <div class="row ml-0">
                         <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                        <h6><?php echo date_format(date_create(h($race['date'])), "M dS, Y"); ?></h6>
+                        <h6><?php echo date_format(date_create(h($race['date'])), "M jS, Y"); ?></h6>
                     </div>
+
                     <div class="row ml-0">
                         <i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-                        <h6>Hungary</h6>
+                        <h6><?php echo h($circuit['country']);?></h6>
                     </div>
+
+
+
+                    <?php if (!is_blank($race['time'])) {  ?>
                     <div class="row ml-0">
-                        <i class="fas fa-trophy mr-2 text-primary"></i>
-                        <h6>Lewis Hamilton</h6>
+                        <i class="fas fa-clock mr-2 text-primary"></i>
+                        <h6><?php echo h($race['time']);  ?></h6>
                     </div>
+                    <?php } ?>
+
                     <a href='#' class='btn btn-sm btn-primary text-white'>
                         View Details
                     </a>
                 </div>
             </div>
         </div>
-        <?php } ?>
+        <?php } } ?>
 
 
 

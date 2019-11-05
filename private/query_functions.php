@@ -138,7 +138,8 @@ function find_race_by_year($year) {
     global $db;
     
     $sql = "SELECT * FROM races ";
-    $sql .= "WHERE year='" . db_escape($db, $year) . "' ";
+    // $sql .= "INNER JOIN circuits ";
+    $sql .= "WHERE year='" . db_escape($db, $year) . "'";
     
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -149,8 +150,13 @@ function find_race_by_year($year) {
     
 }
 
-function find_all_races() {
+function find_race_by_circuitId($circuitId) {
     global $db;
 
-    $sql = "SELECT * FROM races ";
+    $sql = "SELECT * FROM circuits ";
+    $sql .= "WHERE circuitId='" . db_escape($db, $circuitId) . "'";
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
 }
