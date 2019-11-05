@@ -1,8 +1,8 @@
 <footer class="bg-primary pt-5 pb-5">
 <div class="container">
 	<div class="row">
-		<div class="col-12 col-md mr-4">
-			<i class="fas fa-copyright text-white"></i>
+		<div class="col-12 col-md mr-4 text-white">
+			<i class="fas fa-flag-checkered fa-3x"></i>
 			<small class="d-block mt-3 mb-4 text-muted">©
 			<script>document.write(new Date().getFullYear())</script>
 			 Keegan George & Apoorva Bitton</a></small>
