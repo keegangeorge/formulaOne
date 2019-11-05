@@ -22,6 +22,11 @@
 //====================================
 // Additional theme classes
 //====================================
+.scrollable-menu {
+  height: auto;
+  max-height: 9em;
+  overflow-x: hidden;
+}
 
 // User Defined:
 .bg-landing {
