@@ -1,5 +1,6 @@
 <?php
 
+// USER AUTHENTICATION FUNCTIONS //
 // Include query functions in this file.
 function validate_admin($admin) {
 
@@ -52,9 +53,8 @@ function validate_admin($admin) {
       }
   
       return $errors;
-    }
+}
   
-
 function insert_admin($admin) {
     global $db;
 
@@ -122,7 +122,35 @@ function find_admin_by_username($username) {
     return $admin; // returns the associative array
 }
 
+// FORMULA ONE RELATED QUERY FUNCTIONS //
+function find_all_seasons() {
+    global $db;
 
+    $sql = "SELECT DISTINCT year FROM races ";
+    $sql .= "ORDER BY year DESC";
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
 
+function find_race_by_year($year) {
+    global $db;
+    
+    $sql = "SELECT * FROM races ";
+    $sql .= "WHERE year='" . db_escape($db, $year) . "' ";
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    // $race = mysqli_fetch_assoc($result);
+    // mysqli_free_result($result);
+    // return $race;
+    return $result;
+    
+}
 
-?>
+function find_all_races() {
+    global $db;
+
+    $sql = "SELECT * FROM races ";
+}
