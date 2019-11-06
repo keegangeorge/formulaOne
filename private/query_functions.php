@@ -175,3 +175,40 @@ function find_race_by_circuitId($circuitId) {
     confirm_result_set($result);
     return $result;
 }
+
+function find_race_by_raceId($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM races ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $race = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return($race);
+}
+
+function find_circuit($circuitId) {
+    global $db;
+
+    $sql = "SELECT * FROM circuits ";
+    $sql .= "WHERE circuitId='" . db_escape($db, $circuitId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $circuit = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return($circuit);
+}
+
+function find_results_by_raceId($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM results ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $race_results = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return($race_results);
+}
+
