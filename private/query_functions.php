@@ -212,3 +212,29 @@ function find_results_by_raceId($raceId) {
     return($race_results);
 }
 
+function find_driver_standings_by_raceId($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM driverstandings ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    // $driver_standings = mysqli_fetch_assoc($result);
+    // mysqli_free_result($result);
+    // return($driver_standings);
+    return $result;
+}
+
+function find_drivers_by_driverId($driverId) {
+    global $db;
+
+    $sql = "SELECT * FROM drivers ";
+    $sql .= "WHERE driverId='" . db_escape($db, $driverId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    // $drivers = mysqli_fetch_assoc($result);
+    // mysqli_free_result($result);
+    // return($drivers);
+    return($result);
+}
+
