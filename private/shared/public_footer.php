@@ -5,7 +5,7 @@
 			<i class="fas fa-flag-checkered fa-3x"></i>
 			<small class="d-block mt-3 mb-4 text-muted">©
 			<script>document.write(new Date().getFullYear())</script>
-			 Keegan George & Apoorva Bitton</a></small>
+			 <a target="_blank" class="text-muted" href="https://keegangeorge.com">Keegan George</a> & <a target="_blank" class="text-muted" href="https://apoorvabitton.com">Apoorva Bitton</a></small>
 		</div>
 		<div class="col-6 col-md">
 			<h5 class="mb-4 text-white">Races</h5>

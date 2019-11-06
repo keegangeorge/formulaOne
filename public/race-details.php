@@ -31,7 +31,7 @@ $driver_standings_set = find_driver_standings_by_raceId($raceId);
         $drivers_set = find_drivers_by_driverId($driverId);
         while ($drivers = mysqli_fetch_assoc($drivers_set)) {
     // echo $drivers['forename'] . " " . $drivers['surname']; 
-        echo "Driver Id: " . $driver_standings['driverId'] . " <strong>Driver Name:</strong> " . h($drivers['forename']) . "  " . h($drivers['surname']) . " <strong>Points:</strong> " . $driver_standings['points'] . " <strong>Position Text:</strong> " . $driver_standings['positionText'] ."<br>";
+        echo "<strong>Driver Id:</strong " . $driver_standings['driverId'] . " <strong>Driver Name:</strong> <a href=\"" . $drivers['url'] . "\">" . h($drivers['forename']) . "  " . h($drivers['surname']) . "</a> <strong>Points:</strong> " . $driver_standings['points'] . " <strong>Position:</strong> " . $driver_standings['position'] . " <strong>Wins:</strong> " . $driver_standings['wins'] . " <strong>Driver Number:</strong> " . $drivers['number'] . " <strong>Nationality:</strong> " . $drivers['nationality'] . "<br>";
     } 
 }
     ?>

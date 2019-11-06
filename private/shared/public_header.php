@@ -16,8 +16,7 @@
         <script src="https://kit.fontawesome.com/2df6258c61.js" crossorigin="anonymous"></script>
         
 		<!-- Main CSS -->
-		<link href="<?php echo url_for('assets/css/main.css'); ?>" rel="stylesheet"/>
-
+		<link href="<?php echo url_for('assets/css/main.css'); ?>" rel="stylesheet"/>		
         
 		<!-- Animation CSS -->
 		<link href="<?php echo url_for('assets/css/vendor/aos.css'); ?>" rel="stylesheet"/>
