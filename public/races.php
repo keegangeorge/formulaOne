@@ -82,7 +82,7 @@ $race_set = find_race_by_year($year);
                         <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . $year . '&country=' . h(u($country['country']))); ?>"><?php echo h($country['country']); ?>
                         </a>
                     <?php } ?>
-                   
+
                 </div>
             </div>
 
@@ -137,35 +137,32 @@ $race_set = find_race_by_year($year);
                             <div class="row ml-0">
                                 <i class="fas fa-map-marker-alt mr-2 text-primary"></i>
                                 <h6>
-                                    <a 
-                                    class="text-dark"
-                                    data-toggle="tooltip" data-placement="right" data-original-title="<?php echo h($circuit['lat']) . ", " . h($circuit['lng']); ?>"
-                                    class="text-dark" target="_blank" href="http://google.com/maps/place/ <?php echo h($circuit['lat']) . ', ' . h($circuit['lng'])  . "\">"; ?>
-                                    <?php 
-                                    echo h($circuit['location']); 
-                                    // When specific location doesn't exist, the comma separator is not displayed
-                                    if (!is_blank(h($circuit['location']))) {
-                                        echo ', ';
-                                    }
-                                    ?> 
+                                    <a class="text-dark" data-toggle="tooltip" data-placement="right" data-original-title="<?php echo h($circuit['lat']) . ", " . h($circuit['lng']); ?>" class="text-dark" target="_blank" href="http://google.com/maps/place/ <?php echo h($circuit['lat']) . ', ' . h($circuit['lng'])  . "\">"; ?>
                                     <?php
-                                    
-                                    echo h($circuit['country']); 
-                                    ?>
+                                            echo h($circuit['location']);
+                                            // When specific location doesn't exist, the comma separator is not displayed
+                                            if (!is_blank(h($circuit['location']))) {
+                                                echo ', ';
+                                            }
+                                            ?> 
+                                    <?php
+
+                                            echo h($circuit['country']);
+                                            ?>
                                     </a>
                                 </h6>
                             </div>
 
                             <?php if (!is_blank($race['time'])) {  ?>
-                                <div class="row ml-0">
-                                    <i class="fas fa-clock mr-2 text-primary"></i>
-                                    <h6><?php echo date_format(date_create(h($race['time'])), "g:i A");  ?></h6>
-                                </div>
-                            <?php } ?>
+                                <div class=" row ml-0">
+                                        <i class="fas fa-clock mr-2 text-primary"></i>
+                                        <h6><?php echo date_format(date_create(h($race['time'])), "g:i A");  ?></h6>
+                            </div>
+                        <?php } ?>
 
-                            <a href='#' class='btn mt-2 btn-sm btn-primary text-white'>
-                                View Details
-                            </a>
+                        <a href='<?php echo url_for('/race-details.php?raceId=' . h(u($race['raceId']))); ?>' class='btn mt-2 btn-sm btn-primary text-white'>
+                            View Details
+                        </a>
                         </div>
                     </div>
                 </div>
