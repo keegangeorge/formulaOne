@@ -134,12 +134,27 @@ function find_all_seasons() {
     return $result;
 }
 
+
+function find_all_countries() {
+    global $db;
+
+    $sql = "SELECT DISTINCT country FROM circuits ";
+    $sql .= "ORDER BY country ASC";
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
 function find_race_by_year($year) {
     global $db;
+
     
     $sql = "SELECT * FROM races ";
     // $sql .= "INNER JOIN circuits ";
-    $sql .= "WHERE year='" . db_escape($db, $year) . "'";
+    $sql .= "WHERE year='" . db_escape($db, $year) . "' ";
+    
+
     
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
