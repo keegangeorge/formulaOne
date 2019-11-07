@@ -55,7 +55,6 @@ JAVASCRIPTS
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 
 <!-- Animation -->
-
 <script src="./assets/js/vendor/aos.js" type="text/javascript"></script>
 <noscript>
 	<style>

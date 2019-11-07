@@ -14,31 +14,39 @@
         
 		<!-- Font Awesome Icons -->
 		<script src="https://kit.fontawesome.com/2df6258c61.js" crossorigin="anonymous"></script>
-
         
 		<!-- Main CSS -->
 		<link href="<?php echo url_for('assets/css/main.css'); ?>" rel="stylesheet"/>		
         
 		<!-- Animation CSS -->
 		<link href="<?php echo url_for('assets/css/vendor/aos.css'); ?>" rel="stylesheet"/>
+
 	</head>
 
 <body>
 
+<!--  -->
+<nav class="
+<?php 
+if ($whiteNav) { 
+	echo "topnav navbar navbar-expand-lg scrollednav navbar-light text-black bg-white fixed-top shadow-sm py-0 border-bottom border-muted";
+} else {
+	echo "topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top "; 
+} 
 
-<nav class="topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+?>">
 <div class="container">
-	<a class="navbar-brand" href="<?php echo url_for('/index.php'); ?>"><i class="fas fa-flag-checkered mr-2"></i><strong>Formula</strong> One</a>
+	<a class="navbar-brand <?php if ($whiteNav) { echo 'text-dark'; } ?>" href="<?php echo url_for('/index.php'); ?>"><i class="fas fa-flag-checkered mr-2"></i><strong>Formula</strong> One</a>
 	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="navbar-collapse collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto d-flex align-items-center">
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo url_for('/races.php'); ?>">Races</a>
+				<a class="nav-link <?php if ($whiteNav) { echo 'text-muted'; } ?>" href="<?php echo url_for('/races.php'); ?>">Races</a>
 			</li>
 			<li>
-				<a class="nav-link" href="<?php echo url_for('/about.php'); ?>">About</a>
+				<a class="nav-link <?php if ($whiteNav) { echo 'text-muted'; } ?>" href="<?php echo url_for('/about.php'); ?>">About</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto d-flex align-items-center">

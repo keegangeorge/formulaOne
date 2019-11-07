@@ -1,6 +1,7 @@
 <?php require_once '../private/initialize.php'; ?>
 
 <?php $page_title = 'Race Details'; ?>
+<?php $whiteNav = true; ?>
 <?php include SHARED_PATH . '/public_header.php'; ?>
 
 <?php
@@ -107,14 +108,14 @@ $get_race_winner_set = find_driver_standings_by_raceId($raceId);
                     ?>
                 </div>
                 <div class="col-md-1">
-                    <h6 class="text-muted font-weight-light">Driver #</h6>
+                    <h6 class=" font-weight-light">Driver #</h6>
                     <h2 class="display-5 font-weight-bold"><?php echo $race_results['number']; ?></h2>
                 </div>
-                <div class="col-md-2 border-right border-gray">
+                <div class="col-md-1 pr-4 border-right border-gray">
                     <h6 class="text-muted font-weight-light">Points</h6>
                     <h2 class="display-5 font-weight-bold"><?php echo $race_results['points']; ?></h2>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 pl-4">
                     <h6 class="text-muted font-weight-light">Round</h6>
                     <h2 class="display-5 font-weight-bold""><?php echo $race['round']; ?></h2>
                 </div>
@@ -222,59 +223,51 @@ $get_race_winner_set = find_driver_standings_by_raceId($raceId);
                         ?>
                     </tbody>
                 </table>
-            </div>
 
-            <br>
-            <hr size="10">
-            <br>
-            
-
-
-
-
-
-            <div class="row">
-                <h5>Race Results</h5>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-3">
-                    <p>Winner</p>
-                    <h2>Info</h2>
-                </div>
             </div>
 
             <br>
             <hr size="10">
             <br>
 
+
             <div class="row">
-                <h5>Drivers Information</h5>
+                <h5 class="mb-4 text-secondary">Qualifying</h5>
             </div>
-            <br>
+
             <div class="row">
-                <div class="col-md-3">
-                    <p>Names</p>
-                    <h2>Info</h2>
-                </div>
-                <div class="col-md-3">
-                    <p>Standings</p>
-                    <h2>Info</h2>
-                </div>
-                <div class="col-md-3">
-                    <p>Laps Times</p>
-                    <h2>Info</h2>
-                </div>
-                <div class="col-md-3">
-                    <p>Longitude</p>
-                    <h2>Info</h2>
-                </div>
+                <table id="race-qualifying-table" class="table table-hover border-left border-right border-bottom" data-aos="fade-up">
+
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Position</th>
+                            <th scope="col">Number</th>
+                            <th scope="col">Driver</th>
+                            <th scope="col">Constructor</th>
+                            <th scope="col">Q1</th>
+                            <th scope="col">Q2</th>
+                            <th scope="col">Q3</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>Positon</td>
+                        <td>Number</td>
+                        <td>Driver</td>
+                        <td>Constructor</td>
+                        <td>Q1</td>
+                        <td>Q2</td>
+                        <td>Q3</td>
+                    </tr>
+                    </tbody>
+
+                    </table>
+
             </div>
 
 
-            <br>
-            <hr size="10">
-            <br>
+
 
 
 
@@ -351,3 +344,4 @@ mysqli_free_result($winner_driver_set);
 ?>
 
 <?php include SHARED_PATH . '/public_footer.php'; ?>
+
