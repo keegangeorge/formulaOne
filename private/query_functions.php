@@ -212,11 +212,33 @@ function find_results_by_raceId($raceId) {
     return($race_results);
 }
 
+function find_specific_results_by_raceId($raceId, $driverId) {
+    global $db;
+
+    $sql = "SELECT * FROM results ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "' ";
+    $sql .= "AND driverId='" . db_escape($db, $driverId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return($result);
+}
+
+function find_constructors($constructorId) {
+    global $db;
+
+    $sql = "SELECT * FROM constructors ";
+    $sql .= "WHERE constructorId='" . db_escape($db, $constructorId) . "' ";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return($result);
+}
+
 function find_driver_standings_by_raceId($raceId) {
     global $db;
 
     $sql = "SELECT * FROM driverstandings ";
-    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "'";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "' ";
+    $sql .= "ORDER BY position";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     // $driver_standings = mysqli_fetch_assoc($result);
@@ -238,3 +260,6 @@ function find_drivers_by_driverId($driverId) {
     return($result);
 }
 
+function find_race_winner() {
+    
+}

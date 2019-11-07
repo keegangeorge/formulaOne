@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="https://use.typekit.net/qah3bmy.css">
         
 		<!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/2df6258c61.js" crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/2df6258c61.js" crossorigin="anonymous"></script>
+
         
 		<!-- Main CSS -->
 		<link href="<?php echo url_for('assets/css/main.css'); ?>" rel="stylesheet"/>		

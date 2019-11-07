@@ -9,36 +9,25 @@ $raceId = $_GET['raceId'] ?? '1';
 $race = find_race_by_raceId($raceId);
 $circuit = find_circuit($race['circuitId']);
 $race_results = find_results_by_raceId($raceId);
-// $driver_standings = find_driver_standings_by_raceId($raceId);
 $driver_standings_set = find_driver_standings_by_raceId($raceId);
-// $drivers = find_drivers_by_driverId($driver_standings['driverId']);
+$get_race_winner_set = find_driver_standings_by_raceId($raceId);
 ?>
 
 <div class="container pb-5 mt-5 pt-4 text-left">
 
-    <nav class="mt-5" aria-label="breadcrumb">
+    <nav class="mt-5" aria-label="breadcrumb" data-aos="fade">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?php echo url_for('races.php'); ?>">Races</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?php echo $race['name'] . " (" . $race['year'] . ")"; ?></li>
         </ol>
     </nav>
 
-    <!-- Testing some stuffs -->
 
-    <?php 
-    while ($driver_standings = mysqli_fetch_assoc($driver_standings_set)) {
-        $driverId = $driver_standings['driverId'];
-        $drivers_set = find_drivers_by_driverId($driverId);
-        while ($drivers = mysqli_fetch_assoc($drivers_set)) {
-    // echo $drivers['forename'] . " " . $drivers['surname']; 
-        echo "<strong>Driver Id:</strong " . $driver_standings['driverId'] . " <strong>Driver Name:</strong> <a href=\"" . $drivers['url'] . "\">" . h($drivers['forename']) . "  " . h($drivers['surname']) . "</a> <strong>Points:</strong> " . $driver_standings['points'] . " <strong>Position:</strong> " . $driver_standings['position'] . " <strong>Wins:</strong> " . $driver_standings['wins'] . " <strong>Driver Number:</strong> " . $drivers['number'] . " <strong>Nationality:</strong> " . $drivers['nationality'] . "<br>";
-    } 
-}
-    ?>
-    <!-- End of tests -->
 
-    <div class="container mt-5">
-        <h5 class="ml-1 text-muted text-uppercase font-weight-light"><?php echo $circuit['name']; ?></h5>
+    <div class="container mt-5" data-aos="fade-right">
+        <h5 class="ml-1 text-muted text-uppercase font-weight-light">
+            <?php echo $circuit['name']; ?>
+        </h5>
         <h1 class="text-secondary font-weight-normal">
             <?php echo $race['name']; ?>
         </h1>
@@ -76,48 +65,172 @@ $driver_standings_set = find_driver_standings_by_raceId($raceId);
     </div>
 
     <div class="container pt-2">
-        <figure>
+        <figure data-aos="fade-left">
             <img src="../public/assets/img/recent-race-img/<?php echo $circuit['country'] ?>.jpg" alt="">
         </figure>
-        <div class="col mt-4">
-            <a target="_blank" href="<?php echo $race['url']; ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Race Information" class="mt-2 iconbox iconsmall bg-secondary rounded text-white">
+        <div class="mb-5">
+            <a target="_blank" href="<?php echo $race['url']; ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Race Information" class="mt-2 iconbox iconsmall bg-gray rounded text-dark border-0">
                 <i class="fab fa-wikipedia-w"></i>
             </a>
 
             <a target="_blank" href="http://google.com/maps/place/
-            <?php echo h($circuit['lat']) . ', ' . h($circuit['lng']); ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Circuit Location" class="mt-2 iconbox iconsmall bg-secondary rounded text-white">
+            <?php echo h($circuit['lat']) . ', ' . h($circuit['lng']); ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Circuit Location" class="mt-2 iconbox iconsmall bg-gray rounded text-dark border-0">
                 <i class="fas fa-map-marker-alt"></i>
             </a>
         </div>
-        <div class="container">
 
-            <div class="row mt-5">
-                <h5>General Race Information</h5>
-                <?php echo $race['time']; ?>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-3">
-                    <p>Country</p>
-                    <h2>Info</h2>
+
+        <div class="container">
+            <div class="row" data-aos="fade">
+
+                <div class="col-md-4">
+                    <h6 class="text-muted font-weight-light">Winner</h6>
+                    <?php
+                    while ($race_winner = mysqli_fetch_assoc($get_race_winner_set)) {
+                        $winnerDriverId = $race_winner['driverId'];
+                        $winner_driver_set = find_drivers_by_driverId($winnerDriverId);
+
+                        while ($winner_drivers = mysqli_fetch_assoc($winner_driver_set)) {
+                            if ($race_winner['position'] == '1') {
+                                ?>
+                                <h2 class="display-5 font-weight-bold">
+                                    <i class="fas fa-trophy"></i>
+                                    <a target="_blank" class="text-dark" href="<?php echo $winner_drivers['url']; ?>">
+                                        <?php echo $winner_drivers['forename']; ?>
+                                        <?php echo $winner_drivers['surname']; ?>
+                                    </a>
+                                </h2>
+                    <?php }
+                        }
+                    }
+
+                    ?>
+                </div>
+                <div class="col-md-1">
+                    <h6 class="text-muted font-weight-light">Driver #</h6>
+                    <h2 class="display-5 font-weight-bold"><?php echo $race_results['number']; ?></h2>
+                </div>
+                <div class="col-md-2 border-right border-gray">
+                    <h6 class="text-muted font-weight-light">Points</h6>
+                    <h2 class="display-5 font-weight-bold"><?php echo $race_results['points']; ?></h2>
+                </div>
+                <div class="col-md-1">
+                    <h6 class="text-muted font-weight-light">Round</h6>
+                    <h2 class="display-5 font-weight-bold""><?php echo $race['round']; ?></h2>
+                </div>
+                <div class=" col-md-1">
+                        <h6 class="text-muted font-weight-light">Laps</h6>
+                        <h2 class="display-5 font-weight-bold"><?php echo $race_results['laps']; ?></h2>
                 </div>
                 <div class="col-md-3">
-                    <p>Location</p>
-                    <h2>Info</h2>
+                    <h6 class="text-muted font-weight-light">Total Race Time</h6>
+                    <h2 class="display-5 font-weight-bold"><?php echo $race_results['time']; ?></h2>
                 </div>
-                <div class="col-md-3">
-                    <p>Latitude</p>
-                    <h2>Info</h2>
-                </div>
-                <div class="col-md-3">
-                    <p>Longitude</p>
-                    <h2>Info</h2>
-                </div>
+
+
             </div>
 
             <br>
             <hr size="10">
             <br>
+
+
+
+            <div class="row">
+                <h5 class="mb-4 text-secondary">Race Rankings</h5>
+            </div>
+            <div>
+                <table id="race-details-table" class="table table-hover border-left border-right border-bottom searchable sortable" data-aos="fade-up">
+
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Position</th>
+                            <th scope="col">Driver Name</th>
+                            <th scope="col">Nationality</th>
+                            <th scope="col">Constructor</th>
+                            <th scope="col">Points</th>
+                            <th scope="col">Wins</th>
+                            <th scope="col">Fastest Lap Time</th>
+                            <th scope="col">Fastest Lap Speed</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php while ($driver_standings = mysqli_fetch_assoc($driver_standings_set)) {
+                            $driverId = $driver_standings['driverId'];
+                            $drivers_set = find_drivers_by_driverId($driverId);
+                            while ($drivers = mysqli_fetch_assoc($drivers_set)) {
+                                $race_specific_results_set = find_specific_results_by_raceId($raceId, $drivers['driverId']);
+                                while ($race_specific_results = mysqli_fetch_assoc($race_specific_results_set)) {
+                                    $constructor_set = find_constructors($race_specific_results['constructorId']);
+                                    while ($constructor = mysqli_fetch_assoc($constructor_set)) {
+
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $driver_standings['position'];
+                                                                if ($driver_standings['position'] == '1') {
+                                                                    $winner = $drivers['forename'];
+                                                                }
+                                                                ?></td>
+
+                                            <th scope="row">
+                                                <a class="text-dark" target="_blank" href="<?php echo $drivers['url']; ?>">
+                                                    <?php
+                                                                    echo h($drivers['forename']) . " " . h($drivers['surname']); ?>
+                                                </a>
+                                            </th>
+                                            <!-- INDEX 1 -->
+                                            <td>
+                                                <?php echo $drivers['nationality']; ?>
+                                            </td>
+                                            <td>
+                                                <a class="text-dark" target="_blank" href="<?php echo $constructor['url']; ?>">
+                                                    <?php echo $constructor['name']; ?>
+                                                </a>
+                                            </td>
+                                            <!-- INDEX 2 -->
+                                            <td>
+                                                <?php echo $driver_standings['points']; ?>
+                                            </td>
+                                            <!-- INDEX 3 -->
+                                            <td>
+                                                <?php echo $driver_standings['wins']; ?>
+                                            </td>
+                                            <!-- INDEX 4 -->
+                                            <td>
+                                                <?php if (!is_blank($race_specific_results['fastestLapTime'])) { ?>
+                                                    <span class="pr-2" data-toggle="tooltip" data-placement="right" data-original-title="Lap: <?php echo $race_specific_results['fastestLap']; ?>">
+                                                        <?php echo $race_specific_results['fastestLapTime']; ?> </span> <?php } else {
+                                                                                                                                            ?>
+                                                    <span class="text-muted">Lap Time Unavailable</span>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if (!is_blank($race_specific_results['fastestLapSpeed'])) {
+                                                                    echo $race_specific_results['fastestLapSpeed'] . " km/h";
+                                                                } else { ?>
+                                                    <span class="text-muted">Speed Unavailable</span>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+
+                        <?php
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <hr size="10">
+            <br>
+            
+
+
+
 
 
             <div class="row">
@@ -162,10 +275,7 @@ $driver_standings_set = find_driver_standings_by_raceId($raceId);
             <br>
             <hr size="10">
             <br>
-            <h5>Status Information</h5>
 
-
-            <br>
 
 
             <div class="border-top mt-5">
@@ -234,7 +344,9 @@ $driver_standings_set = find_driver_standings_by_raceId($raceId);
 // mysqli_free_result($circuit);
 mysqli_free_result($driver_standings_set);
 mysqli_free_result($drivers_set);
-
+mysqli_free_result($race_specific_results_set);
+mysqli_free_result($get_race_winner_set);
+mysqli_free_result($winner_driver_set);
 
 ?>
 
