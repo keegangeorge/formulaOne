@@ -138,7 +138,7 @@ function find_all_seasons() {
 function find_all_countries() {
     global $db;
 
-    $sql = "SELECT DISTINCT country FROM circuits ";
+    $sql = "SELECT DISTINCT circuitId, country FROM circuits ";
     $sql .= "ORDER BY country ASC";
     
     $result = mysqli_query($db, $sql);
@@ -260,6 +260,12 @@ function find_drivers_by_driverId($driverId) {
     return($result);
 }
 
-function find_race_winner() {
-    
+function find_qualifying_by_raceId($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM qualifying ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return($result);
 }
