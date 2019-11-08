@@ -12,6 +12,7 @@ $circuit = find_circuit($race['circuitId']);
 $race_results = find_results_by_raceId($raceId);
 $driver_standings_set = find_driver_standings_by_raceId($raceId);
 $get_race_winner_set = find_driver_standings_by_raceId($raceId);
+$qualifying_set = find_qualifying_by_raceId($raceId);
 ?>
 
 <div class="container pb-5 mt-5 pt-4 text-left">
@@ -251,17 +252,18 @@ $get_race_winner_set = find_driver_standings_by_raceId($raceId);
                     </thead>
 
                     <tbody>
+                    <?php while ($qualifying = mysqli_fetch_assoc($qualifying_set)) { ?>
                     <tr>
-                        <td>Positon</td>
-                        <td>Number</td>
-                        <td>Driver</td>
-                        <td>Constructor</td>
-                        <td>Q1</td>
-                        <td>Q2</td>
-                        <td>Q3</td>
+                        <td><?php echo $qualifying['position']; ?></td>
+                        <td><?php echo $qualifying['number']; ?></td>
+                        <td><?php echo $qualifying['driverId']; ?></td>
+                        <td><?php echo $qualifying['constructorId']; ?></td>
+                        <td><?php echo $qualifying['q1']; ?></td>
+                        <td><?php echo $qualifying['q2']; ?></td>
+                        <td><?php echo $qualifying['q3']; ?></td>
                     </tr>
                     </tbody>
-
+                    <?php } ?>
                     </table>
 
             </div>
@@ -331,15 +333,12 @@ $get_race_winner_set = find_driver_standings_by_raceId($raceId);
 </div>
 
 <?php
-
-// mysqli_free_result($season_set);
-// mysqli_free_result($race_set);
-// mysqli_free_result($circuit);
 mysqli_free_result($driver_standings_set);
 mysqli_free_result($drivers_set);
 mysqli_free_result($race_specific_results_set);
 mysqli_free_result($get_race_winner_set);
 mysqli_free_result($winner_driver_set);
+mysqli_free_result($qualifying_set);
 
 ?>
 
