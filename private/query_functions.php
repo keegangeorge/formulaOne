@@ -264,7 +264,8 @@ function find_qualifying_by_raceId($raceId) {
     global $db;
 
     $sql = "SELECT * FROM qualifying ";
-    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "'";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "' ";
+    $sql .= "ORDER BY position ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return($result);
