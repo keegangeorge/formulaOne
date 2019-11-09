@@ -13,6 +13,8 @@ $race_results = find_results_by_raceId($raceId);
 $driver_standings_set = find_driver_standings_by_raceId($raceId);
 $get_race_winner_set = find_driver_standings_by_raceId($raceId);
 $qualifying_set = find_qualifying_by_raceId($raceId);
+$drivers_names = [];
+$constructor_names = [];
 ?>
 
 <div class="container pb-5 mt-5 pt-4 text-left">
@@ -161,6 +163,7 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
                         <?php while ($driver_standings = mysqli_fetch_assoc($driver_standings_set)) {
                             $driverId = $driver_standings['driverId'];
                             $drivers_set = find_drivers_by_driverId($driverId);
+                            
                             while ($drivers = mysqli_fetch_assoc($drivers_set)) {
                                 $race_specific_results_set = find_specific_results_by_raceId($raceId, $drivers['driverId']);
                                 while ($race_specific_results = mysqli_fetch_assoc($race_specific_results_set)) {
@@ -178,7 +181,11 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
                                             <th scope="row">
                                                 <a class="text-dark" target="_blank" href="<?php echo $drivers['url']; ?>">
                                                     <?php
-                                                                    echo h($drivers['forename']) . " " . h($drivers['surname']); ?>
+                                                    $temp_drivers = h($drivers['forename']) . " " . h($drivers['surname']);
+
+                                                    array_push($drivers_names, $temp_drivers);  
+                                                               
+                                                    echo h($drivers['forename']) . " " . h($drivers['surname']); ?>
                                                 </a>
                                             </th>
                                             <!-- INDEX 1 -->
@@ -187,7 +194,12 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
                                             </td>
                                             <td>
                                                 <a class="text-dark" target="_blank" href="<?php echo $constructor['url']; ?>">
-                                                    <?php echo $constructor['name']; ?>
+                                                    <?php 
+                                                    $temp_constructors = $constructor['name'];
+
+                                                    array_push($constructor_names, $temp_constructors);  
+
+                                                    echo $constructor['name']; ?>
                                                 </a>
                                             </td>
                                             <!-- INDEX 2 -->
@@ -219,7 +231,9 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
                         <?php
                                     }
                                 }
+                            
                             }
+                        
                         }
                         ?>
                     </tbody>
@@ -252,20 +266,27 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
                     </thead>
 
                     <tbody>
-                    <?php while ($qualifying = mysqli_fetch_assoc($qualifying_set)) { ?>
+                    <?php 
+                    $i = -1;
+                    while ($qualifying = mysqli_fetch_assoc($qualifying_set)) { ?>
+                        <?php $i++; ?>
+
                     <tr>
                         <td><?php echo $qualifying['position']; ?></td>
                         <td><?php echo $qualifying['number']; ?></td>
-                        <td><?php echo $qualifying['driverId']; ?></td>
-                        <td><?php echo $qualifying['constructorId']; ?></td>
+
+                        <td><?php echo $drivers_names[$i]; ?></td>
+
+                        <td><?php echo $constructor_names[$i]; ?></td>
                         <td><?php echo $qualifying['q1']; ?></td>
                         <td><?php echo $qualifying['q2']; ?></td>
                         <td><?php echo $qualifying['q3']; ?></td>
                     </tr>
                     </tbody>
                     <?php } ?>
-                    </table>
 
+                    <?php // } ?>
+                    </table>
             </div>
 
 
@@ -333,12 +354,12 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
 </div>
 
 <?php
-mysqli_free_result($driver_standings_set);
-mysqli_free_result($drivers_set);
-mysqli_free_result($race_specific_results_set);
-mysqli_free_result($get_race_winner_set);
-mysqli_free_result($winner_driver_set);
-mysqli_free_result($qualifying_set);
+if (isset($drivers_set)) { mysqli_free_result($drivers_set); }
+if (isset($driver_standings_set)) { mysqli_free_result($driver_standings_set); }
+if (isset($race_specific_results_set)) { mysqli_free_result($race_specific_results_set); }
+if (isset($get_race_winner_set)) { mysqli_free_result($get_race_winner_set); }
+if (isset($winner_driver_set)) { mysqli_free_result($winner_driver_set); }
+if (isset($qualifying_set)) { mysqli_free_result($qualifying_set); }
 
 ?>
 
