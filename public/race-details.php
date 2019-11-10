@@ -15,6 +15,16 @@ $get_race_winner_set = find_driver_standings_by_raceId($raceId);
 $qualifying_set = find_qualifying_by_raceId($raceId);
 $drivers_names = [];
 $constructor_names = [];
+$comment_set = find_comments_by_raceId($raceId);
+
+if (is_post_request()) {
+    $message = $_POST['message'];
+    $result = insert_comment($message, $raceId);
+    redirect_to(url_for('race-details.php?raceId=' . $raceId . '#comments'));
+} else {
+    // display the blank form
+}
+
 ?>
 
 <div class="container pb-5 mt-5 pt-4 text-left">
@@ -140,104 +150,110 @@ $constructor_names = [];
 
 
 
-            <div class="row">
-                <h5 class="mb-4 text-secondary">Race Rankings</h5>
-            </div>
-            <div>
-                <table id="race-details-table" class="table table-hover border-left border-right border-bottom searchable sortable" data-aos="fade-up">
+            <div class="row accordion">
+                <a data-toggle="collapse" class="text-decoration-none" href="#collapseRankings" aria-expanded="true" aria-controls="collapseRankings">
 
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Position</th>
-                            <th scope="col">Driver Name</th>
-                            <th scope="col">Nationality</th>
-                            <th scope="col">Constructor</th>
-                            <th scope="col">Points</th>
-                            <th scope="col">Wins</th>
-                            <th scope="col">Fastest Lap Time</th>
-                            <th scope="col">Fastest Lap Speed</th>
-                        </tr>
-                    </thead>
+                    <h5 class="text-secondary mb-4" data-aos="fade">
+                        <i class="fa fa-chevron-right mr-3 pull-right"></i>
+                        <i class="fas fa-chevron-down mr-3"></i>
+                        Race Rankings
+                    </h5>
+                </a>
 
-                    <tbody>
-                        <?php while ($driver_standings = mysqli_fetch_assoc($driver_standings_set)) {
-                            $driverId = $driver_standings['driverId'];
-                            $drivers_set = find_drivers_by_driverId($driverId);
-                            
-                            while ($drivers = mysqli_fetch_assoc($drivers_set)) {
-                                $race_specific_results_set = find_specific_results_by_raceId($raceId, $drivers['driverId']);
-                                while ($race_specific_results = mysqli_fetch_assoc($race_specific_results_set)) {
-                                    $constructor_set = find_constructors($race_specific_results['constructorId']);
-                                    while ($constructor = mysqli_fetch_assoc($constructor_set)) {
+                <div class="col-12 clearfix" id="collapseRankings">
+                    <table id="race-details-table" class="table table-hover border-left border-right border-bottom" data-aos="fade-up">
 
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $driver_standings['position'];
-                                                                if ($driver_standings['position'] == '1') {
-                                                                    $winner = $drivers['forename'];
-                                                                }
-                                                                ?></td>
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Position</th>
+                                <th scope="col">Driver Name</th>
+                                <th scope="col">Nationality</th>
+                                <th scope="col">Constructor</th>
+                                <th scope="col">Points</th>
+                                <th scope="col">Wins</th>
+                                <th scope="col">Fastest Lap Time</th>
+                                <th scope="col">Fastest Lap Speed</th>
+                            </tr>
+                        </thead>
 
-                                            <th scope="row">
-                                                <a class="text-dark" target="_blank" href="<?php echo $drivers['url']; ?>">
-                                                    <?php
-                                                    $temp_drivers = h($drivers['forename']) . " " . h($drivers['surname']);
+                        <tbody>
+                            <?php while ($driver_standings = mysqli_fetch_assoc($driver_standings_set)) {
+                                $driverId = $driver_standings['driverId'];
+                                $drivers_set = find_drivers_by_driverId($driverId);
 
-                                                    array_push($drivers_names, $temp_drivers);  
-                                                               
-                                                    echo h($drivers['forename']) . " " . h($drivers['surname']); ?>
-                                                </a>
-                                            </th>
-                                            <!-- INDEX 1 -->
-                                            <td>
-                                                <?php echo $drivers['nationality']; ?>
-                                            </td>
-                                            <td>
-                                                <a class="text-dark" target="_blank" href="<?php echo $constructor['url']; ?>">
-                                                    <?php 
-                                                    $temp_constructors = $constructor['name'];
+                                while ($drivers = mysqli_fetch_assoc($drivers_set)) {
+                                    $race_specific_results_set = find_specific_results_by_raceId($raceId, $drivers['driverId']);
+                                    while ($race_specific_results = mysqli_fetch_assoc($race_specific_results_set)) {
+                                        $constructor_set = find_constructors($race_specific_results['constructorId']);
+                                        while ($constructor = mysqli_fetch_assoc($constructor_set)) {
 
-                                                    array_push($constructor_names, $temp_constructors);  
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $driver_standings['position'];
+                                                                    if ($driver_standings['position'] == '1') {
+                                                                        $winner = $drivers['forename'];
+                                                                    }
+                                                                    ?></td>
 
-                                                    echo $constructor['name']; ?>
-                                                </a>
-                                            </td>
-                                            <!-- INDEX 2 -->
-                                            <td>
-                                                <?php echo $driver_standings['points']; ?>
-                                            </td>
-                                            <!-- INDEX 3 -->
-                                            <td>
-                                                <?php echo $driver_standings['wins']; ?>
-                                            </td>
-                                            <!-- INDEX 4 -->
-                                            <td>
-                                                <?php if (!is_blank($race_specific_results['fastestLapTime'])) { ?>
-                                                    <span class="pr-2" data-toggle="tooltip" data-placement="right" data-original-title="Lap: <?php echo $race_specific_results['fastestLap']; ?>">
-                                                        <?php echo $race_specific_results['fastestLapTime']; ?> </span> <?php } else {
-                                                                                                                                            ?>
-                                                    <span class="text-muted">Lap Time Unavailable</span>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <?php if (!is_blank($race_specific_results['fastestLapSpeed'])) {
-                                                                    echo $race_specific_results['fastestLapSpeed'] . " km/h";
-                                                                } else { ?>
-                                                    <span class="text-muted">Speed Unavailable</span>
-                                                <?php } ?>
-                                            </td>
-                                        </tr>
+                                                <th scope="row">
+                                                    <a class="text-dark" target="_blank" href="<?php echo $drivers['url']; ?>">
+                                                        <?php
+                                                                        $temp_drivers = h($drivers['forename']) . " " . h($drivers['surname']);
 
-                        <?php
+                                                                        array_push($drivers_names, $temp_drivers);
+
+                                                                        echo h($drivers['forename']) . " " . h($drivers['surname']); ?>
+                                                    </a>
+                                                </th>
+                                                <!-- INDEX 1 -->
+                                                <td>
+                                                    <?php echo $drivers['nationality']; ?>
+                                                </td>
+                                                <td>
+                                                    <a class="text-dark" target="_blank" href="<?php echo $constructor['url']; ?>">
+                                                        <?php
+                                                                        $temp_constructors = $constructor['name'];
+
+                                                                        array_push($constructor_names, $temp_constructors);
+
+                                                                        echo $constructor['name']; ?>
+                                                    </a>
+                                                </td>
+                                                <!-- INDEX 2 -->
+                                                <td>
+                                                    <?php echo $driver_standings['points']; ?>
+                                                </td>
+                                                <!-- INDEX 3 -->
+                                                <td>
+                                                    <?php echo $driver_standings['wins']; ?>
+                                                </td>
+                                                <!-- INDEX 4 -->
+                                                <td>
+                                                    <?php if (!is_blank($race_specific_results['fastestLapTime'])) { ?>
+                                                        <span class="pr-2" data-toggle="tooltip" data-placement="right" data-original-title="Lap: <?php echo $race_specific_results['fastestLap']; ?>">
+                                                            <?php echo $race_specific_results['fastestLapTime']; ?> </span> <?php } else {
+                                                                                                                                                ?>
+                                                        <span class="text-muted">Lap Time Unavailable</span>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if (!is_blank($race_specific_results['fastestLapSpeed'])) {
+                                                                        echo $race_specific_results['fastestLapSpeed'] . " km/h";
+                                                                    } else { ?>
+                                                        <span class="text-muted">Speed Unavailable</span>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+
+                            <?php
+                                        }
                                     }
                                 }
-                            
                             }
-                        
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
@@ -246,122 +262,161 @@ $constructor_names = [];
             <br>
 
 
-            <div class="row">
-                <h5 class="mb-4 text-secondary">Qualifying</h5>
-            </div>
+            <div class="row accordion">
+                <a data-toggle="collapse" class="text-decoration-none" href="#collapseQualifying" aria-expanded="true" aria-controls="collapseQualifying">
 
-            <div class="row">
-                <table id="race-qualifying-table" class="table table-hover border-left border-right border-bottom" data-aos="fade-up">
+                    <h5 class="text-secondary mb-4">
+                        <i class="fa fa-chevron-right mr-3 pull-right"></i>
+                        <i class="fas fa-chevron-down mr-3"></i>
+                        Qualifying
+                    </h5>
+                </a>
+                <div class="col-12 clearfix" id="collapseQualifying">
+                    <table role="tabpanel" id="race-qualifying-table" class="table table-hover border-left border-right border-bottom">
 
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Position</th>
-                            <th scope="col">Number</th>
-                            <th scope="col">Driver</th>
-                            <th scope="col">Constructor</th>
-                            <th scope="col">Q1</th>
-                            <th scope="col">Q2</th>
-                            <th scope="col">Q3</th>
-                        </tr>
-                    </thead>
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Position</th>
+                                <th scope="col">Driver</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Constructor</th>
+                                <th scope="col">Q1</th>
+                                <th scope="col">Q2</th>
+                                <th scope="col">Q3</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                    <?php 
-                    $i = -1;
-                    while ($qualifying = mysqli_fetch_assoc($qualifying_set)) { ?>
-                        <?php $i++; ?>
+                        <tbody>
+                            <?php
+                            $i = -1;
+                            while ($qualifying = mysqli_fetch_assoc($qualifying_set)) { ?>
+                                <?php
+                                    if ($i < count($drivers_names) - 1) {
+                                        $i++;
 
-                    <tr>
-                        <td><?php echo $qualifying['position']; ?></td>
-                        <td><?php echo $qualifying['number']; ?></td>
+                                        ?>
 
-                        <td><?php echo $drivers_names[$i]; ?></td>
+                                    <tr>
+                                        <td><?php echo $qualifying['position']; ?></td>
+                                        <td class="font-weight-bold">
+                                            <?php
+                                                    echo $drivers_names[$i]; ?></td>
+                                        <td><?php echo $qualifying['number']; ?></td>
 
-                        <td><?php echo $constructor_names[$i]; ?></td>
-                        <td><?php echo $qualifying['q1']; ?></td>
-                        <td><?php echo $qualifying['q2']; ?></td>
-                        <td><?php echo $qualifying['q3']; ?></td>
-                    </tr>
-                    </tbody>
+
+                                        <td><?php echo $constructor_names[$i]; ?></td>
+                                        <td><?php echo $qualifying['q1']; ?></td>
+                                        <td><?php echo $qualifying['q2']; ?></td>
+                                        <td><?php echo $qualifying['q3']; ?></td>
+                                    <?php } ?>
+                                    </tr>
+                        </tbody>
                     <?php } ?>
 
-                    <?php // } ?>
+                    <?php // } 
+                    ?>
                     </table>
-            </div>
+
+                </div>
 
 
 
 
 
 
-            <div class="border-top mt-5">
-                <!-- Comment Section Header -->
-                <div class="mt-4">
-                    <h3 class="text-secondary">Comments</h3>
 
-                    <div class="col-12 mt-5">
-                        <!-- A Single Comment START-->
-                        <div class="media media-comment bg-light p-4">
-                            <div>
-                                <div>
-                                    <div class="row mb-3 ml-1">
-                                        <div class="iconbox iconsmall bg-gray border-0 mr-2 rounded-circle">
-                                            <i class="text-dark fas fa-user"></i>
+                <div class="col-12 border-top mt-5" data-aos="fade">
+                    <!-- Comment Section Header -->
+                    <div class="mt-4">
+                        <h3 class="text-secondary" id="comments">Comments</h3>
+
+                        <div class="col-12 mt-5">
+                            <!-- A Single Comment START-->
+                            <?php
+                            // $comment_set = find_comments_by_raceId($raceId);
+                            while ($comments = mysqli_fetch_assoc($comment_set)) { ?>
+                                <div class="media media-comment bg-light p-4">
+                                    <div>
+                                        <div>
+                                            <div class="row mb-3 ml-1">
+                                                <div class="iconbox iconsmall bg-gray border-0 mr-2 rounded-circle">
+                                                    <i class="text-dark fas fa-user"></i>
+                                                </div>
+                                                <h6 class="mt-2 mb-3"><?php echo $comments['username']; ?>
+                                                    <span class="font-weight-light"> &#183;
+                                                        <?php
+                                                            echo date_format(date_create($comments['date']), "M/d/Y h:i:s A "); ?>
+                                                    </span></h6>
+                                            </div>
+                                            <p class="text-dark lh-160 bg-gray p-4 rounded">
+                                                <?php echo $comments['message']; ?></p>
                                         </div>
-                                        <h6 class="mt-2 mb-3">Keegan George</h6>
                                     </div>
-                                    <p class="text-dark lh-160 bg-gray p-4 rounded">This race was one of the greatest! Great work by the drivers, pit crew, and constructors.</p>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- A Seingle Comment END -->
+                            <?php } ?>
 
-                        <div class="mt-4 media media-comment align-items-center">
-                            <!-- User Icon START -->
-                            <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
-                                <i class="text-dark fas fa-user"></i>
-                            </div>
-                            <!-- User Icon END -->
-                            <div class="col-9 media-body">
-                                <!-- User Comment Write/Submit Section START -->
-                                <form class="rounded border">
-                                    <div class="input-group input-group-lg input-group-merge">
-                                        <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0 pr-2">
-                                                <i class="text-muted fas fa-marker"></i>
-                                        </div>
+                            <!-- A Single Comment END -->
 
-                                        <input type="text" class="form-control border-0 px-2" aria-label="Find something" placeholder="Write a comment...">
-                                        <!-- Comment Submit Button START -->
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-primary">
-                                                Post
-                                            </button>
+                            <div class="mt-4 media media-comment align-items-center">
+                                <!-- User Icon START -->
+                                <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
+                                    <i class="text-dark fas fa-user"></i>
+                                </div>
+                                <!-- User Icon END -->
+                                <div class="col-9 media-body">
+                                    <!-- User Comment Write/Submit Section START -->
+                                    <form action="<?php echo url_for('/race-details.php?raceId=' . $raceId); ?>" method="post" class="rounded border">
+                                        <div class="input-group input-group-lg input-group-merge">
+                                            <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0 pr-2">
+                                                    <i class="text-muted fas fa-marker"></i>
+                                            </div>
+
+                                            <input name="message" type="text" class="form-control border-0 px-2" aria-label="Find something" placeholder="Write a comment...">
+                                            <!-- Comment Submit Button START -->
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Post
+                                                </button>
+                                            </div>
+                                            <!-- Comment Submit Button END -->
                                         </div>
-                                        <!-- Comment Submit Button END -->
-                                    </div>
-                                </form>
-                                <!-- User Comment Write/Submit Section END -->
+                                    </form>
+                                    <!-- User Comment Write/Submit Section END -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
-
-
     </div>
-</div>
 </div>
 
 <?php
-if (isset($drivers_set)) { mysqli_free_result($drivers_set); }
-if (isset($driver_standings_set)) { mysqli_free_result($driver_standings_set); }
-if (isset($race_specific_results_set)) { mysqli_free_result($race_specific_results_set); }
-if (isset($get_race_winner_set)) { mysqli_free_result($get_race_winner_set); }
-if (isset($winner_driver_set)) { mysqli_free_result($winner_driver_set); }
-if (isset($qualifying_set)) { mysqli_free_result($qualifying_set); }
+if (isset($drivers_set)) {
+    mysqli_free_result($drivers_set);
+}
+if (isset($driver_standings_set)) {
+    mysqli_free_result($driver_standings_set);
+}
+if (isset($race_specific_results_set)) {
+    mysqli_free_result($race_specific_results_set);
+}
+if (isset($get_race_winner_set)) {
+    mysqli_free_result($get_race_winner_set);
+}
+if (isset($winner_driver_set)) {
+    mysqli_free_result($winner_driver_set);
+}
+if (isset($qualifying_set)) {
+    mysqli_free_result($qualifying_set);
+}
+if (isset($comment_set)) {
+    mysqli_free_result($comment_set);
+}
 
 ?>
 
 <?php include SHARED_PATH . '/public_footer.php'; ?>
-

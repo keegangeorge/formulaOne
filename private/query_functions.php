@@ -270,3 +270,71 @@ function find_qualifying_by_raceId($raceId) {
     confirm_result_set($result);
     return($result);
 }
+
+function validate_comment($message) {
+    $errors = [];
+
+    if (is_blank($message)) {
+        $errors[] = "Message cannot be blank.";
+    }
+
+    return $errors;
+}
+
+function insert_comment($message, $raceId) {
+    global $db;
+
+    $errors = validate_comment($message);
+
+    if (!empty($errors)) {
+        return $errors;
+    }
+
+    date_default_timezone_set('Canada/Pacific');
+
+    $sql = "INSERT INTO comments ";
+    $sql .= "(username, date, message, raceId) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . db_escape($db, $_SESSION['username']) . "', ";
+    $sql .= "'" . db_escape($db, date('Y-m-d H:i:s')) . "', ";
+    $sql .= "'" . db_escape($db, $message) . "', ";
+    $sql .= "'" . db_escape($db, $raceId) . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+
+    if ($result) {
+        return true;
+    } else {
+        // inserrt failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+
+
+function find_comments_by_raceId($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM comments ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "' ";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return($result);
+}
+
+function find_latest_races() {
+    global $db;
+
+    $current_date = date('Y-m-d', time());
+    date_default_timezone_set('Canada/Pacific');
+
+    $sql = "SELECT * FROM races ";
+    $sql .= "WHERE date >= '" . db_escape($db, $current_date) . "' ";
+    $sql .= "LIMIT 3";
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return($result);
+}
