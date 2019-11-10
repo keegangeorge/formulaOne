@@ -10,26 +10,28 @@
 		<div class="col-6 col-md">
 			<h5 class="mb-4 text-white">Races</h5>
 			<ul class="list-unstyled text-small">
-				<li><a class="text-muted" href="<?php echo url_for('/races.php'); ?>">View by Year</a></li>
-				<li><a class="text-muted" href="<?php echo url_for('/races.php'); ?>">View by Season</a></li>
-				<li><a class="text-muted" href="<?php echo url_for('/races.php'); ?>">View by Team</a></li>
-				<li><a class="text-muted" href="<?php echo url_for('/races.php'); ?>">View by Driver</a></li>
+				<li><a class="text-muted" href="<?php echo url_for('/races.php?year=2019&country=All'); ?>">View by Season</a></li>
+				<li><a class="text-muted" href="<?php echo url_for('/races.php?year=2019&country=All'); ?>">View by Country</a></li>
+				<li><a class="text-muted" href="<?php echo url_for('/index.php#upcoming'); ?>">Upcoming Races</a></li>
 			</ul>
 		</div>
 		<div class="col-6 col-md">
 			<h5 class="mb-4 text-white">About</h5>
 			<ul class="list-unstyled text-small">
-				<li><a class="text-muted" href="<?php echo url_for('/about.php'); ?>">About the Site</a></li>
+				<li><a class="text-muted" href="<?php echo url_for('/about.php'); ?>">About F1</a></li>
 				<li><a class="text-muted" href="<?php echo url_for('/about.php'); ?>">About F1</a></li>
 				<li><a class="text-muted" href="<?php echo url_for('/index.php'); ?>">FAQ</a></li>
-				<li><a class="text-muted" href="<?php echo url_for('/about.php'); ?>">Terms</a></li>
 			</ul>
 		</div>
 		<div class="col-6 col-md">
 			<h5 class="mb-4 text-white">Membership</h5>
 			<ul class="list-unstyled text-small">
+			<?php if (isset($_SESSION['username'])) { ?>
+				<li><a class="text-muted" href="<?php echo url_for('/sign-out.php'); ?>">Sign Out</a></li>
+			<?php } else { ?>
 				<li><a class="text-muted" href="<?php echo url_for('/register.php'); ?>">Register</a></li>
 				<li><a class="text-muted" href="<?php echo url_for('/sign-in.php'); ?>">Sign In</a></li>
+			<?php } ?>
 			</ul>
 		</div>
 		<div class="col-6 col-md">
