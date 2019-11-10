@@ -3,6 +3,13 @@
 <?php $page_title = 'Home'; ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
+<?php
+
+
+$recent_races_set = find_latest_races();
+$fade = [];
+?>
+
 <!-------------------------------------
 JUMBOTRON
 --------------------------------------->
@@ -76,80 +83,71 @@ FEATURES
 
 
 <!-- Start Recent Races -->
-<div class="container pt-5 pb-5 mt-4" data-aos="fade">
-	<h2><strong>Recent and Upcoming Races</strong></h2>
+<div class="container pt-5 pb-5 mt-4" data-aos="fade" id="upcoming">
+	<div class="row">
+		<h2><strong>Upcoming Races </strong>
+			<a class="btn btn-outline-primary ml-3 mb-1 btn-sm " href="<?php echo url_for('/races.php'); ?>"> VIEW ALL</a>
+		</h2>
+	</div>
 	<div class="row gap-y">
-		<div class="col-md-6 col-xl-4">
 
-			<div class="card shadow-sm border-0" data-aos="fade-right">
-				<img class="card-img-top" src="../public/assets/img/recent-race-img/Hungary.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title text-secondary">ROLEX MAGYAR NAGYDÍJ 2019</h5>
-					<div class="row ml-0">
-						<i class="fas fa-calendar-day mr-2 text-primary"></i>
-						<h6>Aug. 2 - 4 2019</h6>
-					</div>
-					<div class="row ml-0">
-						<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-						<h6>Hungary</h6>
-					</div>
-					<div class="row ml-0">
-						<i class="fas fa-trophy mr-2 text-primary"></i>
-						<h6>Lewis Hamilton</h6>
-					</div>
-					<a href='#' class='btn btn-sm btn-primary text-white'>
-						View Details
-					</a>
-				</div>
-			</div>
-		</div>
+		<?php
+		$fade = ['fade-right', 'fade', 'fade-left'];
+		$loop_fade_array = -1;
+		while ($recent_races = mysqli_fetch_assoc($recent_races_set)) {
 
-		<div class="col-md-6 col-xl-4" data-aos="fade-up">
-			<div class="card shadow-sm border-0">
-				<img class="card-img-top" src="../public/assets/img/recent-race-img/Mexico.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title text-secondary">GRAN PREMIO DE MÉXICO 2019</h5>
-					<div class="row ml-0">
-						<i class="fas fa-calendar-day mr-2 text-primary"></i>
-						<h6>Oct. 25 - 27 2019</h6>
+			$circuitId = $recent_races['circuitId'];
+			$circuit_set = find_race_by_circuitId($circuitId);
+
+			while ($circuit = mysqli_fetch_assoc($circuit_set)) {
+				$loop_fade_array++;
+				if ($loop_fade_array > 3) {
+					$loop_fade_array = -1;
+				}
+
+				?>
+
+				<div class="col-md-6 col-xl-4">
+					<div class="card shadow-sm border-0" data-aos="<?php echo $fade[$loop_fade_array]; ?>">
+						<img class="card-img-top" src="../public/assets/img/recent-race-img/<?php echo $circuit['country']; ?>.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title text-secondary"><a target="_blank" href="<?php echo $recent_races['url']; ?>"><?php echo $recent_races['name']; ?></a></h5>
+							<div class="row ml-0">
+								<i class="fas fa-calendar-day mr-2 text-primary"></i>
+								<h6><?php
+											echo date_format(date_create(h($recent_races['date'])), "M jS, Y");
+											?></h6>
+							</div>
+							<div class="row ml-0">
+								<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+								<h6>
+									<a class="text-dark" data-toggle="tooltip" data-placement="right" data-original-title="<?php echo h($circuit['lat']) . ", " . h($circuit['lng']); ?>" class="text-dark" target="_blank" href="http://google.com/maps/place/ <?php echo h($circuit['lat']) . ', ' . h($circuit['lng'])  . "\">"; ?>
+                                    <?php
+											echo h($circuit['location']);
+											// When specific location doesn't exist, the comma separator is not displayed
+											if (!is_blank(h($circuit['location']))) {
+												echo ', ';
+											}
+											?> 
+                                    <?php
+
+											echo h($circuit['country']);
+											?>
+                                    </a>
+                                </h6>
+						</div>
+						
+						<?php if (!is_blank($recent_races['time'])) {  ?>
+                                <div class=" row ml-0">
+										<i class="fas fa-clock mr-2 text-primary"></i>
+										<h6><?php echo date_format(date_create(h($recent_races['time'])), "g:i A");  ?></h6>
+							</div>
+						<?php } ?>
+						</div>
 					</div>
-					<div class="row ml-0">
-						<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-						<h6>Mexico</h6>
-					</div>
-					<div class="row ml-0">
-						<i class="fas fa-trophy mr-2 text-primary"></i>
-						<h6>NYD</h6>
-					</div>
-					<a href='#' class='btn btn-sm btn-primary text-white'>
-						View Details
-					</a>
 				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-xl-4" data-aos="fade-left">
-			<div class="card shadow-sm border-0">
-				<img class="card-img-top" src="../public/assets/img/recent-race-img/Azerbaijan.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title text-secondary">SOCAR AZERBAIJAN 2019</h5>
-					<div class="row ml-0">
-						<i class="fas fa-calendar-day mr-2 text-primary"></i>
-						<h6>Apr. 26 - 28 2019</h6>
-					</div>
-					<div class="row ml-0">
-						<i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-						<h6>Azerbaijan</h6>
-					</div>
-					<div class="row ml-0">
-						<i class="fas fa-trophy mr-2 text-primary"></i>
-						<h6>Valtteri Bottas</h6>
-					</div>
-					<a href='#' class='btn btn-sm btn-primary text-white'>
-						View Details
-					</a>
-				</div>
-			</div>
-		</div>
+		<?php }
+		} ?>
 	</div>
 </div>
 <!-- End Recent Races -->
@@ -291,6 +289,3 @@ FAQ
 
 
 <?php include(SHARED_PATH . '/public_footer.php'); ?>
-
-
-
