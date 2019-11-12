@@ -96,14 +96,16 @@ if ($whiteNav) {
 											} ?>" href="<?php echo url_for('/about.php'); ?>">About</a>
 					</li>
 				</ul>
+
 				<ul class="navbar-nav ml-auto d-flex align-items-center">
 					<!-- Username in Navigation -->
-					<li class="nav-item nav-link">
-						<?php if (isset($_SESSION['username'])) {
-							?>
-							<i class="fas fa-user-circle"></i>
-						<?php
-							echo $_SESSION['username'];
+					<li class="nav-item">
+						<?php if (isset($_SESSION['username'])) { ?>
+							<a class="nav-link" href="<?php echo url_for('/account.php'); ?>">
+								<i class="fas fa-user-circle"></i> 
+								<?php echo $_SESSION['username']; ?>
+							</a>
+							<?php
 						} else {
 							echo '';
 						}

@@ -3,6 +3,6 @@
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_NAME", "formula_one");
+define("DB_NAME", "KEEGAN_GEORGE");
 
 ?>

@@ -65,7 +65,7 @@ function insert_admin($admin) {
 
     $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
-    $sql = "INSERT INTO admins ";
+    $sql = "INSERT INTO members ";
     $sql .= "(first_name, last_name, email, username, hashed_password) ";
     $sql .= "VALUES (";
     $sql .= "'" . db_escape($db, $admin['first_name']) . "',";
@@ -97,7 +97,7 @@ function update_admin($admin) {
 
     $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
-    $sql = "UPDATE admins SET ";
+    $sql = "UPDATE members SET ";
     $sql .= "first_name='" . db_escape($db, $admin['first_name']) . "', ";
     $sql .= "last_name='" . db_escape($db, $admin['last_name']) . "', ";
     $sql .= "last_name='" . db_escape($db, $admin['last_name']) . "', ";
@@ -112,7 +112,7 @@ function update_admin($admin) {
 function find_admin_by_username($username) {
     global $db;
 
-    $sql = "SELECT * FROM admins ";
+    $sql = "SELECT * FROM members ";
     $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
@@ -187,6 +187,44 @@ function find_race_by_raceId($raceId) {
     mysqli_free_result($result);
     return($race);
 }
+
+function find_comment_count($username) {
+    global $db;
+
+    $sql = "SELECT COUNT(*) FROM comments ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $count = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return($count);
+}
+
+function find_latest_comment($username) {
+    global $db;
+
+    $sql = "SELECT MAX(date) FROM comments ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $date = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return($date);
+}
+
+function update_user_information($account, $username) {
+    global $db;
+
+    $sql = "UPDATE members ";
+    $sql .= "SET first_name='" . db_escape($db, $account['first_name']) . "', ";
+    $sql .= "last_name='" . db_escape($db, $account['last_name']) . "', ";
+    $sql .= "email='" . db_escape($db, $account['email']) . "' ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+
+}
+
 
 function find_circuit($circuitId) {
     global $db;
@@ -312,7 +350,16 @@ function insert_comment($message, $raceId) {
     }
 }
 
+function find_comments_by_username($username) {
+    global $db;
 
+    $sql = "SELECT * FROM comments ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return($result);
+    
+}
 
 function find_comments_by_raceId($raceId) {
     global $db;
@@ -337,4 +384,18 @@ function find_latest_races() {
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return($result);
+}
+
+function find_account_info($username) {
+    global $db;
+
+    $sql = "SELECT * FROM members ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $account = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return($account);
+
+
 }
