@@ -24,13 +24,13 @@ if (is_post_request()) {
 		// Using one variable ensures that msg is the same.
 		$login_failure_msg = "Log in was unsuccessful.";
 		
-		$admin = find_admin_by_username($username);
-		if ($admin) {
+		$member = find_member_by_username($username);
+		if ($member) {
 
 			// if record is found
-			if (password_verify($password, $admin['hashed_password'])) {
+			if (password_verify($password, $member['hashed_password'])) {
 				// password matches
-				log_in_admin($admin);
+				log_in_member($member);
 				redirect_to(url_for('/index.php'));
 			} else {
 				// username found, but password does not match

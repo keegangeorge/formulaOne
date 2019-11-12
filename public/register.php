@@ -2,30 +2,30 @@
 
 <?php
 if (is_post_request()) {
-	$admin['first_name'] = $_POST['first_name'] ?? '';
-	$admin['last_name'] = $_POST['last_name'] ?? '';
-	$admin['email'] = $_POST['email'] ?? '';
-	$admin['username'] = $_POST['username'] ?? '';
-	$admin['password'] = $_POST['password'] ?? '';
-	$admin['confirm_password'] = $_POST['confirm_password'] ?? '';
+	$member['first_name'] = $_POST['first_name'] ?? '';
+	$member['last_name'] = $_POST['last_name'] ?? '';
+	$member['email'] = $_POST['email'] ?? '';
+	$member['username'] = $_POST['username'] ?? '';
+	$member['password'] = $_POST['password'] ?? '';
+	$member['confirm_password'] = $_POST['confirm_password'] ?? '';
 
-	$result = insert_admin($admin);
+	$result = insert_member($member);
 	if ($result === true) {
 		$new_id = mysqli_insert_id($db);
-		$_SESSION['message'] = 'Admin created.';
+		$_SESSION['message'] = 'member created.';
 		redirect_to(url_for('/sign-in.php'));
 	} else {
 		$errors = $result;
 	}
 } else {
 	// display the blank form
-	$admin = [];
-	$admin['first_name'] = '';
-	$admin['last_name'] = '';
-	$admin['email'] = '';
-	$admin['username'] = '';
-	$admin['password'] = '';
-	$admin['confirm_password'] = '';
+	$member = [];
+	$member['first_name'] = '';
+	$member['last_name'] = '';
+	$member['email'] = '';
+	$member['username'] = '';
+	$member['password'] = '';
+	$member['confirm_password'] = '';
 }
 ?>
 
@@ -62,20 +62,20 @@ if (is_post_request()) {
 				<div class="row">
 					<div class="col-6">
 						<div class="form-group">
-							<input type="text" name="first_name" class="form-control" value="<?php echo h($admin['first_name']); ?>" placeholder="First Name" required>
+							<input type="text" name="first_name" class="form-control" value="<?php echo h($member['first_name']); ?>" placeholder="First Name" required>
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-group">
-							<input type="text" name="last_name" class="form-control" value="<?php echo h($admin['last_name']); ?>" placeholder="Last Name" required>
+							<input type="text" name="last_name" class="form-control" value="<?php echo h($member['last_name']); ?>" placeholder="Last Name" required>
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo h($admin['email']); ?>" placeholder="E-mail" required>
+					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo h($member['email']); ?>" placeholder="E-mail" required>
 				</div>
 				<div class="form-group">
-					<input type="text" name="username" class="form-control" value="<?php echo h($admin['username']); ?>" placeholder="Username" required>
+					<input type="text" name="username" class="form-control" value="<?php echo h($member['username']); ?>" placeholder="Username" required>
 				</div>
 				<div class="form-group">
 					<input type="password" name="password" class="form-control" placeholder="Password" value="" required>

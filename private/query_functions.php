@@ -2,76 +2,76 @@
 
 // USER AUTHENTICATION FUNCTIONS //
 // Include query functions in this file.
-function validate_admin($admin) {
+function validate_member($member) {
 
-    if (is_blank($admin['first_name'])) {
+    if (is_blank($member['first_name'])) {
         $errors[] = "First name cannot be blank.";
-    } elseif (!has_length($admin['first_name'], array('min' => 2, 'max' => 255))) {
+    } elseif (!has_length($member['first_name'], array('min' => 2, 'max' => 255))) {
         $errors[] = "First name must be between 2 and 255 characters.";
     }
 
-    if (is_blank($admin['last_name'])) {
+    if (is_blank($member['last_name'])) {
         $errors[] = "Last name cannot be blank.";
-    } elseif (!has_length($admin['first_name'], array('min' => 2, 'max' => 255))) {
+    } elseif (!has_length($member['first_name'], array('min' => 2, 'max' => 255))) {
         $errors[] = "Last name must be between 2 and 255 characters.";
     }
 
-    if (is_blank($admin['email'])) {
+    if (is_blank($member['email'])) {
         $errors[] = "Email cannot be blank.";
-    } elseif (!has_length($admin['email'], array('max' => 255))) {
+    } elseif (!has_length($member['email'], array('max' => 255))) {
         $errors[] = "Email must be less than 255 characters.";
-    } elseif (!has_valid_email_format($admin['email'])) {
+    } elseif (!has_valid_email_format($member['email'])) {
         $errors[] = "Email must be a valid format.";
     }
 
-    if (is_blank($admin['username'])) {
+    if (is_blank($member['username'])) {
         $errors[] = "Username cannot be blank";
-    } elseif (!has_length($admin['username'], array('min' => 8, 'max' => 255))) {
+    } elseif (!has_length($member['username'], array('min' => 8, 'max' => 255))) {
         $errors[] = "Username must be between 8 and 255 characters.";
-    } elseif (!has_unique_username($admin['username'], $admin['id'] ?? 0)) {
+    } elseif (!has_unique_username($member['username'], $member['id'] ?? 0)) {
         $errors[] = "Username not allowed. Try another.";
     }
 
-    if(is_blank($admin['password'])) {
+    if(is_blank($member['password'])) {
         $errors[] = "Password cannot be blank.";
-      } elseif (!has_length($admin['password'], array('min' => 12))) {
+      } elseif (!has_length($member['password'], array('min' => 12))) {
         $errors[] = "Password must contain 12 or more characters";
-      } elseif (!preg_match('/[A-Z]/', $admin['password'])) {
+      } elseif (!preg_match('/[A-Z]/', $member['password'])) {
         $errors[] = "Password must contain at least 1 uppercase letter";
-      } elseif (!preg_match('/[a-z]/', $admin['password'])) {
+      } elseif (!preg_match('/[a-z]/', $member['password'])) {
         $errors[] = "Password must contain at least 1 lowercase letter";
-      } elseif (!preg_match('/[0-9]/', $admin['password'])) {
+      } elseif (!preg_match('/[0-9]/', $member['password'])) {
         $errors[] = "Password must contain at least 1 number";
-      } elseif (!preg_match('/[^A-Za-z0-9\s]/', $admin['password'])) {
+      } elseif (!preg_match('/[^A-Za-z0-9\s]/', $member['password'])) {
         $errors[] = "Password must contain at least 1 symbol";
       }
   
-      if(is_blank($admin['confirm_password'])) {
+      if(is_blank($member['confirm_password'])) {
         $errors[] = "Confirm password cannot be blank.";
-      } elseif ($admin['password'] !== $admin['confirm_password']) {
+      } elseif ($member['password'] !== $member['confirm_password']) {
         $errors[] = "Password and confirm password must match.";
       }
   
       return $errors;
 }
   
-function insert_admin($admin) {
+function insert_member($member) {
     global $db;
 
-    $errors = validate_admin($admin);
+    $errors = validate_member($member);
     if (!empty($errors)) {
         return $errors; 
     }
 
-    $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
+    $hashed_password = password_hash($member['password'], PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO members ";
     $sql .= "(first_name, last_name, email, username, hashed_password) ";
     $sql .= "VALUES (";
-    $sql .= "'" . db_escape($db, $admin['first_name']) . "',";
-    $sql .= "'" . db_escape($db, $admin['last_name']) . "',";
-    $sql .= "'" . db_escape($db, $admin['email']) . "',";
-    $sql .= "'" . db_escape($db, $admin['username']) . "',";
+    $sql .= "'" . db_escape($db, $member['first_name']) . "',";
+    $sql .= "'" . db_escape($db, $member['last_name']) . "',";
+    $sql .= "'" . db_escape($db, $member['email']) . "',";
+    $sql .= "'" . db_escape($db, $member['username']) . "',";
     $sql .= "'" . db_escape($db, $hashed_password) . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
@@ -87,29 +87,29 @@ function insert_admin($admin) {
     }
 }
 
-function update_admin($admin) {
+function update_member($member) {
     global $db;
 
-    $errors = validate_admin($admin);
+    $errors = validate_member($member);
     if (!empty($errors)) {
         return $errors;
     }
 
-    $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
+    $hashed_password = password_hash($member['password'], PASSWORD_BCRYPT);
 
     $sql = "UPDATE members SET ";
-    $sql .= "first_name='" . db_escape($db, $admin['first_name']) . "', ";
-    $sql .= "last_name='" . db_escape($db, $admin['last_name']) . "', ";
-    $sql .= "last_name='" . db_escape($db, $admin['last_name']) . "', ";
-    $sql .= "email='" . db_escape($db, $admin['email']) . "', ";
+    $sql .= "first_name='" . db_escape($db, $member['first_name']) . "', ";
+    $sql .= "last_name='" . db_escape($db, $member['last_name']) . "', ";
+    $sql .= "last_name='" . db_escape($db, $member['last_name']) . "', ";
+    $sql .= "email='" . db_escape($db, $member['email']) . "', ";
     $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
-    $sql .= "username='" . db_escape($db, $admin['username']) . "', ";
-    $sql .= "WHERE id='" . db_escape($db, $admin['id']) . "' ";
+    $sql .= "username='" . db_escape($db, $member['username']) . "', ";
+    $sql .= "WHERE id='" . db_escape($db, $member['id']) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
 }
 
-function find_admin_by_username($username) {
+function find_member_by_username($username) {
     global $db;
 
     $sql = "SELECT * FROM members ";
@@ -117,9 +117,9 @@ function find_admin_by_username($username) {
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
-    $admin = mysqli_fetch_assoc($result); // find first
+    $member = mysqli_fetch_assoc($result); // find first
     mysqli_free_result($result);
-    return $admin; // returns the associative array
+    return $member; // returns the associative array
 }
 
 // FORMULA ONE RELATED QUERY FUNCTIONS //
