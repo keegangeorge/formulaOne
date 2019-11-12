@@ -23,7 +23,7 @@ JUMBOTRON
 				</h1>
 				<h5 class="font-weight-light mb-4">View all race information since the <strong> 1950&#8217;s</strong></strong></h5>
 				<a href="<?php echo url_for('/about.php') ?>" class="btn mr-3 btn-lg btn-white  shadow" data-aos="fade-right">Learn more</a>
-				<a href="<?php echo url_for('/about.php') ?>" class="btn btn-lg btn-secondary shadow" data-aos="fade-left">View Races</a>
+				<a href="<?php echo url_for('/races.php') ?>" class="btn btn-lg btn-secondary shadow" data-aos="fade-left">View Races</a>
 			</div>
 			<div class="col align-self-bottom align-items-right text-right h-max-380 position-relative z-index-1">
 				<!-- <img data-aos="fade-up" src="<?php // echo url_for('../public/assets/img/f1car.png'); ?>" class="rounded img-fluid"> -->
