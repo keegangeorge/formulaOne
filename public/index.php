@@ -13,74 +13,37 @@ $fade = [];
 <!-------------------------------------
 JUMBOTRON
 --------------------------------------->
-<div class="jumbotron jumbotron-lg jumbotron-fluid mb-0 pb-5 bg-primary position-relative">
+<div class="overlay home-bgimg bg-primary jumbotron jumbotron-lg jumbotron-fluid mb-0 pb-5  position-relative">
 	<div class="container-fluid text-white h-100">
-		<div class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5" data-aos="fade">
-			<div class="col pt-4 pb-4">
-				<h1 class="display-3">
-					<strong>Formula 1</strong>
-					<br>Race History
+		<div class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5" >
+			<div class="col pt-5 pb-5" data-aos="zoom-out">
+				<h1 class="">
+					<strong class="display-4 font-italic font-weight-bold">F1</strong>
+					<span class="font-italic font-weight display-4">Race History</span>
 				</h1>
 				<h5 class="font-weight-light mb-4">View all race information since the <strong> 1950&#8217;s</strong></strong></h5>
-				<a href="<?php echo url_for('/about.php') ?>" class="btn btn-lg btn-outline-white btn-round">Learn more</a>
+				<a href="<?php echo url_for('/about.php') ?>" class="btn mr-3 btn-lg btn-white  shadow" data-aos="fade-right">Learn more</a>
+				<a href="<?php echo url_for('/about.php') ?>" class="btn btn-lg btn-secondary shadow" data-aos="fade-left">View Races</a>
 			</div>
 			<div class="col align-self-bottom align-items-right text-right h-max-380 position-relative z-index-1">
-				<img data-aos="fade-up" src="<?php echo url_for('../public/assets/img/f1car.png'); ?>" class="rounded img-fluid">
+				<!-- <img data-aos="fade-up" src="<?php // echo url_for('../public/assets/img/f1car.png'); ?>" class="rounded img-fluid"> -->
 			</div>
 		</div>
 	</div>
+
+
 </div>
+
 
 <!--- END JUMBOTRON -->
 
-
-<!--------------------------------------
-FEATURES
---------------------------------------->
-<div class="container pt-5 pb-3 mt-4" data-aos="fade">
-	<div class="row gap-y">
-		<div class="col-md-6 col-xl-4">
-			<div class="media">
-				<div class="iconbox iconlarge bg-secondary rounded-circle text-white mr-4">
-					<i class="fas fa-globe-europe "></i>
-				</div>
-				<div class="media-body">
-					<h5>Global</h5>
-					<p class="text-muted">
-						Races occur in a variety of host countries around the world where each location has a unique circuit.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-xl-4">
-			<div class="media">
-				<div class="iconbox iconlarge bg-primary rounded-circle text-white mr-4">
-					<i class="fas fa-cog"></i>
-				</div>
-				<div class="media-body">
-					<h5>Engineering</h5>
-					<p class="text-muted">
-						See the marvels of engineering put in actions as teams develop unique vehicles to compete for fastest time.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-xl-4">
-			<div class="media">
-				<div class="iconbox iconlarge bg-secondary rounded-circle text-white mr-4">
-					<i class="fas fa-tachometer-alt"></i>
-				</div>
-				<div class="media-body">
-					<h5>Speed</h5>
-					<p class="text-muted">
-						The cars are the fastest road-course cars in the world. With high cornering speeds achieved through aerodynamics.
-				</div>
-			</div>
-		</div>
+<!-- Start CTA -->
+<div class="border-bottom border-top">
+	<div class="text-center">
+		<img src="<?php echo url_for('../public/assets/img/f1-sponsors.jpg'); ?>" alt="f1 sponsors">
 	</div>
 </div>
-<!-- End Features -->
-
+<!-- End CTA -->
 
 <!-- Start Recent Races -->
 <div class="container pt-5 pb-5 mt-4" data-aos="fade" id="upcoming">
@@ -238,13 +201,8 @@ FEATURES
 
 <!-- End News Items -->
 
-<!-- Start CTA -->
-<div class="border-bottom border-top mt-5">
-	<div class="text-center">
-		<img src="<?php echo url_for('../public/assets/img/f1-sponsors.jpg'); ?>" alt="f1 sponsors">
-	</div>
-</div>
-<!-- End CTA -->
+
+
 
 
 <!--------------------------------------

@@ -24,27 +24,55 @@
 	<!-- Animation CSS -->
 	<link href="<?php echo url_for('assets/css/vendor/aos.css'); ?>" rel="stylesheet" />
 
+
+
+	<!-- BG CSS -->
+
 	<style>
 		a[aria-expanded=false] .fa-chevron-down {
 			display: none;
 		}
-		
+
 		a[aria-expanded=true] .fa-chevron-right {
 			display: none;
 		}
 	</style>
 
+	<style>
+		.home-bgimg {
+			<?php if (isset($_SESSION['username'])) { ?>
+			background-image: url("assets/img/landing-img/img4.jpg");
+			<?php } else { ?>
+			background-image: url("assets/img/landing-img/img1.jpg");
+			<?php } ?>
+			/* background-color: #cccccc;
+			/* Used if the image is unavailable */
+			height: 100%;
+			/* You must set a specified height */
+			background-position: center;
+			/* Center the image */
+			background-repeat: no-repeat;
+			background-size: 110%;
+			/* Do not repeat the image */
+			/* background-size: cover; */
+			/* Resize the background image to cover the entire container */
+			transition: .3s linear; 
+		}
+		
+	
+	</style>
 </head>
 
 <body>
 
-	<!--  -->
+
+
 	<nav class="
 <?php
 if ($whiteNav) {
 	echo "topnav navbar navbar-expand-lg scrollednav navbar-light text-black bg-white fixed-top shadow-sm py-0 border-bottom border-muted";
 } else {
-	echo "topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top ";
+	echo "topnav navbar navbar-expand-lg navbar-dark fixed-top ";
 }
 
 ?>">
@@ -110,24 +138,6 @@ if ($whiteNav) {
 							<?php } ?>
 						</span>
 					</li>
-
-					<!-- <li class="nav-item">
-				<form action="<?php echo url_for('/index.php'); ?>" method="post">
-					<select name="season" class="form-control pr-2 pl-2 bg-transparent text-secondary font-weight-light border-secondary rounded-pill">
-						<?php
-						$season = "";
-						$season_choices = ['2019', '2018', '2017', '2016'];
-						foreach ($season_choices as $season_choice) {
-							echo "<option value=\"{$season_choice}\"";
-							if ($season == $season_choice) {
-								echo " selected";
-							}
-							echo ">{$season_choice}</option>";
-						}
-						?>
-					</select>
-				</form>
-			</li> -->
 				</ul>
 			</div>
 		</div>
