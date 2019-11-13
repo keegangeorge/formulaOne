@@ -356,7 +356,7 @@ if (is_post_request()) {
                             <?php } ?>
 
                             <!-- A Single Comment END -->
-
+                            <?php if (is_logged_in()) { ?>
                             <div class="mt-4 media media-comment align-items-center">
                                 <!-- User Icon START -->
                                 <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
@@ -384,6 +384,17 @@ if (is_post_request()) {
                                     <!-- User Comment Write/Submit Section END -->
                                 </div>
                             </div>
+                            <?php } else { ?>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 bg-light mt-4">
+                                    <p class="text-muted p-2 mt-4 mb-4">
+                                        <a href="<?php echo url_for('sign-in.php'); ?>">Sign in </a>to write a comment.
+                                    </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
