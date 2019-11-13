@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Document Head START -->
+
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="<?php echo url_for('assets/img/favicon.png'); ?>">
 	<link rel="icon" type="image/png" href="<?php echo url_for('assets/img/favicon.png'); ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>F1 <?php if (isset($page_title)) {
-					echo '| ' . h($page_title);
-				} ?></title>
+	<!-- If a page title is set, show it next to F1 text -->
+	<title>
+		F1
+		<?php
+		if (isset($page_title)) {
+			echo '| ' . h($page_title);
+		}
+		?>
+	</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
 	<!-- Adobe Fonts -->
@@ -26,8 +33,7 @@
 
 
 
-	<!-- BG CSS -->
-
+	<!-- Collapsible Table CSS -->
 	<style>
 		a[aria-expanded=false] .fa-chevron-down {
 			display: none;
@@ -37,13 +43,11 @@
 			display: none;
 		}
 	</style>
-
+	<!-- Landing Page Background CSS -->
 	<style>
 		.home-bgimg {
-			<?php if (is_logged_in()) { ?>
-			background-image: url("assets/img/landing-img/img4.jpg");
-			<?php } else { ?>
-			background-image: url("assets/img/landing-img/img1.jpg");
+			<?php if (is_logged_in()) { ?>background-image: url("assets/img/landing-img/img4.jpg");
+			<?php } else { ?>background-image: url("assets/img/landing-img/img1.jpg");
 			<?php } ?>
 			/* background-color: #cccccc;
 			/* Used if the image is unavailable */
@@ -56,12 +60,11 @@
 			/* Do not repeat the image */
 			/* background-size: cover; */
 			/* Resize the background image to cover the entire container */
-			transition: .3s linear; 
+			transition: .3s linear;
 		}
-		
-	
 	</style>
 </head>
+<!-- Document Head END -->
 
 <body>
 
@@ -69,20 +72,24 @@
 
 	<nav class="
 <?php
+// If a white navigation bar is preferred:
 if ($whiteNav) {
 	echo "topnav navbar navbar-expand-lg scrollednav navbar-light text-black bg-white fixed-top shadow-sm py-0 border-bottom border-muted";
+	// If a dark navigation bar is preferred: 
 } else {
 	echo "topnav navbar navbar-expand-lg navbar-dark fixed-top ";
 }
 
 ?>">
 		<div class="container">
+			<!-- Navigation Bar Branding Section -->
 			<a class="navbar-brand <?php if ($whiteNav) {
 										echo 'text-dark';
 									} ?>" href="<?php echo url_for('/index.php'); ?>"><i class="fas fa-flag-checkered mr-2"></i><strong>Formula</strong> One</a>
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+			<!-- Navigation Bar Links -->
 			<div class="navbar-collapse collapse" id="navbarColor02">
 				<ul class="navbar-nav mr-auto d-flex align-items-center">
 					<li class="nav-item">
@@ -96,23 +103,23 @@ if ($whiteNav) {
 											} ?>" href="<?php echo url_for('/about.php'); ?>">About</a>
 					</li>
 				</ul>
-
+				<!-- User Login Related Links -->
 				<ul class="navbar-nav ml-auto d-flex align-items-center">
-					<!-- Username in Navigation -->
+					<!-- Show username in navigation when logged in -->
 					<li class="nav-item">
 						<?php if (is_logged_in()) { ?>
 							<a class="nav-link" href="<?php echo url_for('/account.php'); ?>">
-								<i class="fas fa-user-circle"></i> 
+								<i class="fas fa-user-circle"></i>
 								<?php echo $_SESSION['username']; ?>
 							</a>
-							<?php
+						<?php
 						} else {
 							echo '';
 						}
 						?>
 					</li>
 
-					<!-- Register Button -->
+					<!-- Show register button when logged out -->
 					<li class="nav-item">
 						<?php if (!is_logged_in()) { ?>
 							<span class="nav-link">
@@ -124,7 +131,7 @@ if ($whiteNav) {
 						} ?>
 					</li>
 
-					<!-- Sign In / Sign Out Button -->
+					<!-- Show sign-in if logged out, sign out if logged in -->
 					<li class="nav-item">
 						<span class="nav-link">
 							<?php if (is_logged_in()) { ?>

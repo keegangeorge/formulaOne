@@ -93,6 +93,10 @@
     return preg_match($email_regex, $value) === 1;
   }
 
+  /**
+   * Function that checks to see if the username provided is
+   * unique in comparison to others in the databse.
+   */
   function has_unique_username($username, $current_id="0") {
     global $db;
 

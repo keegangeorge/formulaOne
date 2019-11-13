@@ -28,11 +28,17 @@
         return htmlspecialchars($string);
     }
 
+    /**
+     * Function for displaying 404 page not found error
+     */
     function error_404() {
         header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
         exit();
     }
-      
+    
+    /**
+     * Function for displaying internal server error
+     */
     function error_500() {
         header($_SERVER["SERVER_PROTOCOL"] . " 500 Internal Server Error");
         exit();
@@ -46,14 +52,23 @@
         exit;
     }
     
+    /**
+     * Function to check if post request has been made
+     */
     function is_post_request() {
         return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
     
+    /**
+     * function to check if a get request has been made
+     */
     function is_get_request() {
         return $_SERVER['REQUEST_METHOD'] == 'GET';
     }
     
+    /**
+     * Function to output errors that appear in errors[] array
+     */
     function display_errors($errors=array()) {
         $output = '';
         if(!empty($errors)) {
