@@ -1,13 +1,6 @@
 <?php require_once '../private/initialize.php'; 
 
-if (!isset($_SESSION['username'])) {
-    /* 
-    When trying to access the page without
-    being signed in, redirect the user to
-    the sign in page:
-    */
-    redirect_to(url_for('sign-in.php'));
-}
+require_login();
 
 if (is_post_request()) {
 	$account['first_name'] = $_POST['first_name'] ?? '';
