@@ -40,7 +40,7 @@
 
 	<style>
 		.home-bgimg {
-			<?php if (isset($_SESSION['username'])) { ?>
+			<?php if (is_logged_in()) { ?>
 			background-image: url("assets/img/landing-img/img4.jpg");
 			<?php } else { ?>
 			background-image: url("assets/img/landing-img/img1.jpg");
@@ -100,7 +100,7 @@ if ($whiteNav) {
 				<ul class="navbar-nav ml-auto d-flex align-items-center">
 					<!-- Username in Navigation -->
 					<li class="nav-item">
-						<?php if (isset($_SESSION['username'])) { ?>
+						<?php if (is_logged_in()) { ?>
 							<a class="nav-link" href="<?php echo url_for('/account.php'); ?>">
 								<i class="fas fa-user-circle"></i> 
 								<?php echo $_SESSION['username']; ?>
@@ -114,7 +114,7 @@ if ($whiteNav) {
 
 					<!-- Register Button -->
 					<li class="nav-item">
-						<?php if (!isset($_SESSION['username'])) { ?>
+						<?php if (!is_logged_in()) { ?>
 							<span class="nav-link">
 								<a class="plain-link bg-transparent" href="<?php echo url_for('/register.php'); ?>"><i class="fas fa-user-plus"></i> Register <a href="#signup" class="hidden"></a>
 								</a>
@@ -127,7 +127,7 @@ if ($whiteNav) {
 					<!-- Sign In / Sign Out Button -->
 					<li class="nav-item">
 						<span class="nav-link">
-							<?php if (isset($_SESSION['username'])) { ?>
+							<?php if (is_logged_in()) { ?>
 								<a class="btn btn-secondary btn-round" href="<?php echo url_for('/sign-out.php'); ?>">
 									<i class="fas fa-sign-out-alt"></i>
 									Sign Out
