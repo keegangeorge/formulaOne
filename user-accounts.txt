@@ -1,4 +1,0 @@
-USER: kga29@sfu.ca PASS: test
-USER: abitton@sfu.ca PASS: testagain
-USER: anothertest@gmail.com PASS: testerspassword
-USER: sebastianvettel@gmail.com PASS: formula1
