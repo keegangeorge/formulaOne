@@ -5,7 +5,6 @@
 
 <?php
 // SEASON
-$season_set = find_all_seasons();
 $seasons = [];
 $year = $_GET['year'] ?? date('Y');
 
@@ -20,6 +19,7 @@ $race_set = find_race_by_year($year);
 ?>
 
 
+<script src="./assets/js/vendor/jquery.min.js" type="text/javascript"></script>
 
 <!----------------------- Begin Content -- Races ---------------------->
 <!-- Races Header START -->
@@ -44,16 +44,10 @@ $race_set = find_race_by_year($year);
 
                 <!-- SEASON DROPDOWN BUTTON -->
                 <button type="button" class="dropdown-toggle btn btn-primary" id="seasonDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Season: <?php echo $year; ?>
                 </button>
                 <!-- SEASON DROPDOWN ITEMS -->
-                <div id="" class="dropdown-menu" aria-labelledby="seasonDropdown" style="height: auto;max-height: 9em; overflow-x: hidden;">
-                    <?php
-                    while ($seasons = mysqli_fetch_assoc($season_set)) { 
-                        ?>
-                        <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . h(u($seasons['year']))) . '&country=' . $country; ?>"><?php echo h($seasons['year']); ?>
-                        </a>
-                    <?php } ?>
+                <div id="seasonDropdownDiv" class="dropdown-menu" aria-labelledby="seasonDropdown" style="height: auto;max-height: 9em; overflow-x: hidden;">
+                    
                 </div>
             </div>
 
@@ -62,36 +56,18 @@ $race_set = find_race_by_year($year);
 
                 <!-- COUNTRY DROPDOWN BUTTON -->
                 <button class="btn btn-outline-primary border-left-0 dropdown-toggle" type="button" id="dropdownCountryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php if ($country == 'All') {
-                        echo 'Country: All';
-                    } else {
-                        echo 'Country: ' . $country;
-                    }
-                    ?>
                 </button>
 
                 <!-- COUNTRY DROPDOWN ITEMS -->
-                <div class="dropdown-menu" aria-labelledby="dropdownCountryButton" style="height: auto;max-height: 9em; overflow-x: hidden;">
-                    <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . $year . '&country=' . 'All'); ?>">Display All</a>
-                    <?php
-                    while ($country = mysqli_fetch_assoc($country_set)) { ?>
-                        <?php
-                            $races_based_on_country = find_race_by_year($year);
-                            while ($selected_country_races = mysqli_fetch_assoc($races_based_on_country)) {
-                                if ($country['circuitId'] == $selected_country_races['circuitId']) { ?>
-                                <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . $year . '&country=' . h(u($country['country']))); ?>">
-
-                            <?php echo h($country['country']);
-                                    }
-                                } ?>
-
-                                </a>
-                            <?php } ?>
-
-
+                <div id="countryDropdownSelect" class="dropdown-menu" aria-labelledby="dropdownCountryButton" style="height: auto;max-height: 9em; overflow-x: hidden;">
                 </div>
             </div>
-
+            
+            <!-- TODO: FIX STYLING -->
+            <div class="btn-group">
+                <input id="search_by_title" type="text" class="form-control btn-outline-primary border-left-1" placeholder="Search By Title" aria-label="Username" aria-describedby="basic-addon1">
+                <div id="suggestion"></div>
+            </div>
 
         </div>
 
@@ -231,10 +207,10 @@ $race_set = find_race_by_year($year);
 
     </div>
 </div>
+<script src="./js/race.js" type="text/javascript"></script>
 
 <?php
 
-mysqli_free_result($season_set);
 mysqli_free_result($race_set);
 mysqli_free_result($country_set);
 mysqli_free_result($races_based_on_country);
