@@ -65,8 +65,9 @@ $race_set = find_race_by_year($year);
             
             <!-- TODO: FIX STYLING -->
             <div class="btn-group">
-                <input id="search_by_title" type="text" class="form-control btn-outline-primary border-left-1" placeholder="Search By Title" aria-label="Username" aria-describedby="basic-addon1">
-                <div id="suggestion"></div>
+                <input id="search_by_title" type="text" class="form-control btn-outline-primary border-left-0 dropdown-toggle" placeholder="Search By Title" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <div id="suggestionSelect"class="dropdown-menu" aria-labelledby="dropdownCountryButton" style="height: auto;max-height: 9em; overflow-x: hidden;">
+                </div>
             </div>
 
         </div>
@@ -91,7 +92,7 @@ $race_set = find_race_by_year($year);
 
 <!-- Races Cards Start -->
 <div class="container pt-0 pb-4">
-    <div class="row gap-y justify-content-center">
+    <div id="card_ui" class="row gap-y justify-content-center">
         <?php while ($race = mysqli_fetch_assoc($race_set)) { ?>
             <?php
                 $circuitId = $race['circuitId'];
@@ -213,7 +214,6 @@ $race_set = find_race_by_year($year);
 
 mysqli_free_result($race_set);
 mysqli_free_result($country_set);
-mysqli_free_result($races_based_on_country);
 
 ?>
 
