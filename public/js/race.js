@@ -49,46 +49,62 @@ function setUpCountryUI() {
 })
 }
 
+
+
 function setUpCardDataUI(){
     
     // TODO: empty cardUI div
     $("#card_ui").empty();
+
     
     var search_val = $("#search_by_title").val();
     var year = $("#seasonDropdown").html();
     var country = $("#dropdownCountryButton").html();
+
     if (country == "Display All"){
         country = "";
     }
+    // console.log(country);
+
     if (search_val.length == 0 || search_val ==  "Enter") {
         search_val = "";
     } 
+
     $.ajax({method: "GET", dataType: 'json', url: `./backend/GetRaceCardByYearCountryTitle.php?year=${year}&country=${country}&title=${search_val}`}).done(function(result){
+        $("#card_ui").empty();
+
         // var result = $.parseJSON(data);
         console.log(result);
         // TODO: add the card ui
         var y = result[0];
 
-        // For races without a recorded time
-        if (y.time == null) {
-            // display this text instead of null
-            y.time = "Time not recorded"
-        }
+        console.log("just: " + country);
+        console.log("y: " + y.country);
 
-        
+        // // For races without a recorded time
+        // if (y.time == null) {
+        //     // display this text instead of null
+        //     y.time = "Time not recorded"
+        // }
+
+
         for (var i = 0; i < result.length; i++) {
             y = result[i];
+            // console.log(y.country);
 
-            console.log(y.country);
+
 
             var cardImage = "";
+            var btnBlock = "";
 
             // show cards with image when gallery view selected
             if ($("#galleryView").hasClass("active")) {
                 cardImage = "<img class=\"card-img-top\" src=\"../public/assets/img/recent-race-img/" + y.country + ".jpg\" alt=\"\">";
+                btnBlock = "";
                 // don't show image when listView selected
             } else if ($("#listView").hasClass("active")) {
                 cardImage = "";
+                btnBlock = "btn-block";
             }
           
 
@@ -120,14 +136,16 @@ function setUpCardDataUI(){
                         <h6>${y.time}</h6>
                     </div>
 
-                    <a href="race-details.php?raceId=${y.raceId}" class='btn mt-2 btn-sm btn-primary text-white'>View Details</a>
+                    <a href="race-details.php?raceId=${y.raceId}" class='btn mt-2 btn-sm btn-primary ${btnBlock} text-white'>View Details</a>
 
 
                 </div> 
             </div>
         `); 
+
         }
     });
+
 }
 
 function setSearchBar() {

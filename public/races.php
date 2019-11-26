@@ -92,6 +92,7 @@ $race_set = find_race_by_year($year);
 <!-- Races Cards Start -->
 <div class="container pt-0 pb-4">
     <div id="card_set" class="row gap-y justify-content-center">
+        
         <div id="card_ui" class="col-md-4 col-sm-6">
             <div class="mb-3 card shadow-sm border-0" data-aos="fade-up">
 
@@ -99,6 +100,8 @@ $race_set = find_race_by_year($year);
         </div>
     </div>
 </div>
+
+
 <script src="./js/race.js" type="text/javascript"></script>
 
 <?php
