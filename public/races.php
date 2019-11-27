@@ -71,7 +71,28 @@ $race_set = find_race_by_year($year);
 
         </div>
 
+        <div class="btn-group btn-group-toggle">
+        <label class="m-auto pl-5 pr-3 font-weight-bold text-primary">
+                SHOW
+            </label>
+
+            <label class="btn btn-outline-primary rounded-left">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" id="galleryButton">10
+            </label>
+
+            <label class="btn btn-outline-primary rounded-right mr-5">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" id="listButton">25
+            </label>
+
+            <label class="btn btn-outline-primary rounded-right mr-5">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" id="listButton">ALL
+            </label>
+        </div>
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+
+
             <label class="m-auto pr-3 font-weight-bold text-primary">
                 VIEW
             </label>
@@ -80,9 +101,10 @@ $race_set = find_race_by_year($year);
                 <input type="radio" name="radio" value="galleryView"  autocomplete="off" class="d-none" id="galleryButton"><i class="fas fa-th-large"></i>
             </label>
 
-            <label class="btn btn-outline-primary" id="listView">
+            <label class="btn btn-outline-primary rounded-right" id="listView">
                 <input type="radio" name="radio" value="listView"  autocomplete="off" class="d-none" id="listButton"> <i class="fas fa-th-list"></i>
             </label>
+
 
         </div>
 

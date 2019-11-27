@@ -63,11 +63,33 @@ function setUpCountryUI() {
 // * make = 10?
 var result_limit = 3;
 
+var cardImage = "";
+var btnBlock = "";
+var columnSize = 4;
+var cardWidth = "";
+
 function setUpShowMore() {
     // TODO make button disappear when result.length is reached?
     $("#btnShowMore").on("click", function() {
         result_limit = result_limit + 3;
-        console.log(result_limit);
+        // console.log(result_limit);
+        setUpCardDataUI();
+    })
+}
+
+function setUpViewStyle() {
+    $("#galleryView").on("click", function() {
+        btnBlock = "";
+        columnSize = 4;
+        cardWidth = "";
+        setUpCardDataUI();
+    })
+
+    $("#listView").on("click", function() {
+        cardImage = "";
+        btnBlock = "btn-block";
+        columnSize = 12;
+        cardWidth = "w-75";
         setUpCardDataUI();
     })
 }
@@ -87,6 +109,7 @@ function setUpCardDataUI() {
   if (search_val.length == 0 || search_val == "Enter") {
     search_val = "";
   }
+
 
 
   $.ajax({
@@ -114,10 +137,7 @@ function setUpCardDataUI() {
       console.log("RESULT LENGTH: " + result.length);
 
       console.log("RESULT LIMIT: " + result_limit);
-      var cardImage = "";
-      var btnBlock = "";
-      var columnSize = 4;
-      var cardWidth = "";
+
 
       if (result_limit > result.length) {
           $('#btnShowMore').hide();
@@ -128,15 +148,15 @@ function setUpCardDataUI() {
       if ($("#galleryView").hasClass("active")) {
         cardImage =
           '<img class="card-img-top" src="../public/assets/img/recent-race-img/' + y.country + '.jpg" alt="">';
-        btnBlock = "";
-        columnSize = 4;
-        cardWidth = "";
+        // btnBlock = "";
+        // columnSize = 4;
+        // cardWidth = "";
         // don't show image when listView selected
       } else if ($("#listView").hasClass("active")) {
-        cardImage = "";
-        btnBlock = "btn-block";
-        columnSize = 6;
-        cardWidth = "w-75";
+        // cardImage = "";
+        // btnBlock = "btn-block";
+        // columnSize = 6;
+        // cardWidth = "w-75";
       }
 
 
@@ -222,6 +242,7 @@ function setSearchBar() {
 // Wait for the page load render
 $(document).ready(function() {
   setUpShowMore();
+  setUpViewStyle();
   setUpSeasonUI();
   setUpCountryUI();
   setSearchBar();
