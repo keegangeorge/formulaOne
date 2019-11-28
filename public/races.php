@@ -14,7 +14,6 @@ $country = [];
 $country = $_GET['country'] ?? 'All';
 
 // RACES
-// $race_set = find_race_by_year($year, $country);
 $race_set = find_race_by_year($year);
 ?>
 

@@ -251,6 +251,8 @@ function find_race_by_raceId($raceId) {
 }
 
 
+
+
 /**
  * Function for finding circuit related information
  * based on the circuitId provided
@@ -380,8 +382,6 @@ function find_latest_races() {
 
 
 
-
-
 // COMMENT RELATED QUERY FUNCTIONS //
 
 /**
@@ -504,6 +504,53 @@ function find_favourite_information($raceId) {
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return ($result);
+}
+
+/**
+ * Function for finding races by raceId limited by top 3
+ */
+function find_race_by_raceId_with_limit($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM races ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "' ";
+    $sql .= "LIMIT 3";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return ($result);
+}
+
+function find_favourite_information_by_user() {
+    global $db;
+
+    $sql = "SELECT * FROM race_favourites ";
+    $sql .= "WHERE username='" . db_escape($db, $_SESSION['username']) . "' ";
+    $sql .= "LIMIT 3";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function find_favourite_information_by_user_no_limit() {
+    global $db;
+
+    $sql = "SELECT * FROM race_favourites ";
+    $sql .= "WHERE username='" . db_escape($db, $_SESSION['username']) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function find_favs() {
+    global $db;
+
+    $sql = "SELECT * FROM race_favourites ";
+    $sql .= "WHERE username='" . db_escape($db, $_SESSION['username']) . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $favs = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return ($favs);
 }
 
 

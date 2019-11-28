@@ -64,6 +64,7 @@ function setUpCountryUI() {
 // * Globals * //
 var result_limit = 5;
 var cardImage = "";
+var timeSection = "";
 var btnBlock = "";
 var columnSize = 4;
 var cardWidth = "";
@@ -146,12 +147,6 @@ function setUpCardDataUI() {
     // TODO: add the card ui
     var y = result[0];
 
-    // // For races without a recorded time
-    // if (y.time == null) {
-    //     // display this text instead of null
-    //     y.time = "Time not recorded"
-    // }
-
 
 
     for (var i = 0; i < result.length; i++) {
@@ -160,6 +155,13 @@ function setUpCardDataUI() {
 
       console.log("RESULT LIMIT: " + result_limit);
 
+
+          // Only display time section when  not null
+    if (y.time != null) {
+      timeSection = '<div class=" row ml-0"><i class="fas fa-clock mr-2 text-primary"></i><h6>' + y.time + '</h6></div>'
+  } else if (y.time == null) {
+    timeSection = '<div></div>'
+  }
 
       if (result_limit > result.length) {
           $('#btnShowMore').hide();
@@ -170,15 +172,7 @@ function setUpCardDataUI() {
       if ($("#galleryView").hasClass("active")) {
         cardImage =
           '<img class="card-img-top" src="../public/assets/img/recent-race-img/' + y.country + '.jpg" alt="">';
-        // btnBlock = "";
-        // columnSize = 4;
-        // cardWidth = "";
-        // don't show image when listView selected
       } else if ($("#listView").hasClass("active")) {
-        // cardImage = "";
-        // btnBlock = "btn-block";
-        // columnSize = 6;
-        // cardWidth = "w-75";
       }
 
 
@@ -208,10 +202,7 @@ function setUpCardDataUI() {
                         </h6>
                     </div>
                 
-                    <div class=" row ml-0">
-                        <i class="fas fa-clock mr-2 text-primary"></i>
-                        <h6>${y.time}</h6>
-                    </div>
+                    ${timeSection}
 
                     <a href="race-details.php?raceId=${y.raceId}" class='btn mt-2 btn-sm btn-primary ${btnBlock} text-white'>View Details</a>
 
