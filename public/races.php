@@ -71,38 +71,39 @@ $race_set = find_race_by_year($year);
 
         </div>
 
-        <div class="btn-group btn-group-toggle">
-        <label class="m-auto pl-5 pr-3 font-weight-bold text-primary">
-                SHOW
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+            <label class="m-auto pl-5 pr-3 font-weight-bold text-primary">
+                DISPLAY
             </label>
 
-            <label class="btn btn-outline-primary rounded-left">
-                <input type="radio" name="radio" autocomplete="off" class="d-none" id="galleryButton">10
+            <label id="display_5_races" class="btn btn-outline-primary rounded-left active">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_5_races">5
             </label>
 
-            <label class="btn btn-outline-primary rounded-right mr-5">
-                <input type="radio" name="radio" autocomplete="off" class="d-none" id="listButton">25
+            <label id="display_10_races" class="btn btn-outline-primary border-left-0">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_10_races">10
             </label>
 
-            <label class="btn btn-outline-primary rounded-right mr-5">
-                <input type="radio" name="radio" autocomplete="off" class="d-none" id="listButton">ALL
+            <label id="display_15_races" class="btn btn-outline-primary border-left-0">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_15_races">15
+            </label>
+
+            <label id="display_all_races" class="btn btn-outline-primary border-left-0 rounded-right mr-5">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_all_races">ALL
             </label>
         </div>
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
-
-
             <label class="m-auto pr-3 font-weight-bold text-primary">
                 VIEW
             </label>
-
             <label class="btn btn-outline-primary rounded-left active" id="galleryView">
-                <input type="radio" name="radio" value="galleryView"  autocomplete="off" class="d-none" id="galleryButton"><i class="fas fa-th-large"></i>
+                <input type="radio" name="radio" value="galleryView" autocomplete="off" class="d-none" id="galleryButton"><i class="fas fa-th-large"></i>
             </label>
 
             <label class="btn btn-outline-primary rounded-right" id="listView">
-                <input type="radio" name="radio" value="listView"  autocomplete="off" class="d-none" id="listButton"> <i class="fas fa-th-list"></i>
+                <input type="radio" name="radio" value="listView" autocomplete="off" class="d-none" id="listButton"> <i class="fas fa-th-list"></i>
             </label>
 
 
@@ -114,14 +115,14 @@ $race_set = find_race_by_year($year);
 <!-- Races Cards Start -->
 <div class="container pt-0 pb-4">
     <div id="card_set" class="row gap-y justify-content-center">
-        
+
         <div id="card_ui" class="row">
             <div class="card shadow-sm border-0">
 
             </div>
         </div>
         <button id="btnShowMore" class="mt-5 btn btn-gray btn-block shadow-sm">
-        Show More
+            Show More
         </button>
 
     </div>

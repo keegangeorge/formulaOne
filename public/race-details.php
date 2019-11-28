@@ -16,19 +16,18 @@ $qualifying_set = find_qualifying_by_raceId($raceId);
 $drivers_names = [];
 $constructor_names = [];
 $comment_set = find_comments_by_raceId($raceId);
-
 if (is_post_request()) {
     $message = $_POST['message'];
     $result = insert_comment($message, $raceId);
-    redirect_to(url_for('race-details.php?raceId=' . $raceId . '#comments'));
+    redirect_to(url_for('race-details.php?raceId=' . $raceId . '#comments')); 
 } else {
     // display the blank form
 }
 
 ?>
+<script src="./assets/js/vendor/jquery.min.js" type="text/javascript"></script>
 
 <div class="container pb-5 mt-5 pt-4 text-left">
-
     <nav class="mt-5" aria-label="breadcrumb" data-aos="fade">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?php echo url_for('races.php'); ?>">Races</a></li>
@@ -41,6 +40,7 @@ if (is_post_request()) {
     <div class="container mt-5" data-aos="fade-right">
         <h5 class="ml-1 text-muted text-uppercase font-weight-light">
             <?php echo $circuit['name']; ?>
+
         </h5>
         <h1 class="text-secondary font-weight-normal">
             <?php echo $race['name']; ?>
@@ -83,6 +83,62 @@ if (is_post_request()) {
             <img src="../public/assets/img/recent-race-img/<?php echo $circuit['country'] ?>.jpg" alt="">
         </figure>
         <div class="mb-5">
+            <?php if (is_logged_in()) { ?>
+            <button type="submit" id="starred" data-toggle="tooltip" data-placement="bottom" data-original-title="Save to Favourites" class="rounded border-0 favourite-button mt-2 iconbox iconsmall <?php $favourite_set = find_favourite_information($raceId);
+                while ($favourites = mysqli_fetch_assoc($favourite_set)) {
+                    echo $favourites['starred'];
+
+                    if ($favourites['starred'] == 1) {
+                        echo " bg-secondary text-white ";
+                    }
+                }
+                ?>">
+                <i id="star_icon" class="far fa-star fa-1x"></i>
+
+            </button>
+                        
+
+            <script>
+                // ! TODO: make this appear only if they are a user
+                var raceId = <?php echo $raceId; ?>
+
+                $(document).ready(function() {
+                    $("#starred").on("click", function() {
+                        // If not yet starred, star on click
+                        if ($("#star_icon").hasClass("far")) {
+                            $("#starred").addClass("bg-secondary");
+                            $("#starred").addClass("text-white");
+                            $("#starred").removeClass("bg-gray");
+                            $("#starred").removeClass("text-dark");
+                            $("#star_icon").removeClass("far");
+                            $("#star_icon").addClass("fas");
+
+                            $.post("insertFavourite.php", {
+                                race: raceId
+                            }) 
+
+                            // if already starred, unstar on click
+                        } else if ($("#star_icon").hasClass("fas")) {
+                            $("#starred").addClass("bg-gray");
+                            $("#starred").addClass("text-dark");
+                            $("#starred").removeClass("bg-secondary");
+                            $("#starred").removeClass("text-white");
+
+                            $("#star_icon").removeClass("fas");
+                            $("#star_icon").addClass("far");
+
+                            $.post("removeFavourite.php", {
+                                race: raceId
+                            }) 
+                        }
+                    });
+                });
+
+            </script>
+            <?php } ?>
+
+
+
             <a target="_blank" href="<?php echo $race['url']; ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Race Information" class="mt-2 iconbox iconsmall bg-gray rounded text-dark border-0">
                 <i class="fab fa-wikipedia-w"></i>
             </a>
@@ -91,6 +147,7 @@ if (is_post_request()) {
             <?php echo h($circuit['lat']) . ', ' . h($circuit['lng']); ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Circuit Location" class="mt-2 iconbox iconsmall bg-gray rounded text-dark border-0">
                 <i class="fas fa-map-marker-alt"></i>
             </a>
+
         </div>
 
 
@@ -147,8 +204,6 @@ if (is_post_request()) {
             <br>
             <hr size="10">
             <br>
-
-
 
             <div class="row accordion">
                 <a data-toggle="collapse" class="text-decoration-none" href="#collapseRankings" aria-expanded="true" aria-controls="collapseRankings">
@@ -357,43 +412,43 @@ if (is_post_request()) {
 
                             <!-- A Single Comment END -->
                             <?php if (is_logged_in()) { ?>
-                            <div class="mt-4 media media-comment align-items-center">
-                                <!-- User Icon START -->
-                                <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
-                                    <i class="text-dark fas fa-user"></i>
-                                </div>
-                                <!-- User Icon END -->
-                                <div class="col-9 media-body">
-                                    <!-- User Comment Write/Submit Section START -->
-                                    <form action="<?php echo url_for('/race-details.php?raceId=' . $raceId); ?>" method="post" class="rounded border">
-                                        <div class="input-group input-group-lg input-group-merge">
-                                            <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0 pr-2">
-                                                    <i class="text-muted fas fa-marker"></i>
-                                            </div>
+                                <div class="mt-4 media media-comment align-items-center">
+                                    <!-- User Icon START -->
+                                    <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
+                                        <i class="text-dark fas fa-user"></i>
+                                    </div>
+                                    <!-- User Icon END -->
+                                    <div class="col-9 media-body">
+                                        <!-- User Comment Write/Submit Section START -->
+                                        <form action="<?php echo url_for('/race-details.php?raceId=' . $raceId); ?>" method="post" class="rounded border">
+                                            <div class="input-group input-group-lg input-group-merge">
+                                                <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0 pr-2">
+                                                        <i class="text-muted fas fa-marker"></i>
+                                                </div>
 
-                                            <input name="message" type="text" class="form-control border-0 px-2" aria-label="Find something" placeholder="Write a comment...">
-                                            <!-- Comment Submit Button START -->
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-primary">
-                                                    Post
-                                                </button>
+                                                <input name="message" type="text" class="form-control border-0 px-2" aria-label="Find something" placeholder="Write a comment...">
+                                                <!-- Comment Submit Button START -->
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Post
+                                                    </button>
+                                                </div>
+                                                <!-- Comment Submit Button END -->
                                             </div>
-                                            <!-- Comment Submit Button END -->
-                                        </div>
-                                    </form>
-                                    <!-- User Comment Write/Submit Section END -->
-                                </div>
-                            </div>
-                            <?php } else { ?>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 bg-light mt-4">
-                                    <p class="text-muted p-2 mt-4 mb-4">
-                                        <a href="<?php echo url_for('sign-in.php'); ?>">Sign in </a>to write a comment.
-                                    </p>
+                                        </form>
+                                        <!-- User Comment Write/Submit Section END -->
                                     </div>
                                 </div>
-                            </div>
+                            <?php } else { ?>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 bg-light mt-4">
+                                            <p class="text-muted p-2 mt-4 mb-4">
+                                                <a href="<?php echo url_for('sign-in.php'); ?>">Sign in </a>to write a comment.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>

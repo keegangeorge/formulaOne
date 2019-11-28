@@ -31,6 +31,7 @@ function setUpSeasonUI() {
   });
 }
 
+
 function setUpCountryUI() {
   $("#dropdownCountryButton").html("Display All");
   $("#countryDropdownSelect").empty();
@@ -59,20 +60,17 @@ function setUpCountryUI() {
     });
   });
 }
-// TODO add a button in the ui to set this initial value?
-// * make = 10?
-var result_limit = 3;
 
+// * Globals * //
+var result_limit = 5;
 var cardImage = "";
 var btnBlock = "";
 var columnSize = 4;
 var cardWidth = "";
 
 function setUpShowMore() {
-    // TODO make button disappear when result.length is reached?
     $("#btnShowMore").on("click", function() {
-        result_limit = result_limit + 3;
-        // console.log(result_limit);
+        result_limit = result_limit + 4;
         setUpCardDataUI();
     })
 }
@@ -92,6 +90,30 @@ function setUpViewStyle() {
         cardWidth = "w-75";
         setUpCardDataUI();
     })
+}
+
+function displayCount() {
+    $("#display_5_races").on("click", function() {
+        result_limit = 5;
+        setUpCardDataUI();
+    })
+
+    $("#display_10_races").on("click", function() {
+        result_limit = 10;
+        setUpCardDataUI();
+    })
+
+    $("#display_15_races").on("click", function() {
+        result_limit = 15;
+        setUpCardDataUI();
+    })
+
+    $("#display_all_races").on("click", function() {
+        console.log("clicked all");
+        result_limit = 100;
+        setUpCardDataUI();
+    })
+
 }
 
 function setUpCardDataUI() {
@@ -240,11 +262,15 @@ function setSearchBar() {
 }
 
 // Wait for the page load render
+
+
 $(document).ready(function() {
   setUpShowMore();
   setUpViewStyle();
+  displayCount();
   setUpSeasonUI();
   setUpCountryUI();
   setSearchBar();
   setUpCardDataUI();
 });
+

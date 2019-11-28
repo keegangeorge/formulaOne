@@ -32,7 +32,6 @@
 	<link href="<?php echo url_for('assets/css/vendor/aos.css'); ?>" rel="stylesheet" />
 
 
-
 	<!-- Collapsible Table CSS -->
 	<style>
 		a[aria-expanded=false] .fa-chevron-down {
@@ -63,12 +62,14 @@
 			transition: .3s linear;
 		}
 	</style>
+  
 </head>
 <!-- Document Head END -->
 
 <body>
 
 
+	
 
 	<nav class="
 <?php

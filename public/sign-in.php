@@ -30,6 +30,8 @@ if (is_post_request()) {
 			// if record is found
 			if (password_verify($password, $member['hashed_password'])) {
 				// password matches
+				setcookie("username", $username, time()+60*60*7);
+				setcookie("password", $password, time()+60*60*7);
 				log_in_member($member);
 				redirect_to(url_for('/index.php'));
 			} else {

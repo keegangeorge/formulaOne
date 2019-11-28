@@ -492,3 +492,18 @@ function find_comments_by_raceId($raceId) {
     confirm_result_set($result);
     return ($result);
 }
+
+
+// FAVOURITES RELATED FUNCTIONS //
+function find_favourite_information($raceId) {
+    global $db;
+
+    $sql = "SELECT * FROM race_favourites ";
+    $sql .= "WHERE raceId='" . db_escape($db, $raceId) . "' ";
+    $sql .= "AND username='" . db_escape($db, $_SESSION['username']) . "' ";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return ($result);
+}
+
+
