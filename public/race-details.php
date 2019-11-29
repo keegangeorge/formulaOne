@@ -514,28 +514,6 @@ if (is_post_request()) {
                                 backgroundColor: 'rgba(225, 13, 49, .5)',
                                 hoverBackgroundColor: 'rgba(225, 13, 49, 1)',
 
-                                // backgroundColor: [
-                                //     'rgba(255, 94, 91, .5)', // red
-                                //     'rgba(253, 197, 13, .5)', // green
-                                //     'rgba(55, 63, 81, .5)', // yellow
-                                //     'rgba(82, 191, 111, .5)', // purple
-                                //     'rgba(27, 152, 224, .5)', // blue
-                                // ],
-                                // borderColor: [
-                                //     'rgba(213, 41, 65, 1)', // red
-                                //     'rgba(242, 97, 63, 1)', // yellow
-                                //     'rgba(42, 23, 55, 1)', // purple
-                                //     'rgba(82, 42, 77, 1)', // blue
-                                //     'rgba(37, 153, 139, 1)', // green
-                                // ],
-                                // borderWidth: 0,
-                                // hoverBackgroundColor: [
-                                //     'rgba(213, 41, 65, 1)', // red
-                                //     'rgba(242, 97, 63, 1)', // yellow
-                                //     'rgba(42, 23, 55, 1)', // purple
-                                //     'rgba(46, 42, 77, 1)', // blue
-                                //     'rgba(37, 153, 139, 1)', // green
-                                // ]
 
                             }]
                         }

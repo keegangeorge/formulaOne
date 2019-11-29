@@ -1,3 +1,8 @@
+/**
+ * Function for setting up request for filtering races
+ * by the year and setting up the dropdown menu filled with
+ * all the years that races are available
+ */
 function setUpSeasonUI() {
   $("#seasonDropdown").html(`${new Date().getFullYear()}`);
   $.ajax({ method: "GET", url: "./backend/GetRaceSeason.php" }).done(function(
@@ -31,7 +36,11 @@ function setUpSeasonUI() {
   });
 }
 
-
+/**
+ * Function for setting up request for filtering races
+ * by the country and setting up the dropdown menu filled with
+ * all the countries that hold races
+ */
 function setUpCountryUI() {
   $("#dropdownCountryButton").html("Display All");
   $("#countryDropdownSelect").empty();
@@ -69,6 +78,10 @@ var btnBlock = "";
 var columnSize = 4;
 var cardWidth = "";
 
+/**
+ * Function that changes the query limit to
+ * show more races when button is clicked
+ */
 function setUpShowMore() {
     $("#btnShowMore").on("click", function() {
         result_limit = result_limit + 4;
@@ -76,6 +89,9 @@ function setUpShowMore() {
     })
 }
 
+/**
+ * Function to setup the card view style
+ */
 function setUpViewStyle() {
     $("#galleryView").on("click", function() {
         btnBlock = "";
@@ -93,6 +109,10 @@ function setUpViewStyle() {
     })
 }
 
+/**
+ * Function to change the amount of results displayed
+ * based on amount clicked in button group
+ */
 function displayCount() {
     $("#display_5_races").on("click", function() {
         result_limit = 5;
@@ -117,6 +137,9 @@ function displayCount() {
 
 }
 
+/**
+ * Function to setup the card UI for the races
+ */
 function setUpCardDataUI() {
   $("#card_ui").empty();
 
@@ -127,14 +150,13 @@ function setUpCardDataUI() {
   if (country == "Display All") {
     country = "";
   }
-  // console.log(country);
 
   if (search_val.length == 0 || search_val == "Enter") {
     search_val = "";
   }
 
 
-
+  // Ajax GET Request
   $.ajax({
     method: "GET",
     dataType: "json",
@@ -142,12 +164,7 @@ function setUpCardDataUI() {
   }).done(function(result) {
     $("#card_ui").empty();
 
-    // var result = $.parseJSON(data);
-    console.log(result);
-    // TODO: add the card ui
     var y = result[0];
-
-
 
     for (var i = 0; i < result.length; i++) {
       y = result[i];
@@ -156,7 +173,7 @@ function setUpCardDataUI() {
       console.log("RESULT LIMIT: " + result_limit);
 
 
-          // Only display time section when  not null
+    // Only display time section when  not null
     if (y.time != null) {
       timeSection = '<div class=" row ml-0"><i class="fas fa-clock mr-2 text-primary"></i><h6>' + y.time + '</h6></div>'
   } else if (y.time == null) {

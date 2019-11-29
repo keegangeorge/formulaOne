@@ -1,6 +1,9 @@
 <?php 
 require_once '../..//private/initialize.php'; 
 
+/**
+ * Function for country of race by year
+ */
 function find_by_year($year) {
     global $db;
 

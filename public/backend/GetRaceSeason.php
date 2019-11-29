@@ -12,3 +12,4 @@ echo json_encode($result_array);
 mysqli_free_result($season_set);
 
 ?>
+

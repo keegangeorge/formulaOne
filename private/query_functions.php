@@ -5,7 +5,8 @@
 /**
  * Function for validating members registering an account
  */
-function validate_member($member) {
+function validate_member($member)
+{
 
     // First Name Validation
     if (is_blank($member['first_name'])) {
@@ -67,7 +68,8 @@ function validate_member($member) {
 /**
  * Function for inserting members into the database.
  */
-function insert_member($member) {
+function insert_member($member)
+{
     global $db;
 
     $errors = validate_member($member);
@@ -102,7 +104,8 @@ function insert_member($member) {
 /**
  * Function for updating members in database
  */
-function update_member($member) {
+function update_member($member)
+{
     global $db;
 
     $errors = validate_member($member);
@@ -127,7 +130,8 @@ function update_member($member) {
 /**
  * Function for updating certain user information
  */
-function update_user_information($account, $username) {
+function update_user_information($account, $username)
+{
     global $db;
 
     $sql = "UPDATE members ";
@@ -143,7 +147,8 @@ function update_user_information($account, $username) {
  * Function for finding member information by
  * the username of the member
  */
-function find_member_by_username($username) {
+function find_member_by_username($username)
+{
     global $db;
 
     $sql = "SELECT * FROM members ";
@@ -160,7 +165,8 @@ function find_member_by_username($username) {
  * Function for finding out account information
  * based on the username provided
  */
-function find_account_info($username) {
+function find_account_info($username)
+{
     global $db;
 
     $sql = "SELECT * FROM members ";
@@ -181,7 +187,8 @@ function find_account_info($username) {
 /**
  * Function for finding selected year of race
  */
-function find_all_seasons() {
+function find_all_seasons()
+{
     global $db;
 
     $sql = "SELECT DISTINCT year FROM races ";
@@ -196,7 +203,8 @@ function find_all_seasons() {
  * Function for fetching all countries
  * in ascending order
  */
-function find_all_countries() {
+function find_all_countries()
+{
     global $db;
 
     $sql = "SELECT DISTINCT circuitId, country FROM circuits ";
@@ -210,7 +218,8 @@ function find_all_countries() {
 /**
  * Function for finding races by the year indicated
  */
-function find_race_by_year($year) {
+function find_race_by_year($year)
+{
     global $db;
 
     $sql = "SELECT * FROM races ";
@@ -224,7 +233,8 @@ function find_race_by_year($year) {
 /**
  * Function for finding races by the circuitId
  */
-function find_race_by_circuitId($circuitId) {
+function find_race_by_circuitId($circuitId)
+{
     global $db;
 
     $sql = "SELECT * FROM circuits ";
@@ -238,7 +248,8 @@ function find_race_by_circuitId($circuitId) {
 /**
  * Function for finding races by raceId
  */
-function find_race_by_raceId($raceId) {
+function find_race_by_raceId($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM races ";
@@ -257,7 +268,8 @@ function find_race_by_raceId($raceId) {
  * Function for finding circuit related information
  * based on the circuitId provided
  */
-function find_circuit($circuitId) {
+function find_circuit($circuitId)
+{
     global $db;
 
     $sql = "SELECT * FROM circuits ";
@@ -273,7 +285,8 @@ function find_circuit($circuitId) {
  * Function for findind the results of a race
  * based on the provided raceId
  */
-function find_results_by_raceId($raceId) {
+function find_results_by_raceId($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM results ";
@@ -289,7 +302,8 @@ function find_results_by_raceId($raceId) {
  * Function for finding specific results of a 
  * race based on the raceId and the driverId
  */
-function find_specific_results_by_raceId($raceId, $driverId) {
+function find_specific_results_by_raceId($raceId, $driverId)
+{
     global $db;
 
     $sql = "SELECT * FROM results ";
@@ -304,7 +318,8 @@ function find_specific_results_by_raceId($raceId, $driverId) {
  * Function for querying all constructor related
  * information based on the constructorId
  */
-function find_constructors($constructorId) {
+function find_constructors($constructorId)
+{
     global $db;
 
     $sql = "SELECT * FROM constructors ";
@@ -318,7 +333,8 @@ function find_constructors($constructorId) {
  * Function for finding driver standing based on
  * the raceId that was provided
  */
-function find_driver_standings_by_raceId($raceId) {
+function find_driver_standings_by_raceId($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM driverstandings ";
@@ -333,7 +349,8 @@ function find_driver_standings_by_raceId($raceId) {
  * Function for finding driver related information
  * based on the driverId provided
  */
-function find_drivers_by_driverId($driverId) {
+function find_drivers_by_driverId($driverId)
+{
     global $db;
 
     $sql = "SELECT * FROM drivers ";
@@ -347,7 +364,8 @@ function find_drivers_by_driverId($driverId) {
  * Function for fetching qualifying race 
  * information based on the raceId provided
  */
-function find_qualifying_by_raceId($raceId) {
+function find_qualifying_by_raceId($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM qualifying ";
@@ -362,7 +380,8 @@ function find_qualifying_by_raceId($raceId) {
  * Function for fetching the three latest races
  * based on the current date
  */
-function find_latest_races() {
+function find_latest_races()
+{
     global $db;
 
     // Get the current date and time
@@ -388,7 +407,8 @@ function find_latest_races() {
  * Function for finding the total number of 
  * comments made by a user
  */
-function find_comment_count($username) {
+function find_comment_count($username)
+{
     global $db;
 
     $sql = "SELECT COUNT(*) FROM comments ";
@@ -403,7 +423,8 @@ function find_comment_count($username) {
 /**
  * Function for finding the latest comment made by a user
  */
-function find_latest_comment($username) {
+function find_latest_comment($username)
+{
     global $db;
 
     $sql = "SELECT MAX(date) FROM comments ";
@@ -419,7 +440,8 @@ function find_latest_comment($username) {
  * Function for validating a comment sent to
  * ensure that it is not blank
  */
-function validate_comment($message) {
+function validate_comment($message)
+{
     $errors = [];
 
     if (is_blank($message)) {
@@ -434,7 +456,8 @@ function validate_comment($message) {
  * into the database based on the comment's
  * message and raceId
  */
-function insert_comment($message, $raceId) {
+function insert_comment($message, $raceId)
+{
     global $db;
 
     $errors = validate_comment($message);
@@ -469,7 +492,8 @@ function insert_comment($message, $raceId) {
  * Function for fetching a user's comments based
  * on their username
  */
-function find_comments_by_username($username) {
+function find_comments_by_username($username)
+{
     global $db;
 
     $sql = "SELECT * FROM comments ";
@@ -483,7 +507,8 @@ function find_comments_by_username($username) {
  * Function for finding comments based on the
  * raceId that was provided
  */
-function find_comments_by_raceId($raceId) {
+function find_comments_by_raceId($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM comments ";
@@ -495,7 +520,8 @@ function find_comments_by_raceId($raceId) {
 
 
 // FAVOURITES RELATED FUNCTIONS //
-function find_favourite_information($raceId) {
+function find_favourite_information($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM race_favourites ";
@@ -509,7 +535,8 @@ function find_favourite_information($raceId) {
 /**
  * Function for finding races by raceId limited by top 3
  */
-function find_race_by_raceId_with_limit($raceId) {
+function find_race_by_raceId_with_limit($raceId)
+{
     global $db;
 
     $sql = "SELECT * FROM races ";
@@ -520,7 +547,8 @@ function find_race_by_raceId_with_limit($raceId) {
     return ($result);
 }
 
-function find_favourite_information_by_user() {
+function find_favourite_information_by_user()
+{
     global $db;
 
     $sql = "SELECT * FROM race_favourites ";
@@ -531,7 +559,8 @@ function find_favourite_information_by_user() {
     return $result;
 }
 
-function find_favourite_information_by_user_no_limit() {
+function find_favourite_information_by_user_no_limit()
+{
     global $db;
 
     $sql = "SELECT * FROM race_favourites ";
@@ -541,7 +570,8 @@ function find_favourite_information_by_user_no_limit() {
     return $result;
 }
 
-function find_favs() {
+function find_favs()
+{
     global $db;
 
     $sql = "SELECT * FROM race_favourites ";
@@ -552,5 +582,3 @@ function find_favs() {
     mysqli_free_result($result);
     return ($favs);
 }
-
-
