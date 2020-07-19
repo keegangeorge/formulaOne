@@ -82,6 +82,7 @@ $latest_comment = find_latest_comment($username);
             <ul class="nav" id="myTab">
                 <li class="pl-0 pr-1 nav-item nav-link active"><a class="btn btn-sm btn-outline-primary active" href="#settings" data-toggle="tab">Settings</a></li>
                 <li class="pl-0 pr-1 nav-item nav-link"><a class="btn btn-sm btn-outline-primary" href="#comments" data-toggle="tab">Comments</a></li>
+                <li class="pl-0 pr-1 nav-item nav-link"><a class="btn btn-sm btn-outline-primary" href="#favourites" data-toggle="tab">Favourites</a></li>
             </ul>
 
             <div class="tab-content mb-5" data-aos="fade">
@@ -137,6 +138,27 @@ $latest_comment = find_latest_comment($username);
                             <p class="mb-0"><strong class="font-weight-bold">Date: </strong><?php echo date_format(date_create($user_comment['date']), "M/d/Y h:i:sa") ?></p>
                         </li>
                         <?php } ?>
+                    </ul>
+
+                </div> 
+
+                <div class="tab-pane bg-light rounded p-4" id="favourites" data-aos="fade"> 
+
+
+                    <ul class="list-group">
+                        <?php 
+                            $all_favs_set = find_favourite_information_by_user_no_limit();
+
+                            
+                            while ($all_favs = mysqli_fetch_assoc($all_favs_set)) {
+                                $all_fav_races_set = find_race_by_raceId_with_limit($all_favs['raceId']);
+
+                                while ($all_fav_races = mysqli_fetch_assoc($all_fav_races_set)) {
+                        ?>
+                        <li class="list-group-item">
+                            <a href="<?php echo url_for('/race-details.php?raceId=') . $all_favs['raceId']; ?>"><h5 class="text-secondary font-weight-strong"><?php echo $all_fav_races['name'] . ' (' . $all_fav_races['year'] . ')';?></h5></a>
+                        </li>
+                            <?php } } ?>
                     </ul>
 
                 </div>

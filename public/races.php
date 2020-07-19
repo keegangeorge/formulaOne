@@ -5,7 +5,6 @@
 
 <?php
 // SEASON
-$season_set = find_all_seasons();
 $seasons = [];
 $year = $_GET['year'] ?? date('Y');
 
@@ -15,11 +14,11 @@ $country = [];
 $country = $_GET['country'] ?? 'All';
 
 // RACES
-// $race_set = find_race_by_year($year, $country);
 $race_set = find_race_by_year($year);
 ?>
 
 
+<script src="./assets/js/vendor/jquery.min.js" type="text/javascript"></script>
 
 <!----------------------- Begin Content -- Races ---------------------->
 <!-- Races Header START -->
@@ -44,16 +43,10 @@ $race_set = find_race_by_year($year);
 
                 <!-- SEASON DROPDOWN BUTTON -->
                 <button type="button" class="dropdown-toggle btn btn-primary" id="seasonDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Season: <?php echo $year; ?>
                 </button>
                 <!-- SEASON DROPDOWN ITEMS -->
-                <div id="" class="dropdown-menu" aria-labelledby="seasonDropdown" style="height: auto;max-height: 9em; overflow-x: hidden;">
-                    <?php
-                    while ($seasons = mysqli_fetch_assoc($season_set)) { 
-                        ?>
-                        <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . h(u($seasons['year']))) . '&country=' . $country; ?>"><?php echo h($seasons['year']); ?>
-                        </a>
-                    <?php } ?>
+                <div id="seasonDropdownDiv" class="dropdown-menu" aria-labelledby="seasonDropdown" style="height: auto;max-height: 9em; overflow-x: hidden;">
+
                 </div>
             </div>
 
@@ -61,52 +54,57 @@ $race_set = find_race_by_year($year);
             <div class="btn-group">
 
                 <!-- COUNTRY DROPDOWN BUTTON -->
-                <button class="btn btn-outline-primary border-left-0 dropdown-toggle" type="button" id="dropdownCountryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php if ($country == 'All') {
-                        echo 'Country: All';
-                    } else {
-                        echo 'Country: ' . $country;
-                    }
-                    ?>
+                <button class="border-right-0 btn btn-outline-primary border-left-0 dropdown-toggle" type="button" id="dropdownCountryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </button>
 
                 <!-- COUNTRY DROPDOWN ITEMS -->
-                <div class="dropdown-menu" aria-labelledby="dropdownCountryButton" style="height: auto;max-height: 9em; overflow-x: hidden;">
-                    <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . $year . '&country=' . 'All'); ?>">Display All</a>
-                    <?php
-                    while ($country = mysqli_fetch_assoc($country_set)) { ?>
-                        <?php
-                            $races_based_on_country = find_race_by_year($year);
-                            while ($selected_country_races = mysqli_fetch_assoc($races_based_on_country)) {
-                                if ($country['circuitId'] == $selected_country_races['circuitId']) { ?>
-                                <a class="dropdown-item" href="<?php echo url_for('/races.php?year=' . $year . '&country=' . h(u($country['country']))); ?>">
-
-                            <?php echo h($country['country']);
-                                    }
-                                } ?>
-
-                                </a>
-                            <?php } ?>
-
-
+                <div id="countryDropdownSelect" class="dropdown-menu" aria-labelledby="dropdownCountryButton" style="height: auto;max-height: 9em; overflow-x: hidden;">
                 </div>
             </div>
 
+            <div class="btn-group">
+                <input id="search_by_title" type="text" class="form-control  rounded-0 border-primary dropdown-toggle" placeholder="Search By Title" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div id="suggestionSelect" class="mt-2 dropdown-menu" aria-labelledby="dropdownCountryButton" style="height: auto;max-height: 9em; overflow-x: hidden;">
+                </div>
+            </div>
 
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+            <label class="m-auto pl-5 pr-3 font-weight-bold text-primary">
+                DISPLAY
+            </label>
+
+            <label id="display_5_races" class="btn btn-outline-primary rounded-left active">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_5_races">5
+            </label>
+
+            <label id="display_10_races" class="btn btn-outline-primary border-left-0">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_10_races">10
+            </label>
+
+            <label id="display_15_races" class="btn btn-outline-primary border-left-0">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_15_races">15
+            </label>
+
+            <label id="display_all_races" class="btn btn-outline-primary border-left-0 rounded-right mr-5">
+                <input type="radio" name="radio" autocomplete="off" class="d-none" value="display_all_races">ALL
+            </label>
         </div>
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="m-auto pr-3 font-weight-bold text-primary">
                 VIEW
             </label>
-
-            <label class="btn btn-outline-primary rounded-left active">
-                <input type="radio" name="radio" value="galleryView" id="galleryView" autocomplete="off" class="d-none"><i class="fas fa-th-large"></i>
+            <label class="btn btn-outline-primary rounded-left active" id="galleryView">
+                <input type="radio" name="radio" value="galleryView" autocomplete="off" class="d-none" id="galleryButton"><i class="fas fa-th-large"></i>
             </label>
 
-            <label class="btn btn-outline-primary">
-                <input type="radio" name="radio" value="listView" id="listView" autocomplete="off" class="d-none"> <i class="fas fa-th-list"></i>
+            <label class="btn btn-outline-primary rounded-right" id="listView">
+                <input type="radio" name="radio" value="listView" autocomplete="off" class="d-none" id="listButton"> <i class="fas fa-th-list"></i>
             </label>
+
 
         </div>
 
@@ -115,129 +113,27 @@ $race_set = find_race_by_year($year);
 
 <!-- Races Cards Start -->
 <div class="container pt-0 pb-4">
-    <div class="row gap-y justify-content-center">
-        <?php while ($race = mysqli_fetch_assoc($race_set)) { ?>
-            <?php
-                $circuitId = $race['circuitId'];
-                $circuit_set = find_race_by_circuitId($circuitId);
+    <div id="card_set" class="row gap-y justify-content-center">
 
-                while ($circuit = mysqli_fetch_assoc($circuit_set)) { ?>
-                <div class="col-md-4 col-sm-6">
-                    <?php
-                            $user_set_country = $_GET['country'] ?? 'All';
-                            if ($circuit['country'] == $user_set_country) {
-                                ?>
-                        <!-- Card -->
-                        <div class="card shadow-sm border-0" data-aos="fade-up">
-                            <img class="card-img-top" src="../public/assets/img/recent-race-img/<?php echo $circuit['country'] ?>.jpg" alt="">
-                            <div class="card-body">
+        <div id="card_ui" class="row">
+            <div class="card shadow-sm border-0">
 
-                                <h5 class="card-title text-secondary">
-                                    <?php echo h($race['name']); ?>
-                                </h5>
-
-                                <div class="row ml-0">
-                                    <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                                    <h6><?php echo date_format(date_create(h($race['date'])), "M jS, Y"); ?></h6>
-                                </div>
-
-                                <div class="row ml-0">
-                                    <i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-                                    <h6>
-                                        <a class="text-dark" data-toggle="tooltip" data-placement="right" data-original-title="<?php echo h($circuit['lat']) . ", " . h($circuit['lng']); ?>" class="text-dark" target="_blank" href="http://google.com/maps/place/ <?php echo h($circuit['lat']) . ', ' . h($circuit['lng'])  . "\">"; ?>
-                                    <?php
-                                                echo h($circuit['location']);
-                                                // When specific location doesn't exist, the comma separator is not displayed
-                                                if (!is_blank(h($circuit['location']))) {
-                                                    echo ', ';
-                                                }
-                                                ?> 
-                                    <?php
-
-                                                echo h($circuit['country']);
-                                                ?>
-                                    </a>
-                                </h6>
-                            </div>
-
-                            <?php if (!is_blank($race['time'])) {  ?>
-                                <div class=" row ml-0">
-                                            <i class="fas fa-clock mr-2 text-primary"></i>
-                                            <h6><?php echo date_format(date_create(h($race['time'])), "g:i A");  ?></h6>
-                                </div>
-                            <?php } ?>
-
-                            <a href='<?php echo url_for('/race-details.php?raceId=' . h(u($race['raceId']))); ?>' class='btn mt-2 btn-sm btn-primary text-white'>
-                                View Details
-                            </a>
-                            </div>
-                        </div>
-                    <?php } // end of if statement
-                            else if ($user_set_country == 'All') { ?>
-                        <!-- Card -->
-                        <div class="card shadow-sm border-0" data-aos="fade-up">
-                            <img class="card-img-top" src="../public/assets/img/recent-race-img/<?php echo $circuit['country'] ?>.jpg" alt="">
-                            <div class="card-body">
-
-                                <h5 class="card-title text-secondary">
-                                    <?php echo h($race['name']); ?>
-                                </h5>
-
-                                <div class="row ml-0">
-                                    <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                                    <h6><?php echo date_format(date_create(h($race['date'])), "M jS, Y"); ?></h6>
-                                </div>
-
-                                <div class="row ml-0">
-                                    <i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-                                    <h6>
-                                        <a class="text-dark" data-toggle="tooltip" data-placement="right" data-original-title="<?php echo h($circuit['lat']) . ", " . h($circuit['lng']); ?>" class="text-dark" target="_blank" href="http://google.com/maps/place/ <?php echo h($circuit['lat']) . ', ' . h($circuit['lng'])  . "\">"; ?>
-                                    <?php
-                                                echo h($circuit['location']);
-                                                // When specific location doesn't exist, the comma separator is not displayed
-                                                if (!is_blank(h($circuit['location']))) {
-                                                    echo ', ';
-                                                }
-                                                ?> 
-                                    <?php
-
-                                                echo h($circuit['country']);
-                                                ?>
-                                    </a>
-                                </h6>
-                            </div>
-
-                            <?php if (!is_blank($race['time'])) {  ?>
-                                <div class=" row ml-0">
-                                            <i class="fas fa-clock mr-2 text-primary"></i>
-                                            <h6><?php echo date_format(date_create(h($race['time'])), "g:i A");  ?></h6>
-                                </div>
-                            <?php } ?>
-
-                            <a href='<?php echo url_for('/race-details.php?raceId=' . h(u($race['raceId']))); ?>' class='btn mt-2 btn-sm btn-primary text-white'>
-                                View Details
-                            </a>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-        <?php }
-        } ?>
-
-
-
-
-
+            </div>
+        </div>
+        <button id="btnShowMore" class="mt-5 btn btn-gray btn-block shadow-sm">
+            Show More
+        </button>
 
     </div>
+
 </div>
+
+<script src="./js/race.js" type="text/javascript"></script>
 
 <?php
 
-mysqli_free_result($season_set);
 mysqli_free_result($race_set);
 mysqli_free_result($country_set);
-mysqli_free_result($races_based_on_country);
 
 ?>
 

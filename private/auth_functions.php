@@ -7,6 +7,8 @@
     $_SESSION['member_id'] = $member['id'];
     $_SESSION['last_login'] = time();
     $_SESSION['username'] = $member['username'];
+ 
+  
     return true;
   }
 

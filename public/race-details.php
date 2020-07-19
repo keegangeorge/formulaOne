@@ -3,9 +3,8 @@
 <?php $page_title = 'Race Details'; ?>
 <?php $whiteNav = true; ?>
 <?php include SHARED_PATH . '/public_header.php'; ?>
-
+<?php include('simple_html_dom.php'); ?>
 <?php
-
 $raceId = $_GET['raceId'] ?? '1';
 $race = find_race_by_raceId($raceId);
 $circuit = find_circuit($race['circuitId']);
@@ -14,9 +13,10 @@ $driver_standings_set = find_driver_standings_by_raceId($raceId);
 $get_race_winner_set = find_driver_standings_by_raceId($raceId);
 $qualifying_set = find_qualifying_by_raceId($raceId);
 $drivers_names = [];
+$drivers_points = array();
+$lapSpeeds = array();
 $constructor_names = [];
 $comment_set = find_comments_by_raceId($raceId);
-
 if (is_post_request()) {
     $message = $_POST['message'];
     $result = insert_comment($message, $raceId);
@@ -26,9 +26,9 @@ if (is_post_request()) {
 }
 
 ?>
+<script src="./assets/js/vendor/jquery.min.js" type="text/javascript"></script>
 
 <div class="container pb-5 mt-5 pt-4 text-left">
-
     <nav class="mt-5" aria-label="breadcrumb" data-aos="fade">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?php echo url_for('races.php'); ?>">Races</a></li>
@@ -41,6 +41,7 @@ if (is_post_request()) {
     <div class="container mt-5" data-aos="fade-right">
         <h5 class="ml-1 text-muted text-uppercase font-weight-light">
             <?php echo $circuit['name']; ?>
+
         </h5>
         <h1 class="text-secondary font-weight-normal">
             <?php echo $race['name']; ?>
@@ -82,7 +83,78 @@ if (is_post_request()) {
         <figure data-aos="fade-left">
             <img src="../public/assets/img/recent-race-img/<?php echo $circuit['country'] ?>.jpg" alt="">
         </figure>
+
         <div class="mb-5">
+            <?php if (is_logged_in()) { ?>
+                <button type="submit" id="starred" data-toggle="tooltip" data-placement="bottom" data-original-title="Save to Favourites" class="bg-gray rounded text-darkrounded border-0 favourite-button mt-2 iconbox iconsmall 
+                <?php
+                    $is_favourited = 0;
+                    $favourite_set = find_favourite_information($raceId);
+                    while ($favourites = mysqli_fetch_assoc($favourite_set)) {
+                        echo $favourites['starred'];
+
+                        if ($favourites['starred'] == 1) {
+                            $is_favourited = 1;
+                        }
+                    }
+                    ?>">
+                    <i id="star_icon" class="far fa-star fa-1x"></i>
+
+                </button>
+
+
+                <script>
+                    var isFavourited = <?php echo $is_favourited; ?>
+
+                    // ! TODO: make this appear only if they are a user
+                    var raceId = <?php echo $raceId; ?>
+
+
+                    $(document).ready(function() {
+                        // If this race is a favouirte, make star solid white
+                        if (isFavourited == 1) {
+                            $("#star_icon").addClass("fas");
+                            $("#star_icon").removeClass("far");
+                            $("#starred").removeClass("bg-gray");
+                            $("#starred").removeClass("text-dark");
+                            $("#starred").addClass("bg-secondary");
+                            $("#starred").addClass("text-white");
+                        }
+                        $("#starred").on("click", function() {
+                            // If not yet starred, star on click
+                            if ($("#star_icon").hasClass("far")) {
+                                $("#starred").addClass("bg-secondary");
+                                $("#starred").addClass("text-white");
+                                $("#starred").removeClass("bg-gray");
+                                $("#starred").removeClass("text-dark");
+                                $("#star_icon").removeClass("far");
+                                $("#star_icon").addClass("fas");
+
+                                $.post("insertFavourite.php", {
+                                    race: raceId
+                                })
+
+                                // if already starred, unstar on click
+                            } else if ($("#star_icon").hasClass("fas")) {
+                                $("#starred").addClass("bg-gray");
+                                $("#starred").addClass("text-dark");
+                                $("#starred").removeClass("bg-secondary");
+                                $("#starred").removeClass("text-white");
+
+                                $("#star_icon").removeClass("fas");
+                                $("#star_icon").addClass("far");
+
+                                $.post("removeFavourite.php", {
+                                    race: raceId
+                                })
+                            }
+                        });
+                    });
+                </script>
+            <?php } ?>
+
+
+
             <a target="_blank" href="<?php echo $race['url']; ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Race Information" class="mt-2 iconbox iconsmall bg-gray rounded text-dark border-0">
                 <i class="fab fa-wikipedia-w"></i>
             </a>
@@ -91,6 +163,19 @@ if (is_post_request()) {
             <?php echo h($circuit['lat']) . ', ' . h($circuit['lng']); ?>" data-toggle="tooltip" data-placement="bottom" data-original-title="View Circuit Location" class="mt-2 iconbox iconsmall bg-gray rounded text-dark border-0">
                 <i class="fas fa-map-marker-alt"></i>
             </a>
+            <div class="col-12 rounded bg-light p-3 mt-4 text-dark">
+                <h4 class="text-secondary font-weight-light">Summary</h4>
+                <h6 class="text-muted font-weight-light">From Wikipedia</h6>
+                <?php $html = file_get_html($race['url']);
+
+                $summary = $html->find('div[class="mw-parser-output"]', 0)->find('p', 1);
+
+
+                echo $summary;
+
+                ?>
+            </div>
+
         </div>
 
 
@@ -142,15 +227,32 @@ if (is_post_request()) {
                 </div>
 
 
+                <div class="col-6 border-top border-right border-left pb-4 border-bottom" data-aos="fade-up">
+                    <div class="mt-3">
+                        <div id="pieChart">
+                            <div class="">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-6 border-top border-right border-bottom pb-4" data-aos="fade-up">
+                    <div class="mt-3">
+                        <div id="speedChart">
+                            <div class="">
+                                <canvas id="mySpeedChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
-            <br>
-            <hr size="10">
-            <br>
 
-
-
-            <div class="row accordion">
+            <div class="mt-5 row accordion">
                 <a data-toggle="collapse" class="text-decoration-none" href="#collapseRankings" aria-expanded="true" aria-controls="collapseRankings">
 
                     <h5 class="text-secondary mb-4" data-aos="fade">
@@ -202,6 +304,8 @@ if (is_post_request()) {
 
                                                                         array_push($drivers_names, $temp_drivers);
 
+                                                                        array_push($drivers_points, $driver_standings['points']);
+
                                                                         echo h($drivers['forename']) . " " . h($drivers['surname']); ?>
                                                     </a>
                                                 </th>
@@ -239,6 +343,7 @@ if (is_post_request()) {
                                                 <td>
                                                     <?php if (!is_blank($race_specific_results['fastestLapSpeed'])) {
                                                                         echo $race_specific_results['fastestLapSpeed'] . " km/h";
+                                                                        array_push($lapSpeeds, $race_specific_results['fastestLapSpeed']);
                                                                     } else { ?>
                                                         <span class="text-muted">Speed Unavailable</span>
                                                     <?php } ?>
@@ -320,6 +425,104 @@ if (is_post_request()) {
                 </div>
 
 
+                <script type="text/javascript">
+                    let ctxPieChart = document.getElementById('myPieChart').getContext('2d');
+                    let myPieChart = new Chart(ctxPieChart, {
+                        options: {
+                            title: {
+                                display: true,
+                                position: 'top',
+                                text: 'Driver Standings (Top 5)'
+                            }
+                        },
+                        type: 'pie',
+                        data: {
+                            labels: [
+                                <?php
+                                for ($d = 0; $d <= 4; $d++) {
+                                    echo '\'' . $drivers_names[$d] . '\'' . ', ';
+                                }
+                                ?>
+                            ],
+                            datasets: [{
+                                data: [
+                                    <?php
+                                    for ($p = 0; $p <= 4; $p++) {
+                                        echo '\'' . $drivers_points[$p] . '\'' . ', ';
+                                    }
+                                    ?>
+                                ],
+                                backgroundColor: [
+                                    'rgba(225, 13, 49, .5)', // red
+                                    'rgba(184, 193, 202, .5)', // yellow
+                                    'rgba(110, 224, 229, .5)', // blue
+                                    'rgba(252, 194, 10, .5)', // green
+                                    'rgba(81, 51, 115, .5)', // purple
+                                ],
+                                borderColor: [
+                                    'rgba(225, 13, 49, 1)', // red
+                                    'rgba(184, 193, 202, 1)', // yellow
+                                    'rgba(110, 224, 229, 1)', // blue
+                                    'rgba(252, 194, 10, 1)', // green
+                                    'rgba(81, 51, 115, 1)', // purple
+                                ],
+                                hoverBackgroundColor: [
+                                    'rgba(225, 13, 49, 1)', // red
+                                    'rgba(184, 193, 202, 1)', // yellow
+                                    'rgba(110, 224, 229, 1)', // blue
+                                    'rgba(252, 194, 10, 1)', // green
+                                    'rgba(81, 51, 115, 1)', // purple
+                                ],
+                                borderWidth: 1
+                            }]
+                        }
+                    });
+                </script>
+
+                <script type="text/javascript">
+                    // Global Options
+                    Chart.defaults.global.defaultFontFamily = 'abadi';
+                    let ctxBarChart = document.getElementById('mySpeedChart').getContext('2d');
+                    let myBarChart = new Chart(ctxBarChart, {
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Fastest Lap Speeds (Top 5)'
+                            },
+                            legend: {
+                                display: false,
+                            }
+
+                        },
+                        type: 'horizontalBar',
+                        data: {
+                            labels: [
+                                <?php
+                                for ($d = 0; $d <= 4; $d++) {
+                                    echo '\'' . $drivers_names[$d] . '\'' . ', ';
+                                }
+                                ?>
+                            ],
+                            datasets: [{
+                                data: [
+                                    <?php
+                                    for ($s = 0; $s <= 4; $s++) {
+                                        echo '\'' . $lapSpeeds[$s] . '\'' . ', ';
+                                    }
+                                    ?>
+                                ],
+                                backgroundColor: 'rgba(225, 13, 49, .5)',
+                                hoverBackgroundColor: 'rgba(225, 13, 49, 1)',
+
+
+                            }]
+                        }
+                    });
+                </script>
+
+
+
+
 
 
 
@@ -357,43 +560,43 @@ if (is_post_request()) {
 
                             <!-- A Single Comment END -->
                             <?php if (is_logged_in()) { ?>
-                            <div class="mt-4 media media-comment align-items-center">
-                                <!-- User Icon START -->
-                                <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
-                                    <i class="text-dark fas fa-user"></i>
-                                </div>
-                                <!-- User Icon END -->
-                                <div class="col-9 media-body">
-                                    <!-- User Comment Write/Submit Section START -->
-                                    <form action="<?php echo url_for('/race-details.php?raceId=' . $raceId); ?>" method="post" class="rounded border">
-                                        <div class="input-group input-group-lg input-group-merge">
-                                            <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0 pr-2">
-                                                    <i class="text-muted fas fa-marker"></i>
-                                            </div>
+                                <div class="mt-4 media media-comment align-items-center">
+                                    <!-- User Icon START -->
+                                    <div class="iconbox iconsmall bg-gray border-0 mr-3 rounded-circle">
+                                        <i class="text-dark fas fa-user"></i>
+                                    </div>
+                                    <!-- User Icon END -->
+                                    <div class="col-9 media-body">
+                                        <!-- User Comment Write/Submit Section START -->
+                                        <form action="<?php echo url_for('/race-details.php?raceId=' . $raceId); ?>" method="post" class="rounded border">
+                                            <div class="input-group input-group-lg input-group-merge">
+                                                <div class="input-group-prepend"><span class="input-group-text bg-transparent border-0 pr-2">
+                                                        <i class="text-muted fas fa-marker"></i>
+                                                </div>
 
-                                            <input name="message" type="text" class="form-control border-0 px-2" aria-label="Find something" placeholder="Write a comment...">
-                                            <!-- Comment Submit Button START -->
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-primary">
-                                                    Post
-                                                </button>
+                                                <input name="message" type="text" class="form-control border-0 px-2" aria-label="Find something" placeholder="Write a comment...">
+                                                <!-- Comment Submit Button START -->
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Post
+                                                    </button>
+                                                </div>
+                                                <!-- Comment Submit Button END -->
                                             </div>
-                                            <!-- Comment Submit Button END -->
-                                        </div>
-                                    </form>
-                                    <!-- User Comment Write/Submit Section END -->
-                                </div>
-                            </div>
-                            <?php } else { ?>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 bg-light mt-4">
-                                    <p class="text-muted p-2 mt-4 mb-4">
-                                        <a href="<?php echo url_for('sign-in.php'); ?>">Sign in </a>to write a comment.
-                                    </p>
+                                        </form>
+                                        <!-- User Comment Write/Submit Section END -->
                                     </div>
                                 </div>
-                            </div>
+                            <?php } else { ?>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 bg-light mt-4">
+                                            <p class="text-muted p-2 mt-4 mb-4">
+                                                <a href="<?php echo url_for('sign-in.php'); ?>">Sign in </a>to write a comment.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -426,6 +629,9 @@ if (isset($qualifying_set)) {
 }
 if (isset($comment_set)) {
     mysqli_free_result($comment_set);
+}
+if (isset($favourite_set)) {
+    mysqli_free_result($favourite_set);
 }
 
 ?>
